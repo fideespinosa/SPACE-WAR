@@ -5,6 +5,7 @@
 MenuPrincipal::MenuPrincipal()
 {
 	music.openFromFile("Main Theme.wav");
+    music.setVolume(10.f);
 
 	buffer.loadFromFile("seleccion.ogg");
 
@@ -37,9 +38,11 @@ void MenuPrincipal::MostrarMenu()
     sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War 2942");
 
     sound.setBuffer(buffer);
+
+    music.setVolume(10.f);
 	music.play();
 
-    int xx = 690, yy = 155, pos = 1;
+    int x = 155, y = 690 ;
 
     jugar.setFillColor(sf::Color::White);
 
@@ -116,7 +119,7 @@ void MenuPrincipal::MostrarMenu()
         window.draw(ayuda);
         window.draw(salir);
 
-        indicador.setPosition(xx, yy);
+        indicador.setPosition(x, y);
         indicador.setRotation(90.f);
         window.draw(indicador);
 
