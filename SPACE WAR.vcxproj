@@ -132,11 +132,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collisionable.cpp" />
+    <ClCompile Include="Consumible.cpp" />
+    <ClCompile Include="Life.cpp" />
     <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="MenuRanking.cpp" />
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collisionable.h" />
+    <ClInclude Include="Consumible.h" />
+    <ClInclude Include="Life.h" />
     <ClInclude Include="MenuPrincipal.h" />
     <ClInclude Include="MenuRanking.h" />
   </ItemGroup>

@@ -24,12 +24,30 @@
     <ClCompile Include="MenuRanking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Collisionable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumible.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuPrincipal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuRanking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collisionable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumible.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
