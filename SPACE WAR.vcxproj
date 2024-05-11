@@ -133,10 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MenuPrincipal.cpp" />
+    <ClCompile Include="MenuRanking.cpp" />
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuPrincipal.h" />
+    <ClInclude Include="MenuRanking.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

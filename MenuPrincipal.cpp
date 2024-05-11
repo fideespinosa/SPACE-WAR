@@ -1,6 +1,7 @@
 #include "MenuPrincipal.h"
 #include "windows.h"
 #include <iostream>
+#include "MenuRanking.h"
 
 MenuPrincipal::MenuPrincipal()
 {
@@ -33,9 +34,9 @@ MenuPrincipal::MenuPrincipal()
 
 
 
-void MenuPrincipal::MostrarMenu()
+void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
 {
-    sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War 2942");
+  
 
     sound.setBuffer(buffer);
     buffer.loadFromFile("Main Theme.wav");
@@ -232,7 +233,7 @@ void MenuPrincipal::MostrarMenu()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
-            if (ElegirOpcion(pos, sound) == 1) {
+            if (ElegirOpcion(pos, sound, window) == 1) {
                 window.close();
 
             };
@@ -240,10 +241,11 @@ void MenuPrincipal::MostrarMenu()
         }
 
     }
-   
+    
+    
 }
 
-int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound) {
+int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound, sf::RenderWindow& window) {
      
         int salir = 0;
         switch (pos) {
@@ -252,8 +254,8 @@ int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound) {
             break;
         case 2: std::cout << "2";
 
-            //MenuRanking ranking;
-           // ranking.Mostrar(window);
+            MenuRanking ranking;
+            ranking.Mostrar(window);
             //sound.play();
             break;
         case 3: std::cout << "3";

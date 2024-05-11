@@ -24,11 +24,11 @@ public:
 
     MenuPrincipal();
 
-    void MostrarMenu();
+    void MostrarMenu(sf::RenderWindow &window);
 
     //int Moverse(int pos);
 
-    int ElegirOpcion(int pos, sf::Sound sound);
+    int ElegirOpcion(int pos, sf::Sound sound, sf::RenderWindow &window);
     
 
 
