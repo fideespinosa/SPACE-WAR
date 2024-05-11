@@ -9,6 +9,7 @@ protected: //dara acceso a las clases derivadas
 	sf::SoundBuffer _sonido;
 	sf::Sprite _sprite;
 	sf::Texture _texture;
+	float _velocity;
 	public:
 	virtual void Respawn();
 };

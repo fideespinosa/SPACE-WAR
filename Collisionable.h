@@ -3,8 +3,8 @@
 #pragma once
 #include <SFML/graphics.hpp>
 
-class Collisionable{
-	
+class Collisionable {
+
 
 public:
 	// metodo polimorfico, para que quien lo herede lo obligamos a que lo implemente
@@ -12,4 +12,4 @@ public:
 	virtual sf::FloatRect getBounds() const = 0;
 	bool isCollision(Collisionable& col) const;
 
-}
+};
