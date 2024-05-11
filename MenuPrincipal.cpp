@@ -38,11 +38,14 @@ void MenuPrincipal::MostrarMenu()
     sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War 2942");
 
     sound.setBuffer(buffer);
+    buffer.loadFromFile("Main Theme.wav");
+ 
+    sound.setVolume(20.f);
 
     music.setVolume(10.f);
 	music.play();
 
-    int x = 155, y = 690 ;
+    int x = 690, y = 155, pos=1;
 
     jugar.setFillColor(sf::Color::White);
 
@@ -61,7 +64,7 @@ void MenuPrincipal::MostrarMenu()
     jugar.setPosition(700.f, 150.f);
     jugar.setOutlineColor(sf::Color::Black);
 
-    indicador.setPosition(xx, yy);
+    indicador.setPosition(x, y);
 
 
     ranking.setStyle(sf::Text::Italic);
@@ -119,13 +122,113 @@ void MenuPrincipal::MostrarMenu()
         window.draw(ayuda);
         window.draw(salir);
 
+
         indicador.setPosition(x, y);
         indicador.setRotation(90.f);
         window.draw(indicador);
 
-        pos=Moverse(pos);
+       
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and pos == 1) {
+            pos = 2;
+            x = 670;
+            y = 205;
+            ranking.setFillColor(sf::Color::White);
+            ranking.setOutlineColor(sf::Color::Black);
+            jugar.setFillColor(sf::Color::Transparent);
+            jugar.setOutlineColor(sf::Color::White);
+            //opciones.setFillColor(sf::Color::Transparent);
+
+
+            sound.play();
+            Sleep(150);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 2) {
+            pos = 1;
+            x = 690;
+            y = 155;
+            jugar.setFillColor(sf::Color::White);
+            jugar.setOutlineColor(sf::Color::Black);
+            ranking.setFillColor(sf::Color::Transparent);
+            ranking.setOutlineColor(sf::Color::White);
+
+            sound.play();
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 2) {
+            pos = 3;
+            x = 650;
+            y = 255;
+            opciones.setFillColor(sf::Color::White);
+            opciones.setOutlineColor(sf::Color::Black);
+            ranking.setFillColor(sf::Color::Transparent);
+            ranking.setOutlineColor(sf::Color::White);
+            sound.play();
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 3) {
+            pos = 2;
+            x = 670;
+            y = 205;
+            ranking.setFillColor(sf::Color::White);
+            ranking.setOutlineColor(sf::Color::Black);
+            opciones.setFillColor(sf::Color::Transparent);
+            opciones.setOutlineColor(sf::Color::White);
+            sound.play();
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 3) {
+            pos = 4;
+            x = 690;
+            y = 305;
+            ayuda.setFillColor(sf::Color::White);
+            opciones.setFillColor(sf::Color::Transparent);
+            ayuda.setOutlineColor(sf::Color::Black);
+            opciones.setOutlineColor(sf::Color::White);
+
+            sound.play();
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 4) {
+            pos = 3;
+            x = 650;
+            y = 255;
+            ayuda.setFillColor(sf::Color::Transparent);
+            ayuda.setOutlineColor(sf::Color::White);
+            opciones.setFillColor(sf::Color::White);
+            opciones.setOutlineColor(sf::Color::Black);
+
+            sound.play();
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 4) {
+            pos = 5;
+            x = 700;
+            y = 355;
+            salir.setFillColor(sf::Color::Red);
+            ayuda.setFillColor(sf::Color::Transparent);
+            salir.setOutlineColor(sf::Color::Black);
+            ayuda.setOutlineColor(sf::Color::White);
+            sound.play();
+
+            Sleep(150);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 5) {
+            pos = 4;
+            x = 690;
+            y = 305;
+            ayuda.setFillColor(sf::Color::White);
+            ayuda.setOutlineColor(sf::Color::Black);
+
+            salir.setFillColor(sf::Color::Transparent);
+            salir.setOutlineColor(sf::Color::Red);
+            sound.play();
+            Sleep(150);
+        }
 
         window.display();
+
+        
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
@@ -137,6 +240,7 @@ void MenuPrincipal::MostrarMenu()
         }
 
     }
+   
 }
 
 int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound) {
@@ -147,6 +251,7 @@ int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound) {
         case 1: std::cout << "1";
             break;
         case 2: std::cout << "2";
+
             //MenuRanking ranking;
            // ranking.Mostrar(window);
             //sound.play();
@@ -162,16 +267,14 @@ int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound) {
         }
     }
 
-int MenuPrincipal::Moverse(int pos)
+/*int MenuPrincipal::Moverse(int pos)
 {
-    int x, y;
-
-
+  
+    
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and pos == 1) {
         pos = 2;
-        x = 670;
-        y = 205;
+      
         ranking.setFillColor(sf::Color::White);
         ranking.setOutlineColor(sf::Color::Black);
         jugar.setFillColor(sf::Color::Transparent);
@@ -185,8 +288,7 @@ int MenuPrincipal::Moverse(int pos)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 2) {
         pos = 1;
-        x = 690;
-        y = 155;
+   
         jugar.setFillColor(sf::Color::White);
         jugar.setOutlineColor(sf::Color::Black);
         ranking.setFillColor(sf::Color::Transparent);
@@ -197,8 +299,7 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 2) {
         pos = 3;
-        x = 650;
-        y = 255;
+   
         opciones.setFillColor(sf::Color::White);
         opciones.setOutlineColor(sf::Color::Black);
         ranking.setFillColor(sf::Color::Transparent);
@@ -208,8 +309,6 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 3) {
         pos = 2;
-        x = 670;
-        y = 205;
         ranking.setFillColor(sf::Color::White);
         ranking.setOutlineColor(sf::Color::Black);
         opciones.setFillColor(sf::Color::Transparent);
@@ -219,8 +318,7 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 3) {
         pos = 4;
-        x = 690;
-        y = 305;
+    
         ayuda.setFillColor(sf::Color::White);
         opciones.setFillColor(sf::Color::Transparent);
         ayuda.setOutlineColor(sf::Color::Black);
@@ -231,8 +329,7 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 4) {
         pos = 3;
-        x = 650;
-        y = 255;
+      
         ayuda.setFillColor(sf::Color::Transparent);
         ayuda.setOutlineColor(sf::Color::White);
         opciones.setFillColor(sf::Color::White);
@@ -243,8 +340,7 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && pos == 4) {
         pos = 5;
-        x = 700;
-        y = 355;
+     
         salir.setFillColor(sf::Color::Red);
         ayuda.setFillColor(sf::Color::Transparent);
         salir.setOutlineColor(sf::Color::Black);
@@ -255,8 +351,7 @@ int MenuPrincipal::Moverse(int pos)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && pos == 5) {
         pos = 4;
-        x = 690;
-        y = 305;
+      
         ayuda.setFillColor(sf::Color::White);
         ayuda.setOutlineColor(sf::Color::Black);
 
@@ -266,4 +361,4 @@ int MenuPrincipal::Moverse(int pos)
         Sleep(150);
     }
     return pos;
-}
+}*/

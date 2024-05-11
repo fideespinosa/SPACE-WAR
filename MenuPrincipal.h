@@ -10,8 +10,6 @@ class MenuPrincipal
     sf::SoundBuffer buffer;
     
     sf::Sound sound;
-  
-
    
     sf::Sprite img, indicador;
     sf::Texture fondo, flecha;
@@ -28,7 +26,7 @@ public:
 
     void MostrarMenu();
 
-    int Moverse(int pos);
+    //int Moverse(int pos);
 
     int ElegirOpcion(int pos, sf::Sound sound);
     
