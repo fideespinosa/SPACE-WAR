@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clsPlayer.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Consumible.cpp" />
     <ClCompile Include="Life.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clsPlayer.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Consumible.h" />
     <ClInclude Include="Life.h" />
