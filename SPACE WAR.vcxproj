@@ -135,6 +135,7 @@
     <ClCompile Include="clsPlayer.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Consumible.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Life.cpp" />
     <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="MenuRanking.cpp" />
@@ -145,10 +146,14 @@
     <ClInclude Include="clsPlayer.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Consumible.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="MenuPrincipal.h" />
     <ClInclude Include="MenuRanking.h" />
     <ClInclude Include="PowerUp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

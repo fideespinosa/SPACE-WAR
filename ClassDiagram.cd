@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="clsPlayer">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgCAAQAAAAAAAAoAAAAAEAAAAAAAAAEAAAAEAAA=</HashCode>
+      <FileName>clsPlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collisionable">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Collisionable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Consumible">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQIAAEAAAAAAAAAABAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Consumible.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Life">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAFAAA=</HashCode>
+      <FileName>Life.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuPrincipal">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAAAgAAABMQAAAACAAIAAAAAFAAAAAIBACAEAABA=</HashCode>
+      <FileName>MenuPrincipal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuRanking">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MenuRanking.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerUp">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAABAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>PowerUp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

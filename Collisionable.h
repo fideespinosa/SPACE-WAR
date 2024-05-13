@@ -1,4 +1,7 @@
 //Clase abstracta, funcionara como una interface para las colisiones entre diferentes objetos
+//Para hacer la colision, todos los involucrados deben heredar ser collisionable,
+// y se debe llamar a isCollision desde el objeto pasandole como dato el otro objeto a chequear su collision.
+// personaje.isCollision(powerUp) <---- ejemplo.
 
 #pragma once
 #include <SFML/graphics.hpp>
