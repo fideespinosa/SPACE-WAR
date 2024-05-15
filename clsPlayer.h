@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-class clsPlayer : public sf::Drawable
+#include "Collisionable.h"
+
+class clsPlayer : public sf::Drawable, public Collisionable
 {
 private:
 	sf::Sprite _sprite;
@@ -14,5 +16,6 @@ public:
 protected:
 	void isPress(); // Tecla Presionada
 	void controlExtreme();// Controla los extremos de la pantalla
+	sf::FloatRect getBounds() const override;
 };
 

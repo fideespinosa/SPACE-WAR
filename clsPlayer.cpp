@@ -63,4 +63,9 @@ void clsPlayer::controlExtreme()
 	}
 }
 
+sf::FloatRect clsPlayer::getBounds() const
+{
+	return sf::FloatRect();
+}
+
 

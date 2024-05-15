@@ -10,6 +10,7 @@ class Enemy : public sf::Drawable, public Collisionable
 	sf::Texture _texture;
 public:
 	Enemy();
+	Enemy(int, int);
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 	void respawn();

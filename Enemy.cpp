@@ -4,10 +4,16 @@ Enemy::Enemy()
 {
 	_texture.loadFromFile("heart.png");
 	_sprite.setTexture(_texture);
-	_sprite.setOrigin(std::rand() % 1023 / _sprite.getGlobalBounds().width, std::rand() % 287 / _sprite.getGlobalBounds().height);
+	_sprite.setOrigin(500, 300);
 	//ver setOrigin.
 }
-
+Enemy::Enemy(int x, int y)
+{
+	_texture.loadFromFile("nave.png");
+	_sprite.setTexture(_texture);
+	//_vel = 10;
+	_sprite.setPosition(x, y);
+}
 void Enemy::update()
 {
 	//ver

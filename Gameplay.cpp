@@ -24,6 +24,7 @@
 void Gameplay::StartGame(sf::RenderWindow& window)
 {
     int salir = 0;
+    Enemy enemy(700, 500);
     clsPlayer Spaceship(window.getSize().x / 2, window.getSize().y * 0.8); //X = Mitad de Pantalla ; Y = 1/3 de Pantalla aprox
 
    
@@ -44,13 +45,20 @@ void Gameplay::StartGame(sf::RenderWindow& window)
 
         //=== GAME LOOP = DIBUJOS ===
 
-        //window.draw(_personaje);
+        
         window.draw(background);
+        // BACKGROUND SIEMPRE INCLUIDO ANTES QUE OTRAS IMAGENES PORQUE SUPERPONE
+
         window.draw(Spaceship);
+        window.draw(enemy);
        
 
         //=== GAME LOOP DISPPLAY FLIP ===
         window.display();
+
+        if (Spaceship.isCollision(enemy)){
+        std::cout<<"choque";
+        }
 
 	}
 

@@ -3,6 +3,7 @@
 #include <SFML\Audio.hpp>
 #include "windows.h"
 #include "clsPlayer.h"
+#include "Enemy.h"
 
 class Gameplay
 {
@@ -11,6 +12,7 @@ private:
     sf::SoundBuffer buffer;
     sf::Sound sound;
     clsPlayer Spaceship;
+    Enemy enemy;
     sf::Sprite background;
     sf::Texture backgroundGame;
     sf::Font font;
