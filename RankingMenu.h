@@ -1,12 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-class MenuRanking
+class RankingMenu
 {
 
 private:
 
 public: 
-	void Mostrar(sf::RenderWindow& window);
+	void show(sf::RenderWindow& window);
 };
 

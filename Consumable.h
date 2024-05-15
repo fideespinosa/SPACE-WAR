@@ -3,7 +3,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio.hpp>
 
-class Consumible
+class Consumable
 {
 protected: //dara acceso a las clases derivadas
 	sf::SoundBuffer _sonido;

@@ -2,14 +2,14 @@
 
 clsPlayer::clsPlayer()
 {
-	_texture.loadFromFile("../img/nave.png");
+	_texture.loadFromFile("nave.png");
 	_sprite.setTexture(_texture);
 	_vel = 10;
 }
 
 clsPlayer::clsPlayer(int x, int y)
 {
-	_texture.loadFromFile("../img/nave.png");
+	_texture.loadFromFile("nave.png");
 	_sprite.setTexture(_texture);
 	_vel = 10;
 	_sprite.setPosition(x, y);
@@ -51,15 +51,15 @@ void clsPlayer::controlExtreme()
 	if (_sprite.getPosition().x < 0) {
 		_sprite.setPosition(0, _sprite.getPosition().y);
 	}
-	if (_sprite.getPosition().x + _sprite.getGlobalBounds().width > 800) {
-		_sprite.setPosition(800 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
+	if (_sprite.getPosition().x + _sprite.getGlobalBounds().width > 1024) {
+		_sprite.setPosition(1024 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
 	}
 	//EJE Y
-	if (_sprite.getPosition().y < 400) {
-		_sprite.setPosition(_sprite.getPosition().x, 400);
+	if (_sprite.getPosition().y < 382) {
+		_sprite.setPosition(_sprite.getPosition().x, 382);
 	}
-	if (_sprite.getPosition().y + _sprite.getGlobalBounds().height > 600) {
-		_sprite.setPosition(_sprite.getPosition().x, 600 - _sprite.getGlobalBounds().height);
+	if (_sprite.getPosition().y + _sprite.getGlobalBounds().height > 573) {
+		_sprite.setPosition(_sprite.getPosition().x, 573 - _sprite.getGlobalBounds().height);
 	}
 }
 

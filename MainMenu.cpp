@@ -1,9 +1,9 @@
-#include "MenuPrincipal.h"
+#include "MainMenu.h"
 #include "windows.h"
 #include <iostream>
-#include "MenuRanking.h"
-
-MenuPrincipal::MenuPrincipal()
+#include "RankingMenu.h"
+#include "Gameplay.h"
+MainMenu::MainMenu()
 {
 	music.openFromFile("Main Theme.wav");
     music.setVolume(10.f);
@@ -12,20 +12,20 @@ MenuPrincipal::MenuPrincipal()
 
 	font.loadFromFile("space.ttf");
 
-	fondo.loadFromFile("fondo.png");
-	flecha.loadFromFile("flecha.png");
+	background.loadFromFile("background.png");
+	arrow.loadFromFile("arrow.png");
 
-    jugar.setFont(font);
+    play.setFont(font);
     ranking.setFont(font);
-    opciones.setFont(font);
-    ayuda.setFont(font);
-    salir.setFont(font);
+    options.setFont(font);
+    help.setFont(font);
+    exit.setFont(font);
 
-	jugar.setString("JUGAR");
+	play.setString("play");
 	ranking.setString("RANKING");
-	opciones.setString("OPCIONES");
-	ayuda.setString("AYUDA");
-	salir.setString("SALIR");
+	options.setString("options");
+	help.setString("help");
+	exit.setString("exit");
 
     int x = 690, y = 155;
 
@@ -34,10 +34,8 @@ MenuPrincipal::MenuPrincipal()
 
 
 
-void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
+void MainMenu::showMenu(sf::RenderWindow &window)
 {
-  
-
     sound.setBuffer(buffer);
     buffer.loadFromFile("Main Theme.wav");
  
@@ -48,24 +46,22 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
 
     int x = 690, y = 155, pos=1;
 
-    jugar.setFillColor(sf::Color::White);
+    play.setFillColor(sf::Color::White);
 
-    fondo.loadFromFile("fondo.png");
-    flecha.loadFromFile("flecha.png");
-    img.setTexture(fondo);
-    indicador.setTexture(flecha);
+    background.loadFromFile("background.png");
+    arrow.loadFromFile("arrow.png");
+    img.setTexture(background);
+    indicator.setTexture(arrow);
 
+    play.setStyle(sf::Text::Italic);
+    //play.setFillColor(sf::Color::Transparent);
+    play.setOutlineThickness(1);
+    play.setOutlineColor(sf::Color::Black);
+    //play.setStyle(sf::Text::Underlined);
+    play.setPosition(700.f, 150.f);
+    play.setOutlineColor(sf::Color::Black);
 
-
-    jugar.setStyle(sf::Text::Italic);
-    //jugar.setFillColor(sf::Color::Transparent);
-    jugar.setOutlineThickness(1);
-    jugar.setOutlineColor(sf::Color::Black);
-    //jugar.setStyle(sf::Text::Underlined);
-    jugar.setPosition(700.f, 150.f);
-    jugar.setOutlineColor(sf::Color::Black);
-
-    indicador.setPosition(x, y);
+    indicator.setPosition(x, y);
 
 
     ranking.setStyle(sf::Text::Italic);
@@ -75,25 +71,25 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
     ranking.setPosition(678.f, 200.f);
 
  
-    opciones.setStyle(sf::Text::Italic);
-    opciones.setFillColor(sf::Color::Transparent);
-    opciones.setOutlineThickness(1);
-    opciones.setOutlineColor(sf::Color::White);
-    opciones.setPosition(661.f, 250.f);
+    options.setStyle(sf::Text::Italic);
+    options.setFillColor(sf::Color::Transparent);
+    options.setOutlineThickness(1);
+    options.setOutlineColor(sf::Color::White);
+    options.setPosition(661.f, 250.f);
 
    
-    ayuda.setStyle(sf::Text::Italic);
-    ayuda.setFillColor(sf::Color::Transparent);
-    ayuda.setOutlineThickness(1);
-    ayuda.setOutlineColor(sf::Color::White);
-    ayuda.setPosition(699.f, 300.f);
+    help.setStyle(sf::Text::Italic);
+    help.setFillColor(sf::Color::Transparent);
+    help.setOutlineThickness(1);
+    help.setOutlineColor(sf::Color::White);
+    help.setPosition(699.f, 300.f);
 
-    salir.setString("SALIR");
-    salir.setStyle(sf::Text::Italic);
-    salir.setFillColor(sf::Color::Transparent);
-    salir.setOutlineThickness(1);
-    salir.setOutlineColor(sf::Color::Red);
-    salir.setPosition(710.f, 350.f);
+    exit.setString("exit");
+    exit.setStyle(sf::Text::Italic);
+    exit.setFillColor(sf::Color::Transparent);
+    exit.setOutlineThickness(1);
+    exit.setOutlineColor(sf::Color::Red);
+    exit.setPosition(710.f, 350.f);
 
 
     // Game Loop
@@ -115,18 +111,18 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
 
         window.draw(img);
 
-        window.draw(jugar);
+        window.draw(play);
 
 
         window.draw(ranking);
-        window.draw(opciones);
-        window.draw(ayuda);
-        window.draw(salir);
+        window.draw(options);
+        window.draw(help);
+        window.draw(exit);
 
 
-        indicador.setPosition(x, y);
-        indicador.setRotation(90.f);
-        window.draw(indicador);
+        indicator.setPosition(x, y);
+        indicator.setRotation(90.f);
+        window.draw(indicator);
 
        
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and pos == 1) {
@@ -135,9 +131,9 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             y = 205;
             ranking.setFillColor(sf::Color::White);
             ranking.setOutlineColor(sf::Color::Black);
-            jugar.setFillColor(sf::Color::Transparent);
-            jugar.setOutlineColor(sf::Color::White);
-            //opciones.setFillColor(sf::Color::Transparent);
+            play.setFillColor(sf::Color::Transparent);
+            play.setOutlineColor(sf::Color::White);
+            //options.setFillColor(sf::Color::Transparent);
 
 
             sound.play();
@@ -148,8 +144,8 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 1;
             x = 690;
             y = 155;
-            jugar.setFillColor(sf::Color::White);
-            jugar.setOutlineColor(sf::Color::Black);
+            play.setFillColor(sf::Color::White);
+            play.setOutlineColor(sf::Color::Black);
             ranking.setFillColor(sf::Color::Transparent);
             ranking.setOutlineColor(sf::Color::White);
 
@@ -160,8 +156,8 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 3;
             x = 650;
             y = 255;
-            opciones.setFillColor(sf::Color::White);
-            opciones.setOutlineColor(sf::Color::Black);
+            options.setFillColor(sf::Color::White);
+            options.setOutlineColor(sf::Color::Black);
             ranking.setFillColor(sf::Color::Transparent);
             ranking.setOutlineColor(sf::Color::White);
             sound.play();
@@ -173,8 +169,8 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             y = 205;
             ranking.setFillColor(sf::Color::White);
             ranking.setOutlineColor(sf::Color::Black);
-            opciones.setFillColor(sf::Color::Transparent);
-            opciones.setOutlineColor(sf::Color::White);
+            options.setFillColor(sf::Color::Transparent);
+            options.setOutlineColor(sf::Color::White);
             sound.play();
             Sleep(150);
         }
@@ -182,10 +178,10 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 4;
             x = 690;
             y = 305;
-            ayuda.setFillColor(sf::Color::White);
-            opciones.setFillColor(sf::Color::Transparent);
-            ayuda.setOutlineColor(sf::Color::Black);
-            opciones.setOutlineColor(sf::Color::White);
+            help.setFillColor(sf::Color::White);
+            options.setFillColor(sf::Color::Transparent);
+            help.setOutlineColor(sf::Color::Black);
+            options.setOutlineColor(sf::Color::White);
 
             sound.play();
             Sleep(150);
@@ -194,10 +190,10 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 3;
             x = 650;
             y = 255;
-            ayuda.setFillColor(sf::Color::Transparent);
-            ayuda.setOutlineColor(sf::Color::White);
-            opciones.setFillColor(sf::Color::White);
-            opciones.setOutlineColor(sf::Color::Black);
+            help.setFillColor(sf::Color::Transparent);
+            help.setOutlineColor(sf::Color::White);
+            options.setFillColor(sf::Color::White);
+            options.setOutlineColor(sf::Color::Black);
 
             sound.play();
             Sleep(150);
@@ -206,10 +202,10 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 5;
             x = 700;
             y = 355;
-            salir.setFillColor(sf::Color::Red);
-            ayuda.setFillColor(sf::Color::Transparent);
-            salir.setOutlineColor(sf::Color::Black);
-            ayuda.setOutlineColor(sf::Color::White);
+            exit.setFillColor(sf::Color::Red);
+            help.setFillColor(sf::Color::Transparent);
+            exit.setOutlineColor(sf::Color::Black);
+            help.setOutlineColor(sf::Color::White);
             sound.play();
 
             Sleep(150);
@@ -218,11 +214,11 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
             pos = 4;
             x = 690;
             y = 305;
-            ayuda.setFillColor(sf::Color::White);
-            ayuda.setOutlineColor(sf::Color::Black);
+            help.setFillColor(sf::Color::White);
+            help.setOutlineColor(sf::Color::Black);
 
-            salir.setFillColor(sf::Color::Transparent);
-            salir.setOutlineColor(sf::Color::Red);
+            exit.setFillColor(sf::Color::Transparent);
+            exit.setOutlineColor(sf::Color::Red);
             sound.play();
             Sleep(150);
         }
@@ -233,7 +229,7 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
-            if (ElegirOpcion(pos, sound, window) == 1) {
+            if (chooseOption(pos, sound, window) == 1) {
                 window.close();
 
             };
@@ -245,17 +241,19 @@ void MenuPrincipal::MostrarMenu(sf::RenderWindow &window)
     
 }
 
-int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound, sf::RenderWindow& window) {
-     
-        int salir = 0;
+int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
+  
+    Gameplay gameplay;
+        int exit = 0;
         switch (pos) {
 
         case 1: std::cout << "1";
+           
+            gameplay.StartGame(window);
             break;
         case 2: std::cout << "2";
-
-            MenuRanking ranking;
-            ranking.Mostrar(window);
+            RankingMenu ranking;
+            ranking.show(window);
             //sound.play();
             break;
         case 3: std::cout << "3";
@@ -263,8 +261,8 @@ int MenuPrincipal::ElegirOpcion(int pos, sf::Sound sound, sf::RenderWindow& wind
         case 4: std::cout << "4";
             break;
         case 5: std::cout << "5";
-            salir = 1;
-            return salir;
+            exit = 1;
+            return exit;
 
         }
     }

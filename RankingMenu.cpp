@@ -1,13 +1,13 @@
 
-#include "MenuRanking.h"
+#include "RankingMenu.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/audio.hpp>
 #include <iostream>
 
 
 
-void MenuRanking::Mostrar(sf::RenderWindow& window) {
-    int salir = 0;
+void RankingMenu::show(sf::RenderWindow& window) {
+    int exit = 0;
     FILE* p;
 
     sf::SoundBuffer buffer;
@@ -16,7 +16,7 @@ void MenuRanking::Mostrar(sf::RenderWindow& window) {
     sound.setBuffer(buffer);
 
     sf::Sprite img, uno, dos, tres, escape;
-    sf::Texture fondo, Uno, Dos, Tres, esc;
+    sf::Texture background, Uno, Dos, Tres, esc;
     sf::Font font;
     font.loadFromFile("space.ttf");
     sf::Text Ranking, atras, datosV;
@@ -49,12 +49,12 @@ void MenuRanking::Mostrar(sf::RenderWindow& window) {
     datosV.setStyle(sf::Text::Style::Bold);
     datosV.setPosition(226.f, 150.f);
 
-    while (salir != 1) {
+    while (exit != 1) {
 
-        fondo.loadFromFile("FondoRanking.jpeg");
+        background.loadFromFile("backgroundRanking.jpeg");
         Tres.loadFromFile("copaBronce.png");
         esc.loadFromFile("esc.png");
-        img.setTexture(fondo);
+        img.setTexture(background);
         tres.setTexture(Tres);
         escape.setTexture(esc);
         escape.setTexture(esc);

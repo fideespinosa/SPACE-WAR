@@ -1,8 +1,8 @@
 #pragma once
 #include "Collisionable.h"
 #include <SFML/graphics.hpp>
-#include "Consumible.h"
-class Life : public sf::Drawable, public Collisionable, public Consumible
+#include "Consumable.h"
+class Life : public sf::Drawable, public Collisionable, public Consumable
 {
 	
 public:

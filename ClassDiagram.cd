@@ -14,11 +14,11 @@
       <FileName>Collisionable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Consumible">
+  <Class Name="Consumable">
     <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQIAAEAAAAAAAAAABAAAAAAAAAEAAAAAAAA=</HashCode>
-      <FileName>Consumible.h</FileName>
+      <FileName>Consumable.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Life">
@@ -28,18 +28,18 @@
       <FileName>Life.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MenuPrincipal">
+  <Class Name="MainMenu">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAIAAAAgAAABMQAAAACAAIAAAAAFAAAAAIBACAEAABA=</HashCode>
-      <FileName>MenuPrincipal.h</FileName>
+      <FileName>MainMenu.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MenuRanking">
+  <Class Name="RankingMenu">
     <Position X="7.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MenuRanking.h</FileName>
+      <FileName>RankingMenu.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PowerUp">
