@@ -51,13 +51,13 @@ void Gameplay::StartGame(sf::RenderWindow& window)
 
         window.draw(Spaceship);
         window.draw(enemy);
-       
+        
 
         //=== GAME LOOP DISPPLAY FLIP ===
         window.display();
 
         if (Spaceship.isCollision(enemy)){
-        std::cout<<"choque";
+            enemy.respawn();
         }
 
 	}

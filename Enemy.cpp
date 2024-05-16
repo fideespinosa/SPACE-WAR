@@ -31,5 +31,5 @@ void Enemy::respawn()
 
 sf::FloatRect Enemy::getBounds() const
 {
-	return sf::FloatRect();
+	return _sprite.getGlobalBounds();
 }
