@@ -141,6 +141,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="RankingMenu.cpp" />
     <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="Consumable.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="RankingMenu.h" />
