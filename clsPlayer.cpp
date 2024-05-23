@@ -73,4 +73,3 @@ sf::FloatRect clsPlayer::getBounds() const
 	return _sprite.getGlobalBounds();
 }
 
-
