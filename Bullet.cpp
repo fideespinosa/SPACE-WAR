@@ -3,7 +3,7 @@
 Bullet::Bullet( int x, int y)
 {
     speed = 0.4f;
-    _texture.loadFromFile("copaBronce.png");
+    _texture.loadFromFile("img/bala.png");
     _sprite.setTexture(_texture);
     //_vel = 10;
     _sprite.setPosition(x,y);

@@ -7,7 +7,7 @@ sf::Sprite clsPlayer::getSprite() const
 
 clsPlayer::clsPlayer()
 {
-	_texture.loadFromFile("nave.png");
+	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
 	_vel = 10;
 }
@@ -16,7 +16,7 @@ clsPlayer::clsPlayer()
 
 clsPlayer::clsPlayer(int x, int y)
 {
-	_texture.loadFromFile("nave.png");
+	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
 	_vel = 10;
 	_sprite.setPosition(x, y);
