@@ -1,5 +1,5 @@
 #include "clsPlayer.h"
-
+#include "Bullet.h"
 sf::Sprite clsPlayer::getSprite() const 
 {
 	return _sprite;
@@ -12,6 +12,8 @@ clsPlayer::clsPlayer()
 	_vel = 10;
 }
 
+
+
 clsPlayer::clsPlayer(int x, int y)
 {
 	_texture.loadFromFile("nave.png");
@@ -19,6 +21,8 @@ clsPlayer::clsPlayer(int x, int y)
 	_vel = 10;
 	_sprite.setPosition(x, y);
 }
+
+
 
 void clsPlayer::upDate()
 {
@@ -33,7 +37,25 @@ void clsPlayer::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
 	target.draw(_sprite, states);
 }
-
+/*
+Bullet clsPlayer::shoot(clsPlayer spaceship, Bullet bullet)
+{
+	
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootTimer.getElapsedTime() >= shootCooldown) {
+			// Obtener la posición de la nave
+			sf::Vector2f playerPosition = spaceship.getPosition();
+			// Ajustar la posición de la bala para que esté por encima de la nave
+			float bulletSpawnOffset = 130.0f; // Ajusta la posicion de la bala respecto a la nave
+			sf::Vector2f bulletPosition(playerPosition.x, playerPosition.y - bulletSpawnOffset);
+			Bullet bullet(bulletPosition.x, bulletPosition.y, 4.f);
+			// Agregar la bala al vector
+			bullets.push_back(bullet);
+			// Reiniciar el temporizador
+			shootTimer.restart();
+			return bullet;
+		}
+}
+*/
 void clsPlayer::isPress()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {

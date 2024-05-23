@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <SFML/System/Clock.hpp>
+#include "clsPlayer.h"
 class Bullet : public sf::Drawable {
 private:
     sf::RectangleShape shape;
@@ -9,14 +10,14 @@ private:
     float speed; // Velocidad de la bala
     sf::Sprite _sprite;
     sf::Texture _texture;
-
+  
 public:
 
     Bullet(int x, int y);
-    //Bullet(sf::FloatRect startX, sf::FloatRect startY, float bulletSpeed);
+    Bullet(float startX, float startY, float bulletSpeed);
 
 
-    void upDate(); //Actualizar
+    Bullet upDate(clsPlayer spaceship); //Actualizar
 
     // Obtener posición en el eje x
     float getX() const;

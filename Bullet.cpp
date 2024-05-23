@@ -1,5 +1,5 @@
 #include "Bullet.h"
-
+#include "clsPlayer.h"
 Bullet::Bullet( int x, int y)
 {
     speed = 0.4f;
@@ -9,24 +9,11 @@ Bullet::Bullet( int x, int y)
     _sprite.setPosition(x,y);
 }
 
-/*
-Bullet::Bullet(sf::FloatRect startX, sf::FloatRect startY, float bulletSpeed)
-{
-    y = startY;
-    x = startX;
-    speed = bulletSpeed;
-}
-*/
 
+Bullet::Bullet(float startX, float startY, float bulletSpeed){}
 
-void Bullet::upDate()
-{
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         //Mover Bala
-        _sprite.move(0,-1);
-    }
-    
-}
+        //_sprite.move(0,-1);
 
 float Bullet::getX() const
 {
