@@ -18,9 +18,14 @@ Bullet::Bullet(sf::FloatRect startX, sf::FloatRect startY, float bulletSpeed)
 }
 */
 
-void Bullet::update()
+
+void Bullet::upDate()
 {
-   // _sprite.setPosition(x,y);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        //Mover Bala
+        _sprite.move(0,-1);
+    }
+    
 }
 
 float Bullet::getX() const

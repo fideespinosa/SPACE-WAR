@@ -41,12 +41,11 @@ void Gameplay::StartGame(sf::RenderWindow& window)
 
         //==== GAME LOOP _ UPDATE ===
         Spaceship.upDate();
+        balin.upDate();
 
         window.clear();
 
-        //=== GAME LOOP = DIBUJOS ===
-
-        
+        //=== GAME LOOP = DIBUJOS ===        
         window.draw(background);
         // BACKGROUND SIEMPRE INCLUIDO ANTES QUE OTRAS IMAGENES PORQUE SUPERPONE
 
