@@ -1,10 +1,46 @@
 #include "Bullet.h"
 
-void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    // Dibujar la bala
-    sf::RectangleShape bulletShape(sf::Vector2f(3, 8)); // Tamaño de la bala
-    bulletShape.setFillColor(sf::Color::White); // Color Blanco
-    bulletShape.setPosition(x, y); // Posición de la bala
-    target.draw(bulletShape, states); // Dibujar la forma en el render target
+Bullet::Bullet( int x, int y)
+{
+    speed = 0.0f;
+    _texture.loadFromFile("copaBronce.png");
+    _sprite.setTexture(_texture);
+    //_vel = 10;
+    _sprite.setPosition(x,y);
 }
 
+/*
+Bullet::Bullet(sf::FloatRect startX, sf::FloatRect startY, float bulletSpeed)
+{
+    y = startY;
+    x = startX;
+    speed = bulletSpeed;
+}
+*/
+
+void Bullet::update()
+{
+   // _sprite.setPosition(x,y);
+}
+
+float Bullet::getX() const
+{
+    return 0.0f;
+}
+
+float Bullet::getY() const
+{
+    return 0.0f;
+}
+
+/*
+void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    
+    target.draw(_sprite, states);
+}
+*/
+
+void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(_sprite, states);
+}

@@ -4,14 +4,16 @@
 class Bullet : public sf::Drawable {
 private:
     sf::RectangleShape shape;
-    float x; // Posición en el eje x
-    float y; // Posición en el eje y
+    int x; // Posición en el eje x
+    int y; // Posición en el eje y
     float speed; // Velocidad de la bala
+    sf::Sprite _sprite;
+    sf::Texture _texture;
 
 public:
 
-
-    Bullet(float startX, float startY, float bulletSpeed);
+    Bullet(int x, int y);
+    //Bullet(sf::FloatRect startX, sf::FloatRect startY, float bulletSpeed);
 
 
     // Actualizar posición de la bala

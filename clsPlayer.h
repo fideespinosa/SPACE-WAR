@@ -9,6 +9,7 @@ private:
 	sf::Texture _texture;
 	float _vel;
 public:
+	sf::Sprite getSprite() const;
 	clsPlayer();
 	clsPlayer(int, int); // Contructor setX() and setY()
 	void upDate(); //Actualizar

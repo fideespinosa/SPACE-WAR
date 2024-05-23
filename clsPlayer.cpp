@@ -1,5 +1,10 @@
 #include "clsPlayer.h"
 
+sf::Sprite clsPlayer::getSprite() const 
+{
+	return _sprite;
+}
+
 clsPlayer::clsPlayer()
 {
 	_texture.loadFromFile("nave.png");
