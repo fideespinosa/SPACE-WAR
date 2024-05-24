@@ -3,7 +3,7 @@
 
 PowerUp::PowerUp()
 {
-	_texture.loadFromFile("heart.png");
+	_texture.loadFromFile("img/heart.png");
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }

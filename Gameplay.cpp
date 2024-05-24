@@ -18,7 +18,7 @@
 
 	font.loadFromFile("space.ttf");
 
-	backgroundGame.loadFromFile("backgroundGamePlay.png");
+	backgroundGame.loadFromFile("img/backgroundGamePlay.png");
 	//arrow.loadFromFile("arrow.png");
     background.setTexture(backgroundGame);
 }

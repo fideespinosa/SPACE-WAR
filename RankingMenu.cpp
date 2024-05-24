@@ -51,9 +51,9 @@ void RankingMenu::show(sf::RenderWindow& window) {
 
     while (exit != 1) {
 
-        background.loadFromFile("backgroundRanking.jpeg");
-        Tres.loadFromFile("copaBronce.png");
-        esc.loadFromFile("esc.png");
+        background.loadFromFile("img/backgroundRanking.jpeg");
+        Tres.loadFromFile("img/copaBronce.png");
+        esc.loadFromFile("img/esc.png");
         img.setTexture(background);
         tres.setTexture(Tres);
         escape.setTexture(esc);

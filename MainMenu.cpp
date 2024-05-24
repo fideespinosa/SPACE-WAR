@@ -12,8 +12,8 @@ MainMenu::MainMenu()
 
 	font.loadFromFile("space.ttf");
 
-	background.loadFromFile("background.png");
-	arrow.loadFromFile("arrow.png");
+	background.loadFromFile("img/background.png");
+	arrow.loadFromFile("img/arrow.png");
 
     play.setFont(font);
     ranking.setFont(font);

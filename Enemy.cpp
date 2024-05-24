@@ -2,14 +2,14 @@
 
 Enemy::Enemy()
 {
-	_texture.loadFromFile("heart.png");
+	_texture.loadFromFile("img/heart.png");
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(500, 300);
 	//ver setOrigin.
 }
 Enemy::Enemy(int x, int y)
 {
-	_texture.loadFromFile("nave.png");
+	_texture.loadFromFile("img/heart.png");
 	_sprite.setTexture(_texture);
 	//_vel = 10;
 	_sprite.setPosition(x, y);
