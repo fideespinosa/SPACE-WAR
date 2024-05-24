@@ -1,4 +1,4 @@
-#include "MainMenu.h"
+/*#include "MainMenu.h"
 #include "windows.h"
 #include <iostream>
 #include "RankingMenu.h"
@@ -265,5 +265,4 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
             return exit;
 
         }
-    }
-
+    }*/

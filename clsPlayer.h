@@ -1,9 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Collisionable.h"
+#include "Gameplay.h"
 #include <SFML/System/Clock.hpp>
 
-class clsPlayer : public sf::Drawable, public Collisionable
+class clsPlayer : public sf::Drawable, public Collisionable, public sf::Transformable
 {
 private:
 	sf::Sprite _sprite;

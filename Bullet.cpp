@@ -1,5 +1,49 @@
 #include "Bullet.h"
 #include "clsPlayer.h"
+
+Bullet::Bullet(sf::Vector2f position, Direction direction)
+{
+    _texture.loadFromFile("img/bala.png");
+    _sprite.setTexture(_texture);
+    _direction = direction;
+    setPosition(position);
+}
+
+
+void Bullet::update()
+{
+    sf::Vector2f velocity{ 8,8 };
+
+    switch (_direction) 
+    {
+    case Bullet::Direction::Left:
+        move(-velocity.x, 0);
+        break;
+    case Bullet::Direction::Right:
+        move(velocity.x, 0);
+        break;
+    case Bullet::Direction::Up:
+        move(0, velocity.y);
+        break;
+    case Bullet::Direction::Down:
+        move(0 , -velocity.y);
+        break;
+    default:
+        break;
+    }
+
+}
+
+void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(_sprite, states);
+}
+
+
+
+
+
+/*
 Bullet::Bullet( int x, int y)
 {
     speed = 0.4f;
@@ -27,12 +71,7 @@ float Bullet::getY() const
 
 /*
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    
+
     target.draw(_sprite, states);
 }
 */
-
-void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(_sprite, states);
-}

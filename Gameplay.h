@@ -4,24 +4,21 @@
 #include "windows.h"
 #include "clsPlayer.h"
 #include "Enemy.h"
+#include "Bullet.h"
+#include <vector>
 
-class Gameplay
+class Gameplay: public sf::Drawable
 {
 private:
-    sf::Music music;
-    sf::SoundBuffer buffer;
-    sf::Sound sound;
+    static Gameplay* _currentInstance;
     clsPlayer Spaceship;
-    Enemy enemy;
-    sf::Sprite background;
-    sf::Texture backgroundGame;
-    sf::Font font;
-    //sf::Text;
-public:
-
+    std::vector<Enemy> _enemys;
+    std::vector<Bullet> _bullets;
     Gameplay();
-
-    void StartGame(sf::RenderWindow& window);
-
+public:
+    static Gameplay& getInstance();
+    void update();
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void shoot(sf::Vector2f position, Bullet::Direction direction);
 };
 

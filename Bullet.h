@@ -1,8 +1,31 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SFML/System/Clock.hpp>
-#include "clsPlayer.h"
-class Bullet : public sf::Drawable {
+
+
+class Bullet : public sf::Drawable ,sf::Transformable {
+
+public:
+    enum class Direction {
+        Left = 0,
+        Right = 1,
+        Up = 2,
+        Down = 3
+    };
+public:
+    Bullet(sf::Vector2f position, Direction direction);
+    void update();
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    
+
+private:
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+    Direction _direction;
+};
+
+
+/*
+
 private:
     sf::RectangleShape shape;
     int x; // Posición en el eje x
@@ -10,7 +33,7 @@ private:
     float speed; // Velocidad de la bala
     sf::Sprite _sprite;
     sf::Texture _texture;
-  
+
 public:
 
     Bullet(int x, int y);
@@ -25,9 +48,8 @@ public:
     // Obtener posición en el eje y
     float getY() const;
 
-   
+
     // Sobrecarga de la función draw para permitir dibujar la bala en la ventana
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-
-};
+*/

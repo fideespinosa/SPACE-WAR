@@ -10,82 +10,41 @@
 #include <SFML/System/Clock.hpp>
 #include <iostream>
 
- Gameplay::Gameplay() {
-	//music.openFromFile("");
-	music.setVolume(10.f);
+//inicializamos la variable de clase en 0 para cuando programemos el 
+// getinstance validemos si esta en 0 o se creo una instancia
+Gameplay* Gameplay::_currentInstance = nullptr;
 
-	//buffer.loadFromFile("seleccion.ogg");
-
-	font.loadFromFile("space.ttf");
-
-	backgroundGame.loadFromFile("img/backgroundGamePlay.png");
-	//arrow.loadFromFile("arrow.png");
-    background.setTexture(backgroundGame);
-}
-
-void Gameplay::StartGame(sf::RenderWindow& window)
+Gameplay& Gameplay::getInstance()
 {
-    int salir = 0;
-    Enemy enemy(700, 500);
-    clsPlayer Spaceship(window.getSize().x / 2, window.getSize().y * 0.8); //X = Mitad de Pantalla ; Y = 1/3 de Pantalla aprox
-    Bullet balin(700,300);
-
-
-    // Vector para "almacenar" las balas
-    
-
-    // Temporizador para controlar la cadencia de disparo
-    sf::Clock shootTimer;
-    const sf::Time shootCooldown = sf::seconds(0.1f); // Tiempo de enfriamiento entre disparos
-   
-	while (salir !=1) {
-      
-        // === Perifericos de entradas ===
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-
-        /*
-        // Actualizar todas las balas
-        for (auto& bullet : bullets) {
-            bullet.update();
-        }
-        */
-
-        //==== GAME LOOP _ UPDATE ===
-        Spaceship.upDate();
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            //balin=Spaceship.shoot(Spaceship,balin);
-            
-        }
-        window.clear();
-
-        //=== GAME LOOP = DIBUJOS ===        
-        window.draw(background);
-        // BACKGROUND SIEMPRE INCLUIDO ANTES QUE OTRAS IMAGENES PORQUE SUPERPONE
-
-        window.draw(Spaceship);
-        window.draw(enemy);
-        window.draw(balin);
-
-        //balin.setPosition(x, y++);
-        //=== GAME LOOP DISPPLAY FLIP ===
-        window.display();
-
-        if (Spaceship.isCollision(enemy)){
-            enemy.respawn();
-        }
-
-	}
-
-	
-
-
+    if (Gameplay::_currentInstance == nullptr) {
+        Gameplay::_currentInstance = new Gameplay();
+   }
+    return *Gameplay::_currentInstance;
 }
+
+Gameplay::Gameplay()
+{
+    
+}
+
+
+ void Gameplay::update()
+ {
+     //ver de modificar upDate, sintax rara
+     Spaceship.upDate();
+     for (Bullet& bullet : _bullets) {
+         bullet.update();
+     }
+ }
+
+ void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
+ {
+ }
+
+void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
+{
+    _bullets.push_back(Bullet(position, direction));
+}
+
 
 

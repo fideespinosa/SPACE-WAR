@@ -1,5 +1,8 @@
 #include "clsPlayer.h"
 #include "Bullet.h"
+#include "Gameplay.h"
+
+
 sf::Sprite clsPlayer::getSprite() const 
 {
 	return _sprite;
@@ -69,6 +72,10 @@ void clsPlayer::isPress()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		_sprite.move(_vel, 0);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		Gameplay& gm = Gameplay::getInstance();
+		gm.shoot(getPosition(), Bullet::Direction::Right);
 	}
 }
 
