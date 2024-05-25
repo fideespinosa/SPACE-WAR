@@ -11,6 +11,8 @@ int main()
 
 	sf::Sprite background;
 	sf::Texture backgroundGame;
+	Player Spaceship;
+
 	backgroundGame.loadFromFile("img/backgroundGamePlay.png");
 	background.setTexture(backgroundGame);
 	sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War 2942");
@@ -28,6 +30,7 @@ int main()
 		gp.update();
 		window.clear();
 		window.draw(background);
+		window.draw(gp);//hasta ahora dibuj ala bala y la nave
 		window.display();
 	}
 

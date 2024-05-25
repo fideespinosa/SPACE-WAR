@@ -7,6 +7,7 @@ Bullet::Bullet(sf::Vector2f position, Direction direction)
     _sprite.setTexture(_texture);
     _direction = direction;
     setPosition(position);
+
 }
 
 
@@ -23,10 +24,10 @@ void Bullet::update()
         move(velocity.x, 0);
         break;
     case Bullet::Direction::Up:
-        move(0, velocity.y);
+        move(0, -velocity.y);
         break;
     case Bullet::Direction::Down:
-        move(0 , -velocity.y);
+        move(0 , velocity.y);
         break;
     default:
         break;
@@ -36,7 +37,10 @@ void Bullet::update()
 
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    states.transform *= getTransform();
     target.draw(_sprite, states);
+    
+    
 }
 
 

@@ -20,5 +20,8 @@ public:
     void update();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void shoot(sf::Vector2f position, Bullet::Direction direction);
+    
 };
+
+
 

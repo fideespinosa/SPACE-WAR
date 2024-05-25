@@ -24,6 +24,8 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	target.draw(_sprite, states);
 }
 void Player::isPress()
+
+
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		_sprite.move(0, -_vel);
@@ -39,26 +41,28 @@ void Player::isPress()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		Gameplay& gm = Gameplay::getInstance();
-		gm.shoot(getPosition(), Bullet::Direction::Right);
+		gm.shoot(_sprite.getPosition(), Bullet::Direction::Up);
 	}
 }
 
 void Player::controlExtreme()
 {
+	sf::Vector2f position = _sprite.getPosition();
 	//EJE X
-	if (_sprite.getPosition().x < 0) {
+	if (position.x < 0) {
 		_sprite.setPosition(0, _sprite.getPosition().y);
 	}
-	if (_sprite.getPosition().x + _sprite.getGlobalBounds().width > 1024) {
+	if (position.x + _sprite.getGlobalBounds().width > 1024) {
 		_sprite.setPosition(1024 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
 	}
 	//EJE Y
-	if (_sprite.getPosition().y < 382) {
+	if (position.y < 382) {
 		_sprite.setPosition(_sprite.getPosition().x, 382);
 	}
-	if (_sprite.getPosition().y + _sprite.getGlobalBounds().height > 573) {
+	if (position.y + _sprite.getGlobalBounds().height > 573) {
 		_sprite.setPosition(_sprite.getPosition().x, 573 - _sprite.getGlobalBounds().height);
 	}
+
 }
 
 sf::FloatRect Player::getBounds() const

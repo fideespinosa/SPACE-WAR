@@ -30,7 +30,9 @@ Gameplay::Gameplay()
 
  void Gameplay::update()
  {
+
      _spaceship.update();
+
      for (Bullet& bullet : _bullets) {
          bullet.update();
      }
@@ -39,13 +41,15 @@ Gameplay::Gameplay()
  void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
  {
      target.draw(_spaceship, states);
+ 
      for (const Bullet& bullet : _bullets) {
          target.draw(bullet, states);
      }
  }
-
+ 
 void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
 {
+
     _bullets.push_back(Bullet(position, direction));
 }
 
