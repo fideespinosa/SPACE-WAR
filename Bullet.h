@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 
-class Bullet : public sf::Drawable ,sf::Transformable {
+class Bullet : public sf::Drawable ,public sf::Transformable {
 
 public:
     enum class Direction {
@@ -24,7 +24,7 @@ private:
     sf::Sprite _sprite;
     sf::Texture _texture;
     Direction _direction;
-
+    sf::Vector2f _velocity;
 
 };
 

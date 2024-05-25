@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "Player.h"
+#include <SFML\Graphics.hpp>
 
 Bullet::Bullet(sf::Vector2f position, Direction direction)
 {
@@ -9,27 +10,27 @@ Bullet::Bullet(sf::Vector2f position, Direction direction)
     _sprite.setScale(0.4f, 0.05f);
     _direction = direction;
     setPosition(position);
-
+    _velocity={ 8.0f, 8.0f };
 }
 
 
 void Bullet::update()
 {
-    sf::Vector2f velocity{ 8,8 };
+    
 
     switch (_direction) 
     {
     case Bullet::Direction::Left:
-        move(-velocity.x, 0);
+        move(-_velocity.x, 0);
         break;
     case Bullet::Direction::Right:
-        move(velocity.x, 0);
+        move(_velocity.x, 0);
         break;
     case Bullet::Direction::Up:
-        move(0, -velocity.y);
+        move(0, -_velocity.y);
         break;
     case Bullet::Direction::Down:
-        move(0 , velocity.y);
+        move(0 , _velocity.y);
         break;
     default:
         break;

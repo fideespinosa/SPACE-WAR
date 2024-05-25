@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include <list>"
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <SFML/System/Clock.hpp>
@@ -13,7 +14,7 @@ class Gameplay : public sf::Drawable, sf::Transformable
 private:
     static Gameplay* _currentInstance;
     std::vector<Enemy> _enemys;
-    std::vector<Bullet> _bullets;
+    std::list<Bullet> _bullets;
     sf::Clock shootTimer;
 
     Gameplay();

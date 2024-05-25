@@ -1,6 +1,7 @@
 
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
+#include <list>"
 #include "windows.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -28,7 +29,7 @@ Gameplay::Gameplay()
 }
 
 
- void Gameplay::update()
+ void Gameplay::update() 
  {
 
      _spaceship.update();
@@ -36,6 +37,22 @@ Gameplay::Gameplay()
 
      for (Bullet& bullet : _bullets) {
          bullet.update();
+     }
+
+     auto it = _bullets.begin();
+     while (it != _bullets.end()) {
+         
+         Bullet& bullet = *it;
+
+         bullet.update();
+
+
+         if (bullet.getPosition().x>1000) {
+             it = _bullets.erase(it);
+         }
+         else {
+             ++it;
+         }
      }
  }
 

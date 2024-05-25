@@ -30,7 +30,7 @@ int main()
 		gp.update();
 		window.clear();
 		window.draw(background);
-		window.draw(gp);//hasta ahora dibuj ala bala y la nave
+		window.draw(gp);//hasta ahora dibuja la bala y la nave
 		window.display();
 	}
 
