@@ -1,14 +1,8 @@
-#include "clsPlayer.h"
+#include "Player.h"
 #include "Bullet.h"
 #include "Gameplay.h"
 
-
-sf::Sprite clsPlayer::getSprite() const 
-{
-	return _sprite;
-}
-
-clsPlayer::clsPlayer()
+Player::Player()
 {
 	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
@@ -16,18 +10,7 @@ clsPlayer::clsPlayer()
 }
 
 
-
-clsPlayer::clsPlayer(int x, int y)
-{
-	_texture.loadFromFile("img/nave.png");
-	_sprite.setTexture(_texture);
-	_vel = 10;
-	_sprite.setPosition(x, y);
-}
-
-
-
-void clsPlayer::upDate()
+void Player::update()
 {
 	//Teclado
 	isPress();
@@ -36,30 +19,11 @@ void clsPlayer::upDate()
 
 }
 //DIBUJA el SPRITE
-void clsPlayer::draw(sf::RenderTarget& target, sf::RenderStates states)const
+void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
 	target.draw(_sprite, states);
 }
-/*
-Bullet clsPlayer::shoot(clsPlayer spaceship, Bullet bullet)
-{
-	
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootTimer.getElapsedTime() >= shootCooldown) {
-			// Obtener la posición de la nave
-			sf::Vector2f playerPosition = spaceship.getPosition();
-			// Ajustar la posición de la bala para que esté por encima de la nave
-			float bulletSpawnOffset = 130.0f; // Ajusta la posicion de la bala respecto a la nave
-			sf::Vector2f bulletPosition(playerPosition.x, playerPosition.y - bulletSpawnOffset);
-			Bullet bullet(bulletPosition.x, bulletPosition.y, 4.f);
-			// Agregar la bala al vector
-			bullets.push_back(bullet);
-			// Reiniciar el temporizador
-			shootTimer.restart();
-			return bullet;
-		}
-}
-*/
-void clsPlayer::isPress()
+void Player::isPress()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		_sprite.move(0, -_vel);
@@ -79,7 +43,7 @@ void clsPlayer::isPress()
 	}
 }
 
-void clsPlayer::controlExtreme()
+void Player::controlExtreme()
 {
 	//EJE X
 	if (_sprite.getPosition().x < 0) {
@@ -97,7 +61,7 @@ void clsPlayer::controlExtreme()
 	}
 }
 
-sf::FloatRect clsPlayer::getBounds() const
+sf::FloatRect Player::getBounds() const
 {
 	return _sprite.getGlobalBounds();
 }

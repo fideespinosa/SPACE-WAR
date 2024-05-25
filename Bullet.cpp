@@ -1,5 +1,5 @@
 #include "Bullet.h"
-#include "clsPlayer.h"
+#include "Player.h"
 
 Bullet::Bullet(sf::Vector2f position, Direction direction)
 {
