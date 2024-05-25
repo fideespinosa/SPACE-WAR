@@ -25,6 +25,7 @@ private:
     sf::Texture _texture;
     Direction _direction;
 
+
 };
 
 

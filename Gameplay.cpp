@@ -24,7 +24,7 @@ Gameplay& Gameplay::getInstance()
 
 Gameplay::Gameplay()
 {
-    
+    shootTimer.restart();
 }
 
 
@@ -32,6 +32,7 @@ Gameplay::Gameplay()
  {
 
      _spaceship.update();
+
 
      for (Bullet& bullet : _bullets) {
          bullet.update();
@@ -42,6 +43,7 @@ Gameplay::Gameplay()
  {
      target.draw(_spaceship, states);
  
+
      for (const Bullet& bullet : _bullets) {
          target.draw(bullet, states);
      }
@@ -49,8 +51,12 @@ Gameplay::Gameplay()
  
 void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
 {
-
+    const sf::Time shootCooldown = sf::seconds(0.1f);
+    if(shootTimer.getElapsedTime() >= shootCooldown) {
     _bullets.push_back(Bullet(position, direction));
+
+    shootTimer.restart();
+    }
 }
 
 
