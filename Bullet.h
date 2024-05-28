@@ -1,8 +1,9 @@
 #pragma once
+#include "Collisionable.h"
 #include <SFML/Graphics.hpp>
 
 
-class Bullet : public sf::Drawable ,public sf::Transformable {
+class Bullet : public sf::Drawable ,public sf::Transformable, public Collisionable {
 
 public:
     enum class Direction {
@@ -15,7 +16,7 @@ public:
     Bullet(sf::Vector2f position, Direction direction);
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    
+    sf::FloatRect getBounds() const override{ return _sprite.getGlobalBounds(); }
     
 
 

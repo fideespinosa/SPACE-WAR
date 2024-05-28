@@ -1,26 +1,38 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
+
+Enemy::Enemy(sf::Vector2f position, Direction direction)
 {
-	_texture.loadFromFile("img/heart.png");
-	_sprite.setTexture(_texture);
-	_sprite.setOrigin(500, 300);
-	//ver setOrigin.
-}
-Enemy::Enemy(int x, int y)
-{
-	_texture.loadFromFile("img/heart.png");
-	_sprite.setTexture(_texture);
-	//_vel = 10;
-	_sprite.setPosition(x, y);
+    _texture.loadFromFile("img/enemy.png");
+    _sprite.setTexture(_texture);
+    _sprite.setScale(0.5f, 0.05f);
+    _direction = direction;
+    setPosition(position);
 }
 void Enemy::update()
 {
-	//ver
+    switch (_direction)
+    {
+    case Enemy::Direction::Left:
+        move(-_velocity.x, 0);
+        break;
+    case Enemy::Direction::Right:
+        move(_velocity.x, 0);
+        break;
+    case Enemy::Direction::Up:
+        move(0, -_velocity.y);
+        break;
+    case Enemy::Direction::Down:
+        move(0, _velocity.y);
+        break;
+    default:
+        break;
+    }
 }
 
 void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    states.transform *= getTransform();
 	target.draw(_sprite, states);
 }
 

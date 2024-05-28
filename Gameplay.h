@@ -13,10 +13,11 @@ class Gameplay : public sf::Drawable, sf::Transformable
 
 private:
     static Gameplay* _currentInstance;
-    std::vector<Enemy> _enemys;
+    std::list<Enemy> _enemys;
     std::list<Bullet> _bullets;
     sf::Clock shootTimer;
-
+    float spawnTimer = 0;
+    float spawnTimerMax = 3;
     Gameplay();
     Player _spaceship;
 public:

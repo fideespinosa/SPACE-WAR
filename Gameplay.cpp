@@ -1,4 +1,3 @@
-
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <list>"
@@ -54,6 +53,33 @@ Gameplay::Gameplay()
              ++it;
          }
      }
+
+     spawnTimer += 0.5f;
+     if (spawnTimer >= spawnTimerMax) {
+         _enemys.push_back(Enemy(sf::Vector2f(rand() % 1022, rand() % 150), Enemy::Direction::Down));
+         spawnTimer = 0;
+     }
+     for (Enemy& _enemy : _enemys) {
+         _enemy.update();
+     }
+     auto enemy_it = _enemys.begin();
+     while (enemy_it != _enemys.end()) {
+         Enemy& _enemy = *enemy_it;
+         _enemy.update();
+         bool collided = false;
+         for (Bullet& bullet : _bullets) {
+             if (_enemy.isCollision(bullet)) {
+                 collided = true;
+                 break;
+             }
+         }
+         if (collided) {
+             enemy_it = _enemys.erase(enemy_it);
+         }
+         else {
+             ++enemy_it;
+         }
+     }
  }
 
  void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -63,6 +89,9 @@ Gameplay::Gameplay()
 
      for (const Bullet& bullet : _bullets) {
          target.draw(bullet, states);
+     }
+     for (const Enemy& enemy : _enemys) {
+         target.draw(enemy, states);
      }
  }
  
