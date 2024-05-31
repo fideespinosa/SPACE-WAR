@@ -3,7 +3,7 @@
 #include "Gameplay.h"
 #include <iostream>
 #include "Life.h"
-
+#include "Bullet.h"
 using namespace std;
 
 int main()
@@ -26,11 +26,10 @@ int main()
 				window.close();
 
 		}
-		
-		gp.update();
 		window.clear();
 		window.draw(background);
-		window.draw(gp);//hasta ahora dibuja la bala y la nave
+		gp.update();
+		gp.draw(window, sf::RenderStates::Default);
 		window.display();
 	}
 

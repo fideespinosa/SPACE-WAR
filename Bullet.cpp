@@ -7,7 +7,7 @@ Bullet::Bullet(sf::Vector2f position, Direction direction)
     _texture.loadFromFile("img/bala.png");
     _sprite.setTexture(_texture);
     _sprite.setOrigin({ -46.0f,0.0f});
-    _sprite.setScale(0.4f, 0.05f);
+    _sprite.setScale(0.9f, 0.09f);
     _direction = direction;
     setPosition(position);
     _velocity={ 8.0f, 8.0f };

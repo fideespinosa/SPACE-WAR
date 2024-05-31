@@ -8,7 +8,7 @@ Player::Player()
 	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin({ 0.0f,0.0f });
-	_sprite.setScale(0.5, 0.5);
+	_sprite.setScale(0.4, 0.4);
 	_vel = 10;
 }
 

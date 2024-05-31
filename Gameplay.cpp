@@ -14,6 +14,7 @@
 // getinstance validemos si esta en 0 o se creo una instancia
 Gameplay* Gameplay::_currentInstance = nullptr;
 
+
 Gameplay& Gameplay::getInstance()
 {
     if (Gameplay::_currentInstance == nullptr) {
@@ -26,67 +27,71 @@ Gameplay::Gameplay()
 {
     shootTimer.restart();
 }
+void Gameplay::update()
+{
+    _spaceship.update();
+    auto bullet_it = _bullets.begin();
 
 
- void Gameplay::update() 
- {
+    while (bullet_it != _bullets.end())
+    {
+        Bullet& bullet = *bullet_it;
+        bullet.update();
 
-     _spaceship.update();
-
-
-     for (Bullet& bullet : _bullets) {
-         bullet.update();
-     }
-
-     auto it = _bullets.begin();
-     while (it != _bullets.end()) {
-         
-         Bullet& bullet = *it;
-
-         bullet.update();
+        if (bullet.getPosition().x > 1000) {
+            bullet_it = _bullets.erase(bullet_it);
+        }
+        else {
+            ++bullet_it;
+        }
+    }
 
 
-         if (bullet.getPosition().x>1000) {
-             it = _bullets.erase(it);
-         }
-         else {
-             ++it;
-         }
-     }
+    spawnTimer += 0.1f;
+    if (spawnTimer >= spawnTimerMax)
+    {
+        _enemys.push_back(Enemy(sf::Vector2f(rand() % 1022, rand() % 150), Enemy::Direction::Down));
+        spawnTimer = 0;
+    }
+    auto enemy_it = _enemys.begin();
+    while (enemy_it != _enemys.end()) {
+        Enemy& _enemy = *enemy_it;
+        _enemy.update();
+        ++enemy_it;
+    }
+    enemy_it = _enemys.begin();
 
-     spawnTimer += 0.5f;
-     if (spawnTimer >= spawnTimerMax) {
-         _enemys.push_back(Enemy(sf::Vector2f(rand() % 1022, rand() % 150), Enemy::Direction::Down));
-         spawnTimer = 0;
-     }
-     for (Enemy& _enemy : _enemys) {
-         _enemy.update();
-     }
-     auto enemy_it = _enemys.begin();
-     while (enemy_it != _enemys.end()) {
-         Enemy& _enemy = *enemy_it;
-         _enemy.update();
-         bool collided = false;
-         for (Bullet& bullet : _bullets) {
-             if (_enemy.isCollision(bullet)) {
-                 collided = true;
-                 break;
-             }
-         }
-         if (collided) {
-             enemy_it = _enemys.erase(enemy_it);
-         }
-         else {
-             ++enemy_it;
-         }
-     }
- }
+    while (enemy_it != _enemys.end())
+    {
+        Enemy& _enemy = *enemy_it;
+        bool collided = false;
+        bullet_it = _bullets.begin();
+        while (bullet_it != _bullets.end())
+        {
+            Bullet& bullet = *bullet_it;
+            if (_enemy.isCollision(bullet))
+            {
+                collided = true;
+                break;
+            }
+            ++bullet_it;
+        }
+        if (collided) {
+            enemy_it = _enemys.erase(enemy_it);
+        }
+        else {
+            ++enemy_it;
 
- void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
+
+        }
+    }
+
+
+}
+
+ void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const 
  {
      target.draw(_spaceship, states);
- 
-
      for (const Bullet& bullet : _bullets) {
          target.draw(bullet, states);
      }
@@ -97,12 +102,13 @@ Gameplay::Gameplay()
  
 void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
 {
-    const sf::Time shootCooldown = sf::seconds(0.1f);
+    const sf::Time shootCooldown = sf::seconds(0.09f);
     if(shootTimer.getElapsedTime() >= shootCooldown) {
     _bullets.push_back(Bullet(position, direction));
 
     shootTimer.restart();
     }
+
 }
 
 

@@ -6,6 +6,7 @@
 #include <SFML/System/Clock.hpp>
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Windows.h"
 #include <vector>
 
 class Gameplay : public sf::Drawable, sf::Transformable
@@ -20,6 +21,8 @@ private:
     float spawnTimerMax = 3;
     Gameplay();
     Player _spaceship;
+    sf::Sprite background;
+    sf::Texture backgroundGame;
 public:
     static Gameplay& getInstance();
     void update();
