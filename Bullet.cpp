@@ -46,6 +46,11 @@ void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
     
 }
 
+sf::FloatRect Bullet::getGlobalBounds() const
+{
+    return _sprite.getGlobalBounds();
+}
+
 
 
 

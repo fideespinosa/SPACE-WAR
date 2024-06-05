@@ -25,7 +25,7 @@ void Life::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(_sprite, states);
 }
 
-sf::FloatRect Life::getBounds() const
+sf::FloatRect Life::getGlobalBounds() const
 {
 	return _sprite.getGlobalBounds();
 }

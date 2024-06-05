@@ -18,7 +18,7 @@ void PowerUp::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(_sprite, states);
 }
 
-sf::FloatRect PowerUp::getBounds() const
+sf::FloatRect PowerUp::getGlobalBounds() const
 {
 	return _sprite.getGlobalBounds();
 }

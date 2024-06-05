@@ -19,6 +19,6 @@ public:
 protected:
 	void isPress(); // Tecla Presionada
 	void controlExtreme();// Controla los extremos de la pantalla
-	sf::FloatRect getBounds() const override;
+	sf::FloatRect getGlobalBounds() const override;
 };
 

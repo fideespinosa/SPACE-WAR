@@ -16,7 +16,7 @@ public:
     Bullet(sf::Vector2f position, Direction direction);
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override{ return _sprite.getGlobalBounds(); }
+    sf::FloatRect getGlobalBounds() const override;
     
 
 

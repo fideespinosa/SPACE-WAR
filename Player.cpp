@@ -8,7 +8,7 @@ Player::Player()
 	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin({ 0.0f,0.0f });
-	_sprite.setScale(0.4, 0.4);
+	_sprite.setScale(0.9, 0.9);
 	_vel = 10;
 }
 
@@ -68,7 +68,7 @@ void Player::controlExtreme()
 
 }
 
-sf::FloatRect Player::getBounds() const
+sf::FloatRect Player::getGlobalBounds() const
 {
 	return _sprite.getGlobalBounds();
 }

@@ -20,7 +20,7 @@ public:
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 	void respawn();
-	sf::FloatRect getBounds() const override;
+	sf::FloatRect getGlobalBounds() const override;
 private:
 	sf::RenderStates _states;
 	Direction _direction;
