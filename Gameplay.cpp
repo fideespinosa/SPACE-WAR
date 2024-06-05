@@ -32,7 +32,7 @@ void Gameplay::update()
     updatePlayer(); // Actualiza la nave espacial
     updateBullets(); // Actualiza las balas
     updateEnemies(); // Actualiza los enemigos
-    handleCollisions(); // Maneja las colisiones
+    checkCollisions(); // Maneja las colisiones
     spawnEnemies(); // Genera nuevos enemigos
 }
 
@@ -61,7 +61,7 @@ void Gameplay::updateEnemies()
     }
 }
 
-void Gameplay::handleCollisions()
+void Gameplay::checkCollisions()
 {
     auto bullet_it = _bullets.begin();
     while (bullet_it != _bullets.end())

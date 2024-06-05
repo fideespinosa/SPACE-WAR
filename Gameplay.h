@@ -29,7 +29,7 @@ public:
     void updatePlayer();
     void updateBullets();
     void updateEnemies();
-    void handleCollisions();
+    void checkCollisions();
     void spawnEnemies();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void shoot(sf::Vector2f position, Bullet::Direction direction);
