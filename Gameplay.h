@@ -26,6 +26,11 @@ private:
 public:
     static Gameplay& getInstance();
     void update();
+    void updatePlayer();
+    void updateBullets();
+    void updateEnemies();
+    void handleCollisions();
+    void spawnEnemies();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     void shoot(sf::Vector2f position, Bullet::Direction direction);
     

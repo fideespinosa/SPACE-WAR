@@ -1,6 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
-#include <list>"
+#include <list>
 #include "windows.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -29,85 +29,91 @@ Gameplay::Gameplay()
 }
 void Gameplay::update()
 {
-    // Actualiza el estado de la nave espacial
+    updatePlayer(); // Actualiza la nave espacial
+    updateBullets(); // Actualiza las balas
+    updateEnemies(); // Actualiza los enemigos
+    handleCollisions(); // Maneja las colisiones
+    spawnEnemies(); // Genera nuevos enemigos
+}
+
+void Gameplay::updatePlayer()
+{
     _spaceship.update();
+}
 
-    // Inicializa un iterador al comienzo de la lista de balas
+void Gameplay::updateBullets()
+{
+    for (auto& bullet : _bullets)
+    {
+        bullet.update();
+    }
+    // Elimina las balas fuera de pantalla
+    _bullets.erase(std::remove_if(_bullets.begin(), _bullets.end(),
+        [](const Bullet& bullet) { return bullet.getPosition().y > 1000; }),
+        _bullets.end());
+}
+
+void Gameplay::updateEnemies()
+{
+    for (auto& enemy : _enemys)
+    {
+        enemy.update();
+    }
+}
+
+void Gameplay::handleCollisions()
+{
     auto bullet_it = _bullets.begin();
-    // Inicializa un iterador al comienzo de la lista de enemigos
-    auto enemy_it = _enemys.begin();
-
-    // Itera sobre cada bala en la lista
     while (bullet_it != _bullets.end())
     {
-        // Obtiene una referencia a la bala actual
-        Bullet& bullet = *bullet_it;
-        // Actualiza el estado de la bala
-        bullet.update();
+        auto& bullet = *bullet_it;
+        auto enemy_it = _enemys.begin();
+        while (enemy_it != _enemys.end())
+        {
+            auto& enemy = *enemy_it;
 
-        // Si la bala ha salido de la pantalla (posición x > 1000), la elimina de la lista
-        if (bullet.getPosition().x > 1000 ) {
-            bullet_it = _bullets.erase(bullet_it);
+            // genero estos cout para validar con global bounds las posiciones de la 'caja' del sprite
+            std::cout << "Bala bounds: " << bullet.getGlobalBounds().left << ", " << bullet.getGlobalBounds().top << ", " << bullet.getGlobalBounds().width << ", " << bullet.getGlobalBounds().height << std::endl;
+            std::cout << "Enemigo bounds: " << enemy.getGlobalBounds().left << ", " << enemy.getGlobalBounds().top << ", " << enemy.getGlobalBounds().width << ", " << enemy.getGlobalBounds().height << std::endl;
+
+
+            if (bullet.isCollision(enemy))
+            {
+                // Manejar la colisión aquí
+                std::cout << "¡Colisión detectada!" << std::endl;
+
+                // Eliminar la bala y el enemigo
+                bullet_it = _bullets.erase(bullet_it);
+                enemy_it = _enemys.erase(enemy_it);
+                // Romper el bucle de enemigos ya que esta bala ya no puede colisionar con más enemigos
+                break;
+            }
+            else
+            {
+                ++enemy_it;
+            }
         }
-        else {
-                ++bullet_it;
+
+        // Solo avanzar al siguiente iterador de bala si no se eliminó esta bala durante la colisión
+        if (bullet_it != _bullets.end())
+        {
+            ++bullet_it;
         }
     }
 
-    // Incrementa el temporizador de aparición de enemigos
-    spawnTimer += 0.1f;
+}
 
-    // Si el temporizador ha alcanzado el máximo, crea un nuevo enemigo y lo añade a la lista
+
+void Gameplay::spawnEnemies()
+{
+    spawnTimer += 0.1f;
     if (spawnTimer >= spawnTimerMax)
     {
         _enemys.push_back(Enemy(sf::Vector2f(rand() % 1022, rand() % 150), Enemy::Direction::Down));
-        // Reinicia el temporizador de aparición de enemigos
         spawnTimer = 0;
     }
-
-    // Itera sobre cada enemigo en la lista y actualiza su estado
-    while (enemy_it != _enemys.end()) {
-        Enemy& _enemy = *enemy_it;
-        _enemy.update();
-        ++enemy_it;
-    }
-
-    // Reinicializa el iterador al comienzo de la lista de enemigos
-    enemy_it = _enemys.begin();
-    // Itera sobre cada enemigo en la lista
-    while (enemy_it != _enemys.end())
-    {
-        // Obtiene una referencia al enemigo actual
-        Enemy& _enemy = *enemy_it;
-
-        // Itera sobre cada bala en la lista
-        bullet_it = _bullets.begin();
-        while (bullet_it != _bullets.end())
-        {
-            // Obtiene una referencia a la bala actual
-            Bullet& bullet = *bullet_it;
-
-            // Comprueba si la bala ha colisionado con el enemigo
-            if (bullet.isCollision(_enemy)) {
-                // Si hay una colisión, imprime un mensaje en la consola
-                std::cout << "¡Colisión detectada!" << std::endl;
-
-                // Elimina la bala y pasa a la siguiente
-                bullet_it = _bullets.erase(bullet_it);
-            }
-            else {
-                // Si no hay colisión, pasa a la siguiente bala
-                ++bullet_it;
-            }
-        }
-
-        // Pasa al siguiente enemigo
-        ++enemy_it;
-    }
-
-
-
 }
+
 
 
  void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const 

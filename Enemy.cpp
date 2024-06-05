@@ -10,12 +10,6 @@ Enemy::Enemy(sf::Vector2f position, Direction direction)
     setPosition(position);
     _states.texture = &_texture;
 }
-Enemy::Enemy()
-{
-    _texture.loadFromFile("img/enemy.png");
-    _sprite.setTexture(_texture);
-    _sprite.setScale(0.5f, 0.05f);
-}
 
 void Enemy::update()
 {
