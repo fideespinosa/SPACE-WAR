@@ -120,7 +120,7 @@ void Gameplay::spawnEnemies()
 
 void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-   
+   //
 
     for (const Bullet& bullet : _bullets) {
         Bullet tempBullet;
