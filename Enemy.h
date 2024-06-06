@@ -16,6 +16,7 @@ public:
 		Down = 3
 	};
 	Enemy(sf::Vector2f position, Direction direction);
+	Enemy();
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
 	void respawn();

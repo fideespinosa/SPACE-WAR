@@ -71,6 +71,8 @@ void Gameplay::checkCollisions()
         while (enemy_it != _enemys.end())
         {
             auto& enemy = *enemy_it;
+            std::cout << "Posición de la bala: " << bullet.getPosition().x << ", " << bullet.getPosition().y << std::endl;
+            std::cout << "Posición del enemigo: " << enemy.getPosition().x << ", " << enemy.getPosition().y << std::endl;
 
             // genero estos cout para validar con global bounds las posiciones de la 'caja' del sprite
             std::cout << "Bala bounds: " << bullet.getGlobalBounds().left << ", " << bullet.getGlobalBounds().top << ", " << bullet.getGlobalBounds().width << ", " << bullet.getGlobalBounds().height << std::endl;
@@ -116,23 +118,33 @@ void Gameplay::spawnEnemies()
 
 
 
- void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const 
- {
-     target.draw(_spaceship, states);
-     for (const Bullet& bullet : _bullets) {
-         target.draw(bullet, states);
-     }
-     for (const Enemy& enemy : _enemys) {
-         target.draw(enemy, states);
-     }
- }
+void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+   
+
+    for (const Bullet& bullet : _bullets) {
+        Bullet tempBullet;
+        tempBullet.setPosition(bullet.getPosition()); 
+        target.draw(tempBullet, states); 
+    }
+    target.draw(_spaceship, states);
+    for (const Enemy& enemy : _enemys) {
+        Enemy tempEnemy; 
+        tempEnemy.setPosition(enemy.getPosition()); 
+        target.draw(tempEnemy, states); 
+    }
+}
+
  
 void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
 {
+    sf::FloatRect playerBounds = _spaceship.getGlobalBounds();
+    sf::Vector2f playerCenter(position.x + playerBounds.width / 2, position.y  );
+
     const sf::Time shootCooldown = sf::seconds(0.09f);
     if(shootTimer.getElapsedTime() >= shootCooldown) {
-    _bullets.push_back(Bullet(position, direction));
-
+    _bullets.push_back(Bullet(playerCenter, direction));
+    std::cout << "Nueva bala ";
     shootTimer.restart();
     }
 

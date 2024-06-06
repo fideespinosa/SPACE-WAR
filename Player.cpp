@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Gameplay.h"
+#include <iostream>
 
 
 Player::Player()
@@ -8,7 +9,7 @@ Player::Player()
 	_texture.loadFromFile("img/nave.png");
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin({ 0.0f,0.0f });
-	_sprite.setScale(0.5f, 0.5f);
+	_sprite.setScale(0.8, 0.8);
 	_vel = 10;
 }
 
@@ -27,26 +28,37 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	target.draw(_sprite, states);
 }
 void Player::isPress()
-
-
 {
+	bool moved = false; // Para verificar si alguna tecla se presiona
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		_sprite.move(0, -_vel);
+		moved = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		_sprite.move(-_vel, 0);
+		moved = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		_sprite.move(0, _vel);
+		moved = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		_sprite.move(_vel, 0);
+		moved = true;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+
 		Gameplay& gm = Gameplay::getInstance();
 		gm.shoot(_sprite.getPosition(), Bullet::Direction::Up);
 	}
+
+	if (moved) {
+		sf::Vector2f position = _sprite.getPosition();
+		std::cout << "Posición del jugador después del movimiento: " << position.x << ", " << position.y << std::endl;
+	}
 }
+
 
 void Player::controlExtreme()
 {

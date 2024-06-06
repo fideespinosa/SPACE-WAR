@@ -14,11 +14,11 @@ public:
 	Player();
 	void update(); //Actualizar
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override; //Dibujar
-
+	sf::FloatRect getGlobalBounds() const override;
 
 protected:
 	void isPress(); // Tecla Presionada
 	void controlExtreme();// Controla los extremos de la pantalla
-	sf::FloatRect getGlobalBounds() const override;
+
 };
 

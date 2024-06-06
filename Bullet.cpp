@@ -13,6 +13,13 @@ Bullet::Bullet(sf::Vector2f position, Direction direction)
     _velocity={ 2.0f, 2.0f };
 }
 
+Bullet::Bullet()
+{
+    _texture.loadFromFile("img/bala.png");
+    _sprite.setTexture(_texture);
+    _sprite.setScale(0.9f, 0.9f);
+}
+
 
 void Bullet::update()
 {

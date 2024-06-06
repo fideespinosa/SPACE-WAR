@@ -11,7 +11,6 @@ int main()
 
 	sf::Sprite background;
 	sf::Texture backgroundGame;
-	Player Spaceship;
 
 	backgroundGame.loadFromFile("img/backgroundGamePlay.png");
 	background.setTexture(backgroundGame);
