@@ -7,8 +7,11 @@ private:
     sf::Sprite _sprite;
     sf::Texture _texture;
     float _speed;
+    int _life=5;
 
 public:
+    int getLife();
+    void setLife(int life);
     Enemy(float x, float y);
     void update();
     void draw(sf::RenderWindow& window) override;

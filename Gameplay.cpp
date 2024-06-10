@@ -25,7 +25,11 @@ void Gameplay::handleCollisions() {
         bool collisionDetected = false;
         for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();) {
             if (it->getBounds().intersects(enemyIt->getBounds())) {
-                enemyIt = _enemies.erase(enemyIt);
+                enemyIt->setLife(enemyIt->getLife() - 1);
+                if (enemyIt->getLife() == 0) {
+                    enemyIt = _enemies.erase(enemyIt);
+                    _score += 10;
+                }
                 std::cout << "Collision detected" << std::endl;
                 collisionDetected = true;
                 break;
@@ -36,7 +40,6 @@ void Gameplay::handleCollisions() {
         }
         if (collisionDetected) {
             it = _playerBullets.erase(it);
-            _score += 10;
         }
         else {
             ++it;
@@ -54,18 +57,17 @@ void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREG
 
 sf::Text Gameplay::showScore(int _score)
 {   
-    sf::Font _font;
     _font.loadFromFile("SPACE.ttf");
     std::string score = std::to_string(_score);
     sf::Text textScore;
     textScore.setFont(_font);
     textScore.setString(score);
     textScore.setCharacterSize(40);
-    textScore.setStyle(sf::Text::Regular);
+    textScore.setStyle(sf::Text::Italic);
     textScore.setFillColor(sf::Color::White);
     textScore.setOutlineThickness(1);
-    textScore.setOutlineColor(sf::Color::White);
-    textScore.setPosition(500, 300);
+    textScore.setOutlineColor(sf::Color::Red);
+    textScore.setPosition(950, 25);
     return textScore;
 
 }
@@ -102,9 +104,7 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         spawnEnemies();
         handleCollisions();
-        //sf::Text _text(showScore(_score));
-        //window.draw(_text);
-        //window.clear();
+        window.draw(showScore(_score));
         _player.draw(window);
         
 

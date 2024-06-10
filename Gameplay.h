@@ -21,4 +21,5 @@ public:
     Gameplay& getInstance();
     Gameplay();
     void run(sf::RenderWindow& window);
+    sf::Font _font;
 };

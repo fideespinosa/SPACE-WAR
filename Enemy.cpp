@@ -1,6 +1,16 @@
 #include "Enemy.h"
 #include <iostream>
 
+int Enemy::getLife()
+{
+    return _life;
+}
+
+void Enemy::setLife(int life)
+{
+    _life = life;
+}
+
 Enemy::Enemy(float x, float y) {
     _texture.loadFromFile("img/enemy.png");
     _sprite.setTexture(_texture);

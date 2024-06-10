@@ -40,7 +40,7 @@ void Player::handleInput(std::list<Bullet>& bullets) {
 
     // Disparo al presionar la barra espaciadora
     static sf::Clock shootClock;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootClock.getElapsedTime().asSeconds() > 0.5f) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootClock.getElapsedTime().asSeconds() > 0.2f) {
         bullets.push_back(shoot());
         shootClock.restart();
     }
