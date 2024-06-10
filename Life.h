@@ -9,7 +9,7 @@ public:
 	Life();
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	sf::FloatRect getGlobalBounds() const override; //sobreescribimos el metodo de collisionable
+	sf::FloatRect getBounds() const override; //sobreescribimos el metodo de collisionable
 	
 };
 

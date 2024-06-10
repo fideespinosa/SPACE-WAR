@@ -1,24 +1,20 @@
-#pragma once
-#include <SFML/Graphics.hpp>
-#include "Bullet.h"
+#include <SFML\Graphics.hpp>
 #include "Collisionable.h"
-#include <SFML/System/Clock.hpp>
+#include "Bullet.h"
+#include <list>
 
-class Player : public sf::Drawable, public Collisionable, public sf::Transformable
-{
+class Player : public Collisionable {
 private:
-	sf::Sprite _sprite;
-	sf::Texture _texture;
-	float _vel;
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+    float _speed;
+
 public:
-	Player();
-	void update(); //Actualizar
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override; //Dibujar
-	sf::FloatRect getGlobalBounds() const override;
-
-protected:
-	void isPress(); // Tecla Presionada
-	void controlExtreme();// Controla los extremos de la pantalla
-
+    Player();
+    void handleInput(std::list<Bullet>& bullets);
+    void update();
+    void draw(sf::RenderWindow& window) override;
+    sf::FloatRect getBounds() const override;
+    sf::Vector2f getPosition() const;
+    Bullet shoot();
 };
-

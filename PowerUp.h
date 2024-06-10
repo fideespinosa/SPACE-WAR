@@ -6,10 +6,12 @@ class PowerUp : public sf::Drawable, public Collisionable, public Consumable
 {
 
 public:
+	sf::Sprite _sprite;
+	sf::Texture _texture;
 	PowerUp();
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	sf::FloatRect getGlobalBounds() const override; //sobreescribimos el metodo de collisionable
+	sf::FloatRect getBounds() const override; //sobreescribimos el metodo de collisionable
 
 };
 

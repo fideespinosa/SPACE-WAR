@@ -1,14 +1,7 @@
-#include <SFML\Graphics.hpp>
-#include <SFML\Audio.hpp>
-#include <list>
-#include "windows.h"
-#include "Enemy.h"
-#include "Player.h"
-#include "Consumable.h"
+#pragma once
 #include "Gameplay.h"
-#include "Bullet.h"
-#include <SFML/System/Clock.hpp>
 #include <iostream>
+
 
 //inicializamos la variable de clase en 0 para cuando programemos el 
 // getinstance validemos si esta en 0 o se creo una instancia
@@ -19,135 +12,130 @@ Gameplay& Gameplay::getInstance()
 {
     if (Gameplay::_currentInstance == nullptr) {
         Gameplay::_currentInstance = new Gameplay();
-   }
+    }
     return *Gameplay::_currentInstance;
 }
 
-Gameplay::Gameplay()
-{
-    shootTimer.restart();
-}
-void Gameplay::update()
-{
-    updatePlayer(); // Actualiza la nave espacial
-    updateBullets(); // Actualiza las balas
-    updateEnemies(); // Actualiza los enemigos
-    checkCollisions(); // Maneja las colisiones
-    spawnEnemies(); // Genera nuevos enemigos
+Gameplay::Gameplay() {
+    // Inicializar jugador y listas de enemigos y balas
 }
 
-void Gameplay::updatePlayer()
-{
-    _spaceship.update();
-}
-
-void Gameplay::updateBullets()
-{
-    for (auto& bullet : _bullets)
-    {
-        bullet.update();
-    }
-    // Elimina las balas fuera de pantalla
-    _bullets.erase(std::remove_if(_bullets.begin(), _bullets.end(),
-        [](const Bullet& bullet) { return bullet.getPosition().y > 1000; }),
-        _bullets.end());
-}
-
-void Gameplay::updateEnemies()
-{
-    for (auto& enemy : _enemys)
-    {
-        enemy.update();
-    }
-}
-
-void Gameplay::checkCollisions()
-{
-    auto bullet_it = _bullets.begin();
-    while (bullet_it != _bullets.end())
-    {
-        auto& bullet = *bullet_it;
-        auto enemy_it = _enemys.begin();
-        while (enemy_it != _enemys.end())
-        {
-            auto& enemy = *enemy_it;
-            std::cout << "Posición de la bala: " << bullet.getPosition().x << ", " << bullet.getPosition().y << std::endl;
-            std::cout << "Posición del enemigo: " << enemy.getPosition().x << ", " << enemy.getPosition().y << std::endl;
-
-            // genero estos cout para validar con global bounds las posiciones de la 'caja' del sprite
-            std::cout << "Bala bounds: " << bullet.getGlobalBounds().left << ", " << bullet.getGlobalBounds().top << ", " << bullet.getGlobalBounds().width << ", " << bullet.getGlobalBounds().height << std::endl;
-            std::cout << "Enemigo bounds: " << enemy.getGlobalBounds().left << ", " << enemy.getGlobalBounds().top << ", " << enemy.getGlobalBounds().width << ", " << enemy.getGlobalBounds().height << std::endl;
-
-
-            if (bullet.isCollision(enemy))
-            {
-                // Manejar la colisión aquí
-                std::cout << "¡Colisión detectada!" << std::endl;
-
-                // Eliminar la bala y el enemigo
-                bullet_it = _bullets.erase(bullet_it);
-                enemy_it = _enemys.erase(enemy_it);
-                // Romper el bucle de enemigos ya que esta bala ya no puede colisionar con más enemigos
+void Gameplay::handleCollisions() {
+    for (auto it = _playerBullets.begin(); it != _playerBullets.end();) {
+        bool collisionDetected = false;
+        for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();) {
+            if (it->getBounds().intersects(enemyIt->getBounds())) {
+                enemyIt = _enemies.erase(enemyIt);
+                std::cout << "Collision detected" << std::endl;
+                collisionDetected = true;
                 break;
             }
-            else
-            {
-                ++enemy_it;
+            else {
+                ++enemyIt;
             }
         }
-
-        // Solo avanzar al siguiente iterador de bala si no se eliminó esta bala durante la colisión
-        if (bullet_it != _bullets.end())
-        {
-            ++bullet_it;
+        if (collisionDetected) {
+            it = _playerBullets.erase(it);
+            _score += 10;
+        }
+        else {
+            ++it;
         }
     }
-
 }
 
-
-void Gameplay::spawnEnemies()
-{
-    spawnTimer += 0.1f;
-    if (spawnTimer >= spawnTimerMax)
-    {
-        _enemys.push_back(Enemy(sf::Vector2f(rand() % 1022, rand() % 150), Enemy::Direction::Down));
-        spawnTimer = 0;
+void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
+    if (_enemySpawnClock.getElapsedTime().asSeconds() > 2) {
+        float spawnX = static_cast<float>(rand() % (800 - 50)); // Suponiendo que el ancho del enemigo es 50
+        _enemies.push_back(Enemy(spawnX, 0));
+        _enemySpawnClock.restart();
     }
 }
 
+sf::Text Gameplay::showScore(int _score)
+{   
+    sf::Font _font;
+    _font.loadFromFile("SPACE.ttf");
+    std::string score = std::to_string(_score);
+    sf::Text textScore;
+    textScore.setFont(_font);
+    textScore.setString(score);
+    textScore.setCharacterSize(40);
+    textScore.setStyle(sf::Text::Regular);
+    textScore.setFillColor(sf::Color::White);
+    textScore.setOutlineThickness(1);
+    textScore.setOutlineColor(sf::Color::White);
+    textScore.setPosition(500, 300);
+    return textScore;
 
-
-void Gameplay::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-   //
-
-    for (const Bullet& bullet : _bullets) {
-        Bullet tempBullet;
-        tempBullet.setPosition(bullet.getPosition()); 
-        target.draw(tempBullet, states); 
-    }
-    target.draw(_spaceship, states);
-    for (const Enemy& enemy : _enemys) {
-        Enemy tempEnemy; 
-        tempEnemy.setPosition(enemy.getPosition()); 
-        target.draw(tempEnemy, states); 
-    }
 }
 
- 
-void Gameplay::shoot(sf::Vector2f position, Bullet::Direction direction)
-{
-    sf::FloatRect playerBounds = _spaceship.getGlobalBounds();
-    sf::Vector2f playerCenter(position.x + playerBounds.width / 2, position.y  );
+void Gameplay::run(sf::RenderWindow& window) {
+    _score = 0;
+    sf::Sprite background;
+    sf::Texture backgroundGame;
 
-    const sf::Time shootCooldown = sf::seconds(0.09f);
-    if(shootTimer.getElapsedTime() >= shootCooldown) {
-    _bullets.push_back(Bullet(playerCenter, direction));
-    std::cout << "Nueva bala ";
-    shootTimer.restart();
+    backgroundGame.loadFromFile("img/backgroundGamePlay.png");
+    background.setTexture(backgroundGame);
+    
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+        window.clear();
+        window.draw(background);
+        
+        _player.handleInput(_playerBullets);
+        _player.update();
+
+        for (auto& enemy : _enemies) {
+            enemy.update();
+        }
+
+        for (auto& bullet : _playerBullets) {
+            bullet.update();
+        }
+
+        spawnEnemies();
+        handleCollisions();
+        //sf::Text _text(showScore(_score));
+        //window.draw(_text);
+        //window.clear();
+        _player.draw(window);
+        
+
+        /*
+        auto enemy_it = _enemies.begin();
+        while (enemy_it != _enemies.end())
+        {
+            auto& enemy = *enemy_it;
+            enemy.draw(window);
+            ++enemy_it;
+        }
+
+        auto bullet_it = _playerBullets.begin();
+        while (bullet_it != _playerBullets.end())
+        {
+            auto& bullet = *bullet_it;
+            bullet.draw(window);
+            ++bullet_it;
+        }*/
+
+        // Dibujar enemigos
+        for (auto it = _enemies.begin(); it != _enemies.end(); ++it) {
+            it->draw(window);
+        }
+
+        // Dibujar balas
+        for (auto it = _playerBullets.begin(); it != _playerBullets.end(); ++it) {
+            it->draw(window);
+        }
+        window.display();
     }
-
 }
 
 

@@ -1,64 +1,27 @@
 #include "Enemy.h"
 #include <iostream>
 
-
-Enemy::Enemy(sf::Vector2f position, Direction direction)
-{
+Enemy::Enemy(float x, float y) {
     _texture.loadFromFile("img/enemy.png");
     _sprite.setTexture(_texture);
-    _sprite.setScale(1, 1);
-    _direction = direction;
-    setPosition(position);
-    _states.texture = &_texture;
+    _sprite.setPosition(x, y);
+    _speed = 0.2f;
 }
 
-Enemy::Enemy()
-{
+void Enemy::update() {
+    _sprite.move(0, _speed);
+}
+
+void Enemy::draw(sf::RenderWindow& window) {
     _texture.loadFromFile("img/enemy.png");
     _sprite.setTexture(_texture);
-    _sprite.setScale(1, 1);
+    window.draw(_sprite);
 }
 
-void Enemy::update()
-{
-    _velocity.x = 0.2f;
-    _velocity.y = 0.2f;
-    switch (_direction)
-    {
-    case Enemy::Direction::Left:
-        move(-_velocity.x, 0);
-        break;
-    case Enemy::Direction::Right:
-        move(_velocity.x, 0);
-        break;
-    case Enemy::Direction::Up:
-        move(0, -_velocity.y);
-        break;
-    case Enemy::Direction::Down:
-        move(0, _velocity.y);
-        break;
-    default:
-        break;
-    }
+sf::FloatRect Enemy::getBounds() const {
+    return _sprite.getGlobalBounds();
 }
 
-void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    states.transform *= getTransform();
-	target.draw(_sprite, states);
+Bullet Enemy::shoot() {
+    return Bullet(_sprite.getPosition());
 }
-
-void Enemy::respawn()
-{
-	//_sprite.setPosition(std::rand() % 1023, std::rand() % 287);
-    _sprite.setPosition(200, 200);
-    std::cout << "Nuevo enemigo" << std::endl;
-}
-
-sf::FloatRect Enemy::getGlobalBounds() const
-{
-	return _sprite.getGlobalBounds();
-}
-
-
-

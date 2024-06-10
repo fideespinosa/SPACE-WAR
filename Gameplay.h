@@ -1,40 +1,24 @@
-#pragma once
+#include <SFML/Graphics.hpp>
+#include <list>
 #include "Player.h"
-#include <list>"
-#include <SFML\Graphics.hpp>
-#include <SFML\Audio.hpp>
-#include <SFML/System/Clock.hpp>
 #include "Enemy.h"
 #include "Bullet.h"
-#include "Windows.h"
-#include <vector>
 
-class Gameplay : public sf::Drawable, sf::Transformable
-{
-
+class Gameplay {
 private:
     static Gameplay* _currentInstance;
-    std::list<Enemy> _enemys;
-    std::list<Bullet> _bullets;
-    sf::Clock shootTimer;
-    float spawnTimer = 0;
-    float spawnTimerMax = 3;
-    Gameplay();
-    Player _spaceship;
-    sf::Sprite background;
-    sf::Texture backgroundGame;
-public:
-    static Gameplay& getInstance();
-    void update();
-    void updatePlayer();
-    void updateBullets();
-    void updateEnemies();
-    void checkCollisions();
+    Player _player;
+    std::list<Enemy> _enemies;
+    std::list<Bullet> _playerBullets;
+    std::list<Bullet> _enemyBullets;
+    sf::Clock _enemySpawnClock;
+    int _score = 0;
+    void handleCollisions();
     void spawnEnemies();
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-    void shoot(sf::Vector2f position, Bullet::Direction direction);
-    
+    sf::Text showScore(int _score);
+
+public:
+    Gameplay& getInstance();
+    Gameplay();
+    void run(sf::RenderWindow& window);
 };
-
-
-

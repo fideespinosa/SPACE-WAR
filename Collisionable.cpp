@@ -1,5 +1,6 @@
 #include "Collisionable.h"
 
-bool Collisionable::isCollision(Collisionable& obj) const {
-	return getGlobalBounds().intersects(obj.getGlobalBounds());
-};
+sf::FloatRect Collisionable::getBounds() const
+{
+	return sf::FloatRect();
+}

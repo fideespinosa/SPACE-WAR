@@ -1,87 +1,70 @@
 #include "Player.h"
-#include "Bullet.h"
-#include "Gameplay.h"
-#include <iostream>
+
+Player::Player() {
+    _texture.loadFromFile("img/nave.png");
+    _sprite.setTexture(_texture);
+    _sprite.setPosition(400, 500); // Posición inicial en la parte inferior de la pantalla
+    _speed = 0.7f;
+}
+
+void Player::handleInput(std::list<Bullet>& bullets) {
+    // agrego x2 en la velocidad de mov izq y der
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        _sprite.move(-_speed*2, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        _sprite.move(_speed*2, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        _sprite.move(0, -_speed);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        _sprite.move(0, _speed);
+    }
+
+    // Limitar movimiento del jugador dentro de los límites de la pantalla
+    sf::Vector2f position = _sprite.getPosition();
+    if (position.x < 0) {
+        _sprite.setPosition(0, position.y);
+    }
+    if (position.x > 1024 - _sprite.getGlobalBounds().width) {
+        _sprite.setPosition(1024 - _sprite.getGlobalBounds().width, position.y);
+    }
+    if (position.y < 300) { //  300 piso de Y
+        _sprite.setPosition(position.x, 300);
+    }
+    if (position.y > 573 - _sprite.getGlobalBounds().height) { // 573 tope
+        _sprite.setPosition(position.x, 573 - _sprite.getGlobalBounds().height);
+    }
 
 
-Player::Player()
-{
-	_texture.loadFromFile("img/nave.png");
-	_sprite.setTexture(_texture);
-	_sprite.setOrigin({ 0.0f,0.0f });
-	_sprite.setScale(0.8, 0.8);
-	_vel = 10;
+    // Disparo al presionar la barra espaciadora
+    static sf::Clock shootClock;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootClock.getElapsedTime().asSeconds() > 0.5f) {
+        bullets.push_back(shoot());
+        shootClock.restart();
+    }
 }
 
 
-void Player::update()
-{
-	//Teclado
-	isPress();
-	//Controlar los extremos
-	controlExtreme();
-
-}
-//DIBUJA el SPRITE
-void Player::draw(sf::RenderTarget& target, sf::RenderStates states)const
-{
-	target.draw(_sprite, states);
-}
-void Player::isPress()
-{
-	bool moved = false; // Para verificar si alguna tecla se presiona
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		_sprite.move(0, -_vel);
-		moved = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		_sprite.move(-_vel, 0);
-		moved = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		_sprite.move(0, _vel);
-		moved = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		_sprite.move(_vel, 0);
-		moved = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-
-		Gameplay& gm = Gameplay::getInstance();
-		gm.shoot(_sprite.getPosition(), Bullet::Direction::Up);
-	}
-
-	if (moved) {
-		sf::Vector2f position = _sprite.getPosition();
-		std::cout << "Posición del jugador después del movimiento: " << position.x << ", " << position.y << std::endl;
-	}
+void Player::update() {
+    // Actualizar lógica del jugador si es necesario
 }
 
-
-void Player::controlExtreme()
-{
-	sf::Vector2f position = _sprite.getPosition();
-	//EJE X
-	if (position.x < 0) {
-		_sprite.setPosition(0, _sprite.getPosition().y);
-	}
-	if (position.x + _sprite.getGlobalBounds().width > 1024) {
-		_sprite.setPosition(1024 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
-	}
-	//EJE Y
-	if (position.y < 382) {
-		_sprite.setPosition(_sprite.getPosition().x, 382);
-	}
-	if (position.y + _sprite.getGlobalBounds().height > 573) {
-		_sprite.setPosition(_sprite.getPosition().x, 573 - _sprite.getGlobalBounds().height);
-	}
-
+void Player::draw(sf::RenderWindow& window) {
+    window.draw(_sprite);
 }
 
-sf::FloatRect Player::getGlobalBounds() const
-{
-	return _sprite.getGlobalBounds();
+sf::FloatRect Player::getBounds() const {
+    return _sprite.getGlobalBounds();
 }
 
+sf::Vector2f Player::getPosition() const {
+    return _sprite.getPosition();
+}
+
+Bullet Player::shoot() {
+    sf::FloatRect playerBounds = _sprite.getGlobalBounds();
+    sf::Vector2f playerCenter(_sprite.getPosition().x + playerBounds.width / 2, _sprite.getPosition().y);
+    return Bullet(playerCenter);
+}

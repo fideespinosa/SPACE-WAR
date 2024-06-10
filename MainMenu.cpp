@@ -1,8 +1,9 @@
-/*#include "MainMenu.h"
+#include "MainMenu.h"
 #include "windows.h"
 #include <iostream>
 #include "RankingMenu.h"
 #include "Gameplay.h"
+
 MainMenu::MainMenu()
 {
 	music.openFromFile("Main Theme.wav");
@@ -34,8 +35,9 @@ MainMenu::MainMenu()
 
 
 
-void MainMenu::showMenu(sf::RenderWindow &window)
-{
+void MainMenu::showMenu(){
+
+    sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War");
     sound.setBuffer(buffer);
     buffer.loadFromFile("Main Theme.wav");
  
@@ -48,8 +50,8 @@ void MainMenu::showMenu(sf::RenderWindow &window)
 
     play.setFillColor(sf::Color::White);
 
-    background.loadFromFile("background.png");
-    arrow.loadFromFile("arrow.png");
+    background.loadFromFile("img/background.png");
+    arrow.loadFromFile("img/arrow.png");
     img.setTexture(background);
     indicator.setTexture(arrow);
 
@@ -249,7 +251,7 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
 
         case 1: std::cout << "1";
            
-            gameplay.StartGame(window);
+            gameplay.run(window);
             break;
         case 2: std::cout << "2";
             RankingMenu ranking;
@@ -265,4 +267,4 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
             return exit;
 
         }
-    }*/
+    }
