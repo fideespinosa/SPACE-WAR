@@ -3,10 +3,11 @@
 #include "Bullet.h"
 #include <list>
 
-class Player : public Collisionable {
+class Player : public Collisionable{
 private:
     sf::Sprite _sprite;
     sf::Texture _texture;
+    int life = 5;
     float _speed;
 
 public:

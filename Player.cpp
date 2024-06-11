@@ -4,7 +4,7 @@ Player::Player() {
     _texture.loadFromFile("img/nave.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(400, 500); // Posición inicial en la parte inferior de la pantalla
-    _speed = 0.7f;
+    _speed = 1;
 }
 
 void Player::handleInput(std::list<Bullet>& bullets) {

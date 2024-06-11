@@ -1,4 +1,6 @@
 #pragma once
+#include <cstdlib>
+#include <ctime>
 #include "Gameplay.h"
 #include <iostream>
 
@@ -48,9 +50,13 @@ void Gameplay::handleCollisions() {
 }
 
 void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
+    std::srand(std::time(0)); 
+    int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
+    
+    
     if (_enemySpawnClock.getElapsedTime().asSeconds() > 2) {
-        float spawnX = static_cast<float>(rand() % (800 - 50)); // Suponiendo que el ancho del enemigo es 50
-        _enemies.push_back(Enemy(spawnX, 0));
+        float spawnX = static_cast<float>(rand() % (800 - 50)); // verificar ancho en getBounds de enemigo
+        _enemies.push_back(Enemy(spawnX, 0, randomType));
         _enemySpawnClock.restart();
     }
 }
@@ -136,6 +142,11 @@ void Gameplay::run(sf::RenderWindow& window) {
         }
         window.display();
     }
+}
+
+void Gameplay::drawLife(sf::RenderWindow& window, int life)
+{
+    
 }
 
 
