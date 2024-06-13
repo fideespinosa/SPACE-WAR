@@ -19,6 +19,7 @@ private:
 
 
 public:
+   // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);
     Gameplay& getInstance();
     Gameplay();
     void run(sf::RenderWindow& window);

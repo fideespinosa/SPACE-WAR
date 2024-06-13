@@ -9,6 +9,16 @@
 // getinstance validemos si esta en 0 o se creo una instancia
 Gameplay* Gameplay::_currentInstance = nullptr;
 
+/*
+bool Gameplay::checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies)
+{
+    for (auto& enemy : _enemies) {
+        if (enemy->getBounds().intersects(_enemies->getBounds()) {
+
+        }
+    }
+}
+*/
 
 Gameplay& Gameplay::getInstance()
 {
@@ -52,7 +62,7 @@ void Gameplay::handleCollisions() {
 void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
     std::srand(std::time(0)); 
     int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
-    
+    //
     
     if (_enemySpawnClock.getElapsedTime().asSeconds() > 2) {
         float spawnX = static_cast<float>(rand() % (800 - 50)); // verificar ancho en getBounds de enemigo

@@ -12,7 +12,7 @@ void Bullet::update() {
 }
 
 void Bullet::draw(sf::RenderWindow& window) {
-    _texture.loadFromFile("img/bala.png");
+    //_texture.loadFromFile("img/bala.png");
     _sprite.setTexture(_texture);
     window.draw(_sprite);
 }

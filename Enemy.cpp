@@ -22,13 +22,13 @@ Enemy::Enemy(float x, float y, int type) {
     case 1:
         _type = type;
         _sprite.setPosition(x, y);
-        _speed = 0.2f;
+        _speed = 5;
         _life = 10;
         break;
     case 2:
         _type = type;
         _sprite.setPosition(x, y);
-        _speed = 0.3f;
+        _speed = 6;
         _life = 1;
         break;
     case 3:
@@ -47,15 +47,8 @@ Enemy::Enemy(float x, float y, int type) {
         std::cout << "Error en load / Enemy" << std::endl;
 
     };
-}
 
-void Enemy::update() {
-    _sprite.move(0, _speed);
-}
-
-void Enemy::draw(sf::RenderWindow& window) 
-{
-
+   
     switch (getType()) {
 
     case 1:
@@ -65,7 +58,6 @@ void Enemy::draw(sf::RenderWindow& window)
     case 2:
         _texture.loadFromFile("img/enemy2.png");
         _sprite.setTexture(_texture);
-        window.draw(_sprite);
         break;
     case 3:
         _texture.loadFromFile("img/enemy3.png");
@@ -75,16 +67,24 @@ void Enemy::draw(sf::RenderWindow& window)
         _texture.loadFromFile("img/enemy4.png");
         _sprite.setTexture(_texture);
         break;
-
-
     }
+}
 
+void Enemy::update() {
+    _sprite.move(0, _speed);
+}
+
+void Enemy::draw(sf::RenderWindow& window) 
+{
+    _sprite.setTexture(_texture);
     window.draw(_sprite);
 };
 
 
 sf::FloatRect Enemy::getBounds() const {
     return _sprite.getGlobalBounds();
+    //recomendacion - usar SF::REctangleShape 
+    // cambiar return
 }
 
 Bullet Enemy::shoot() {
