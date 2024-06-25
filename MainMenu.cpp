@@ -28,6 +28,26 @@ MainMenu::MainMenu()
 	help.setString("help");
 	exit.setString("exit");
 
+    EnterName.setCharacterSize(20);
+    EnterName.setFont(font);
+    EnterName.setString("Ingrese su nombre:");
+    EnterName.setStyle(sf::Text::Italic);
+    EnterName.setOutlineThickness(1);
+    EnterName.setOutlineColor(sf::Color::Black);
+    EnterName.setPosition(600.f, 200.f);
+
+    esc.loadFromFile("img/esc.png");
+    escape.setTexture(esc);
+    escape.setPosition(sf::Vector2f(5, 455));
+
+    atras.setFont(font);
+    atras.setString("ATRAS");
+    atras.setStyle(sf::Text::Italic);
+    atras.setFillColor(sf::Color::White);
+    atras.setOutlineThickness(1);
+    atras.setOutlineColor(sf::Color::Black);
+    atras.setPosition(115.f, 515.f);
+
     int x = 690, y = 155;
 
     sound.setBuffer(buffer);
@@ -61,7 +81,7 @@ void MainMenu::showMenu(){
     play.setOutlineColor(sf::Color::Black);
     //play.setStyle(sf::Text::Underlined);
     play.setPosition(700.f, 150.f);
-    play.setOutlineColor(sf::Color::Black);
+  
 
     indicator.setPosition(x, y);
 
@@ -243,6 +263,25 @@ void MainMenu::showMenu(){
     
 }
 
+bool MainMenu::InserName(sf::RenderWindow& window)
+{
+    Sleep(200);
+    while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
+  
+     
+
+        window.draw(img);
+        window.draw(escape);
+        window.draw(atras);
+        window.draw(EnterName);
+        window.display();
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) return true;
+    }
+    return false;
+    std::cout << "salio";
+}
+
 int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
   
     Gameplay gameplay;
@@ -250,8 +289,11 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
         switch (pos) {
 
         case 1: std::cout << "1";
+            if (InserName(window)) {
+                music.stop();
+                gameplay.run(window);
+            };
            
-            gameplay.run(window);
             break;
         case 2: std::cout << "2";
             RankingMenu ranking;

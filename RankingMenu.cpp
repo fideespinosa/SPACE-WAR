@@ -57,7 +57,7 @@ void RankingMenu::show(sf::RenderWindow& window) {
         img.setTexture(background);
         tres.setTexture(Tres);
         escape.setTexture(esc);
-        escape.setTexture(esc);
+       
 
         tres.setPosition(sf::Vector2f(100, 200));
         escape.setPosition(sf::Vector2f(5, 455));

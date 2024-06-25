@@ -15,6 +15,7 @@ public:
 		}
 		_sprite.setTexture(_texture);
 		_sprite.setPosition(x, y);
+		_sprite.setRotation(180.f);
 		_speed = 0.2f;
 		_life = 5;
 	};
