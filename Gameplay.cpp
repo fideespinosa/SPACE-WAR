@@ -36,9 +36,9 @@ void Gameplay::handleCollisions() {
     for (auto it = _playerBullets.begin(); it != _playerBullets.end();) {
         bool collisionDetected = false;
         for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();) {
-            if (it->getBounds().intersects(enemyIt->getBounds())) {
-                enemyIt->setLife(enemyIt->getLife() - 1);
-                if (enemyIt->getLife() == 0) {
+            if (it->getBounds().intersects((*enemyIt)->getBounds())) {
+                (*enemyIt)->setLife((*enemyIt)->getLife() - 1);
+                if ((*enemyIt)->getLife() == 0) {
                     enemyIt = _enemies.erase(enemyIt);
                     _score += 10;
                 }
@@ -66,7 +66,21 @@ void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREG
     
     if (_enemySpawnClock.getElapsedTime().asSeconds() > 2) {
         float spawnX = static_cast<float>(rand() % (800 - 50)); // verificar ancho en getBounds de enemigo
-        _enemies.push_back(Enemy(spawnX, 0, randomType));
+        switch (randomType) {
+        case 1:
+            _enemies.push_back(std::make_unique<Enemy1>(spawnX, 0));
+            break;
+        case 2:
+            _enemies.push_back(std::make_unique<Enemy2>(spawnX, 0));
+            break;
+        case 3:
+            _enemies.push_back(std::make_unique<Enemy3>(spawnX, 0));
+            break;
+        case 4:
+            _enemies.push_back(std::make_unique<Enemy4>(spawnX, 0));
+            break;
+        }
+
         _enemySpawnClock.restart();
     }
 }
@@ -83,7 +97,7 @@ sf::Text Gameplay::showScore(int _score)
     textScore.setFillColor(sf::Color::White);
     textScore.setOutlineThickness(1);
     textScore.setOutlineColor(sf::Color::Red);
-    textScore.setPosition(950, 25);
+    textScore.setPosition(750, 25);
     return textScore;
 
 }
@@ -111,7 +125,7 @@ void Gameplay::run(sf::RenderWindow& window) {
         _player.update();
 
         for (auto& enemy : _enemies) {
-            enemy.update();
+            enemy->update();
         }
 
         for (auto& bullet : _playerBullets) {
@@ -143,7 +157,7 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         // Dibujar enemigos
         for (auto it = _enemies.begin(); it != _enemies.end(); ++it) {
-            it->draw(window);
+            (*it)->draw(window);
         }
 
         // Dibujar balas

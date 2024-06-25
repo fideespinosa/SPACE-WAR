@@ -1,14 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <list>
+#include <memory>
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Enemy1.h"
+#include "Enemy2.h"
+#include "Enemy3.h"
+#include "Enemy4.h"
 
 class Gameplay{
 private:
     static Gameplay* _currentInstance;
     Player _player;
-    std::list<Enemy> _enemies;
+    std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;
     std::list<Bullet> _enemyBullets;
     sf::Clock _enemySpawnClock;
