@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include <list>
 #include <memory>
 #include "Player.h"
@@ -21,6 +22,8 @@ private:
     void handleCollisions();
     void spawnEnemies();
     sf::Text showScore(int _score);
+    sf::Music music;
+    sf::SoundBuffer buffer;
 
 
 public:

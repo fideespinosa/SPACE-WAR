@@ -58,6 +58,9 @@ MainMenu::MainMenu()
 void MainMenu::showMenu(){
 
     sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War");
+    window.setFramerateLimit(60);
+
+
     sound.setBuffer(buffer);
     buffer.loadFromFile("Main Theme.wav");
  

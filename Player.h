@@ -1,4 +1,5 @@
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "Collisionable.h"
 #include "Bullet.h"
 #include <list>
@@ -8,6 +9,8 @@ private:
     sf::Sprite _sprite;
     sf::Texture _texture;
     int life = 5;
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
     float _speed;
 
 public:

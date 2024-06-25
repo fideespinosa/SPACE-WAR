@@ -1,10 +1,14 @@
 #include "Player.h"
-
+#include <iostream>
 Player::Player() {
     _texture.loadFromFile("img/nave.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(400, 500); // Posición inicial en la parte inferior de la pantalla
-    _speed = 1;
+    _speed = 4;
+
+    buffer.loadFromFile("bulletSound.mp3");
+    sound.setBuffer(buffer);
+
 }
 
 void Player::handleInput(std::list<Bullet>& bullets) {
@@ -41,6 +45,11 @@ void Player::handleInput(std::list<Bullet>& bullets) {
     // Disparo al presionar la barra espaciadora
     static sf::Clock shootClock;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shootClock.getElapsedTime().asSeconds() > 0.2f) {
+     
+        
+       
+        sound.play();
+
         bullets.push_back(shoot());
         shootClock.restart();
     }

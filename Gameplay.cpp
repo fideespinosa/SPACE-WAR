@@ -5,6 +5,7 @@
 #include <iostream>
 
 
+
 //inicializamos la variable de clase en 0 para cuando programemos el 
 // getinstance validemos si esta en 0 o se creo una instancia
 Gameplay* Gameplay::_currentInstance = nullptr;
@@ -106,11 +107,14 @@ void Gameplay::run(sf::RenderWindow& window) {
     _score = 0;
     sf::Sprite background;
     sf::Texture backgroundGame;
+  
+    music.openFromFile("GPsoundtrack.wav");
+    music.setVolume(20.f);
 
     backgroundGame.loadFromFile("img/backgroundGamePlay.png");
     background.setTexture(backgroundGame);
     
-
+    music.play();
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -119,6 +123,7 @@ void Gameplay::run(sf::RenderWindow& window) {
             }
         }
         window.clear();
+       
         window.draw(background);
         
         _player.handleInput(_playerBullets);
