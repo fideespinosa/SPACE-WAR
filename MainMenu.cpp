@@ -1,20 +1,22 @@
+
 #include "MainMenu.h"
 #include "windows.h"
 #include <iostream>
 #include "RankingMenu.h"
 #include "Gameplay.h"
+#include <string>
 
 MainMenu::MainMenu()
 {
-	music.openFromFile("Main Theme.wav");
+    music.openFromFile("Main Theme.wav");
     music.setVolume(10.f);
 
-	buffer.loadFromFile("seleccion.ogg");
+    buffer.loadFromFile("seleccion.ogg");
 
-	font.loadFromFile("space.ttf");
+    font.loadFromFile("space.ttf");
 
-	background.loadFromFile("img/background.png");
-	arrow.loadFromFile("img/arrow.png");
+    background.loadFromFile("img/background.png");
+    arrow.loadFromFile("img/arrow.png");
 
     play.setFont(font);
     ranking.setFont(font);
@@ -22,11 +24,19 @@ MainMenu::MainMenu()
     help.setFont(font);
     exit.setFont(font);
 
-	play.setString("play");
-	ranking.setString("RANKING");
-	options.setString("options");
-	help.setString("help");
-	exit.setString("exit");
+    play.setString("play");
+    ranking.setString("RANKING");
+    options.setString("options");
+    help.setString("help");
+    exit.setString("exit");
+
+    NameLimit.setCharacterSize(20);
+    NameLimit.setFont(font);
+    NameLimit.setString("Su nombre es demasiado largo");
+    NameLimit.setStyle(sf::Text::Italic);
+    //NameLimit.setOutlineThickness(1);
+    NameLimit.setOutlineColor(sf::Color::Red);
+    NameLimit.setPosition(600.f, 400.f);
 
     EnterName.setCharacterSize(20);
     EnterName.setFont(font);
@@ -35,6 +45,12 @@ MainMenu::MainMenu()
     EnterName.setOutlineThickness(1);
     EnterName.setOutlineColor(sf::Color::Black);
     EnterName.setPosition(600.f, 200.f);
+
+    texto.setCharacterSize(15);
+    texto.setFont(font);
+    texto.setStyle(sf::Text::Italic);
+    texto.setFillColor(sf::Color::White);
+    //text.setPosition()
 
     esc.loadFromFile("img/esc.png");
     escape.setTexture(esc);
@@ -55,7 +71,7 @@ MainMenu::MainMenu()
 
 
 
-void MainMenu::showMenu(){
+void MainMenu::showMenu() {
 
     sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War");
     window.setFramerateLimit(60);
@@ -63,13 +79,13 @@ void MainMenu::showMenu(){
 
     sound.setBuffer(buffer);
     buffer.loadFromFile("Main Theme.wav");
- 
+
     sound.setVolume(20.f);
 
     music.setVolume(10.f);
-	music.play();
+    music.play();
 
-    int x = 690, y = 155, pos=1;
+    int x = 690, y = 155, pos = 1;
 
     play.setFillColor(sf::Color::White);
 
@@ -84,7 +100,7 @@ void MainMenu::showMenu(){
     play.setOutlineColor(sf::Color::Black);
     //play.setStyle(sf::Text::Underlined);
     play.setPosition(700.f, 150.f);
-  
+
 
     indicator.setPosition(x, y);
 
@@ -95,14 +111,14 @@ void MainMenu::showMenu(){
     ranking.setOutlineColor(sf::Color::White);
     ranking.setPosition(678.f, 200.f);
 
- 
+
     options.setStyle(sf::Text::Italic);
     options.setFillColor(sf::Color::Transparent);
     options.setOutlineThickness(1);
     options.setOutlineColor(sf::Color::White);
     options.setPosition(661.f, 250.f);
 
-   
+
     help.setStyle(sf::Text::Italic);
     help.setFillColor(sf::Color::Transparent);
     help.setOutlineThickness(1);
@@ -122,12 +138,12 @@ void MainMenu::showMenu(){
 
         //ReadImput
 
-        sf::Event event;
+        sf::Event Event;
 
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(Event)) {
 
             //music.setPlayingOffset(sf::seconds(10));
-            if (event.type == sf::Event::Closed)
+            if (Event.type == sf::Event::Closed)
                 window.close();
         }
 
@@ -149,7 +165,7 @@ void MainMenu::showMenu(){
         indicator.setRotation(90.f);
         window.draw(indicator);
 
-       
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and pos == 1) {
             pos = 2;
             x = 670;
@@ -250,11 +266,11 @@ void MainMenu::showMenu(){
 
         window.display();
 
-        
+
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
-            if (chooseOption(pos, sound, window) == 1) {
+            if (chooseOption(pos, sound, window, Event) == 1) {
                 window.close();
 
             };
@@ -262,54 +278,83 @@ void MainMenu::showMenu(){
         }
 
     }
-    
-    
+
+
 }
 
-bool MainMenu::InserName(sf::RenderWindow& window)
+bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
 {
+    int cont = 0;
+    bool state = false;
+    const int maxLength = 10;
     Sleep(200);
+
+
+
     while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
-  
-     
+
+        if (Event.type == sf::Event::Closed)
+            window.close();
+        window.pollEvent(Event);
+
+        if (Event.type == sf::Event::TextEntered)
+        {
+            Sleep(100);
+            std::cout << "texto entro";
+            // Manejar la entrada de texto
+            if (Event.text.unicode == 8) // Manejar retroceso (Backspace)
+            {
+                if (!name.empty())
+                {
+                    std::cout << "se borro";
+                    name.pop_back();
+                }
+            }
+            else if (Event.text.unicode < 128 and name.length() < maxLength) // Asegurarse de que sea un caracter imprimible y ver el limite
+            {
+                name += static_cast<char>(Event.text.unicode);
+            }
+            texto.setString(name);
+        }
 
         window.draw(img);
         window.draw(escape);
         window.draw(atras);
         window.draw(EnterName);
+        window.draw(texto);
         window.display();
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) return true;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) return true;
     }
     return false;
     std::cout << "salio";
 }
 
-int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window) {
-  
+int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, sf::Event Event) {
+
     Gameplay gameplay;
-        int exit = 0;
-        switch (pos) {
+    int exit = 0;
+    switch (pos) {
 
-        case 1: std::cout << "1";
-            if (InserName(window)) {
-                music.stop();
-                gameplay.run(window);
-            };
-           
-            break;
-        case 2: std::cout << "2";
-            RankingMenu ranking;
-            ranking.show(window);
-            //sound.play();
-            break;
-        case 3: std::cout << "3";
-            break;
-        case 4: std::cout << "4";
-            break;
-        case 5: std::cout << "5";
-            exit = 1;
-            return exit;
+    case 1: std::cout << "1";
+        if (InserName(window, Event)) {
+            music.stop();
+            gameplay.run(window);
+        };
 
-        }
+        break;
+    case 2: std::cout << "2";
+        RankingMenu ranking;
+        ranking.show(window);
+        //sound.play();
+        break;
+    case 3: std::cout << "3";
+        break;
+    case 4: std::cout << "4";
+        break;
+    case 5: std::cout << "5";
+        exit = 1;
+        return exit;
+
     }
+}
