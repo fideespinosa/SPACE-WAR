@@ -9,6 +9,7 @@ private:
     float _speed;
 
 public:
+    Bullet(sf::Vector2f position, int type);
     Bullet(sf::Vector2f position);
     void update();
     void draw(sf::RenderWindow& window) override;

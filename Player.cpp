@@ -1,5 +1,15 @@
 #include "Player.h"
 #include <iostream>
+
+
+void Player::setLife(int life)
+{
+    _life = life;
+}
+int Player::getLife()
+{
+    return _life;
+}
 Player::Player() {
     _texture.loadFromFile("img/nave.png");
     _sprite.setTexture(_texture);

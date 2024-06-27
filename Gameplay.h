@@ -24,7 +24,7 @@ private:
     sf::Text showScore(int _score);
     sf::Music music;
     sf::SoundBuffer buffer;
-
+    void checkPlayerCollisions();
 
 public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);

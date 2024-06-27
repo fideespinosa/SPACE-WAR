@@ -1,6 +1,8 @@
 #pragma once
 #include "Enemy.h"
 #include <iostream>
+#include <list>
+#include "Bullet.h"
 
 class Enemy1 : public Enemy
 {
@@ -15,7 +17,7 @@ public:
         }
         _sprite.setTexture(_texture);
         _sprite.setPosition(x, y);
-        _speed = 0.2f;
+        _speed = 2;
 		_life = 5;
     };
 	void update();

@@ -11,6 +11,7 @@ void Enemy1::setLife(int life)
 	_life = life;
 }
 
+
 void Enemy1::update()
 {
 	std::srand(std::time(0));

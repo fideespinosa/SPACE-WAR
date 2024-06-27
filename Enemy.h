@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Collisionable.h"
 #include "Bullet.h"
+#include <list>
 
 class Enemy : public Collisionable {
 protected:
@@ -20,7 +21,8 @@ public:
     virtual void update();
     virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
-    Bullet shoot();
-    virtual ~Enemy() = default;
+    virtual Bullet shoot();
+    virtual void handleInputEnemy(std::list<Bullet>& bullets);
+    virtual ~Enemy();
 };
 

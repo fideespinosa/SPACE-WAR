@@ -15,11 +15,20 @@ void Enemy3::update()
 {
 	std::srand(std::time(0));
 	int randomMove = (std::rand() % 2) + 1;
-	if (randomMove / 2 == 0) {
-		_sprite.move(0, _speed *2);
-	}
-	else {
-		_sprite.move(_speed * 10, 0);
+	switch (randomMove) {
+	case 1:
+		_sprite.move(0, _speed);
+		break;
+	case 2:
+		_sprite.move(_speed * -1, 3);
+		break;
+	case 3:
+		_sprite.move(0, _speed * 2);
+		break;
+	case 4:
+		_sprite.move(0, _speed);
+		_sprite.move(_speed, 0);
+		break;
 	}
 }
 

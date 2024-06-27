@@ -33,13 +33,39 @@ Gameplay::Gameplay() {
     // Inicializar jugador y listas de enemigos y balas
 }
 
+void Gameplay::checkPlayerCollisions()
+{
+    bool collisionDetected = false;
+    for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();)
+    {
+        if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
+        {
+            _player.setLife(_player.getLife() - 5);
+            if (_player.getLife() == 0)
+            {
+                std::cout << "GAME OVER PAPA te quedan : "<< std::endl;
+            }
+            std::cout << "Choco la navee" << std::endl;
+            enemyIt = _enemies.erase(enemyIt);
+        }
+        else
+        {
+            ++enemyIt;
+        }
+    }
+}
+
 void Gameplay::handleCollisions() {
-    for (auto it = _playerBullets.begin(); it != _playerBullets.end();) {
+    for (auto it = _playerBullets.begin(); it != _playerBullets.end();) 
+    {
         bool collisionDetected = false;
-        for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();) {
-            if (it->getBounds().intersects((*enemyIt)->getBounds())) {
+        for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();) 
+        {
+            if (it->getBounds().intersects((*enemyIt)->getBounds())) 
+            {
                 (*enemyIt)->setLife((*enemyIt)->getLife() - 1);
-                if ((*enemyIt)->getLife() == 0) {
+                if ((*enemyIt)->getLife() == 0) 
+                {
                     enemyIt = _enemies.erase(enemyIt);
                     _score += 10;
                 }
@@ -47,18 +73,24 @@ void Gameplay::handleCollisions() {
                 collisionDetected = true;
                 break;
             }
-            else {
+            else
+            {
                 ++enemyIt;
             }
         }
-        if (collisionDetected) {
+
+
+        if (collisionDetected) 
+        {
             it = _playerBullets.erase(it);
         }
-        else {
+        else 
+        {
             ++it;
         }
     }
 }
+
 
 void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
     std::srand(std::time(0)); 
@@ -103,6 +135,8 @@ sf::Text Gameplay::showScore(int _score)
 
 }
 
+
+
 void Gameplay::run(sf::RenderWindow& window) {
     _score = 0;
     sf::Sprite background;
@@ -129,8 +163,19 @@ void Gameplay::run(sf::RenderWindow& window) {
         _player.handleInput(_playerBullets);
         _player.update();
 
-        for (auto& enemy : _enemies) {
+        for (auto& enemy1 : _enemies)
+        {
+            enemy1->handleInputEnemy(_enemyBullets);
+        }
+
+        for (auto& enemy : _enemies)
+        {
             enemy->update();
+        }
+
+        for (auto& bullet1 : _enemyBullets) 
+        {
+            bullet1.update();
         }
 
         for (auto& bullet : _playerBullets) {
@@ -139,6 +184,7 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         spawnEnemies();
         handleCollisions();
+        checkPlayerCollisions();
         window.draw(showScore(_score));
         _player.draw(window);
         
@@ -167,6 +213,10 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         // Dibujar balas
         for (auto it = _playerBullets.begin(); it != _playerBullets.end(); ++it) {
+            it->draw(window);
+        }
+        // Dibujar balas enemigas
+        for (auto it = _enemyBullets.begin(); it != _enemyBullets.end(); ++it) {
             it->draw(window);
         }
         window.display();

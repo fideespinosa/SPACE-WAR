@@ -39,8 +39,30 @@ sf::FloatRect Enemy::getBounds() const {
 }
 
 Bullet Enemy::shoot() {
-    return Bullet(_sprite.getPosition());
+    sf::FloatRect enemyBounds = _sprite.getGlobalBounds();
+    sf::Vector2f enemyCenter(_sprite.getPosition().x + enemyBounds.width / 2, _sprite.getPosition().y);
+    return Bullet(enemyCenter, 3);
 }
+
+void Enemy::handleInputEnemy(std::list<Bullet>& bullets)
+{
+
+    int randomLuck = (std::rand() % 10) + 1;
+    static sf::Clock shootClock;
+    if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
+    {
+        std::cout << " balin enemigo " << std::endl;
+        bullets.push_back(shoot());
+        shootClock.restart();
+    }
+
+}
+
+Enemy::~Enemy()
+{
+
+}
+
 
 
 

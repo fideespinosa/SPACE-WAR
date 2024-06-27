@@ -1,11 +1,21 @@
 #include "Bullet.h"
 
+Bullet::Bullet(sf::Vector2f position, int type)
+{
+    _texture.loadFromFile("img/balaEnemigo.png");
+    _sprite.setTexture(_texture);
+    _sprite.setPosition(position);
+    _speed = -5.0f; // Velocidad hacia arriba
+}
+
 Bullet::Bullet(sf::Vector2f position) {
     _texture.loadFromFile("img/bala.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(position);
     _speed = -10.0f; // Velocidad hacia arriba
 }
+
+
 
 void Bullet::update() {
     _sprite.move(0, _speed);
