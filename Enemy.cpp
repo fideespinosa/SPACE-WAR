@@ -40,7 +40,7 @@ sf::FloatRect Enemy::getBounds() const {
 
 Bullet Enemy::shoot() {
     sf::FloatRect enemyBounds = _sprite.getGlobalBounds();
-    sf::Vector2f enemyCenter(_sprite.getPosition().x + enemyBounds.width / 2, _sprite.getPosition().y);
+    sf::Vector2f enemyCenter(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width/2, _sprite.getPosition().y);
     return Bullet(enemyCenter, 3);
 }
 

@@ -6,6 +6,7 @@ Bullet::Bullet(sf::Vector2f position, int type)
     _sprite.setTexture(_texture);
     _sprite.setPosition(position);
     _speed = -5.0f; // Velocidad hacia arriba
+    _direction = 1;
 }
 
 Bullet::Bullet(sf::Vector2f position) {
@@ -13,12 +14,18 @@ Bullet::Bullet(sf::Vector2f position) {
     _sprite.setTexture(_texture);
     _sprite.setPosition(position);
     _speed = -10.0f; // Velocidad hacia arriba
+    _direction = 0;
 }
 
 
 
 void Bullet::update() {
-    _sprite.move(0, _speed);
+    if (_direction == 0) { _sprite.move(0, _speed); }
+    else
+    {
+        _sprite.move(0, -_speed);
+    }
+
 }
 
 void Bullet::draw(sf::RenderWindow& window) {
