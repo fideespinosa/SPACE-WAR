@@ -11,6 +11,7 @@ protected:
     float _speed = 0;
     int _life = 0;
     int _type = 0;
+    sf::Clock shootClock;
 
 public:
     int getType();

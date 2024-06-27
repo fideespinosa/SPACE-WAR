@@ -40,10 +40,10 @@ void Gameplay::checkPlayerCollisions()
     {
         if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
         {
-            _player.setLife(_player.getLife() - 5);
+            _player.setLife(_player.getLife() - 1);
             if (_player.getLife() == 0)
             {
-                std::cout << "GAME OVER PAPA te quedan : "<< std::endl;
+                std::cout << "GAME OVER PAPA te quedan : "<<_player.getLife() << " "<<  std::endl;
             }
             std::cout << "Choco la navee" << std::endl;
             enemyIt = _enemies.erase(enemyIt);
