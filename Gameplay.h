@@ -12,25 +12,35 @@
 
 class Gameplay{
 private:
+    //Variables
     static Gameplay* _currentInstance;
+    int _score = 0;
+//Game Clases
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;
     std::list<Bullet> _enemyBullets;
     sf::Clock _enemySpawnClock;
-    int _score = 0;
-    void handleCollisions();
-    void spawnEnemies();
-    sf::Text showScore(int _score);
+//Windows
+
+//Mouse Posicion
+
+//Resources
     sf::Music music;
     sf::SoundBuffer buffer;
-    void checkPlayerCollisions();
+//Text
+    sf::Font _font;
+    sf::Text showScore(int _score);
 
 public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);
     Gameplay& getInstance();
     Gameplay();
+
     void run(sf::RenderWindow& window);
-    sf::Font _font;
     void drawLife(sf::RenderWindow& window, int life);
+protected:
+    void handleCollisions();
+    void spawnEnemies();
+    void checkPlayerCollisions();
 };

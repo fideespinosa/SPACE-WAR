@@ -31,6 +31,7 @@ Gameplay& Gameplay::getInstance()
 
 Gameplay::Gameplay() {
     // Inicializar jugador y listas de enemigos y balas
+
 }
 
 void Gameplay::checkPlayerCollisions()
@@ -132,7 +133,6 @@ sf::Text Gameplay::showScore(int _score)
     textScore.setOutlineColor(sf::Color::Red);
     textScore.setPosition(750, 25);
     return textScore;
-
 }
 
 
@@ -188,25 +188,6 @@ void Gameplay::run(sf::RenderWindow& window) {
         window.draw(showScore(_score));
         _player.draw(window);
         
-
-        /*
-        auto enemy_it = _enemies.begin();
-        while (enemy_it != _enemies.end())
-        {
-            auto& enemy = *enemy_it;
-            enemy.draw(window);
-            ++enemy_it;
-        }
-
-        auto bullet_it = _playerBullets.begin();
-        while (bullet_it != _playerBullets.end())
-        {
-            auto& bullet = *bullet_it;
-            bullet.draw(window);
-            ++bullet_it;
-        }*/
-
-        // Dibujar enemigos
         for (auto it = _enemies.begin(); it != _enemies.end(); ++it) {
             (*it)->draw(window);
         }
