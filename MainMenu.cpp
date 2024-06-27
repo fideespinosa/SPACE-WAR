@@ -32,7 +32,7 @@ MainMenu::MainMenu()
 
     NameLimit.setCharacterSize(20);
     NameLimit.setFont(font);
-    NameLimit.setString("Su nombre es demasiado largo");
+    NameLimit.setString("Su nombre ha alcanzado el limite de caracteres");
     NameLimit.setStyle(sf::Text::Italic);
     //NameLimit.setOutlineThickness(1);
     NameLimit.setOutlineColor(sf::Color::Red);
@@ -300,27 +300,36 @@ bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
         if (Event.type == sf::Event::TextEntered)
         {
             Sleep(100);
-            std::cout << "texto entro";
+            
             // Manejar la entrada de texto
             if (Event.text.unicode == 8) // Manejar retroceso (Backspace)
             {
                 if (!name.empty())
                 {
-                    std::cout << "se borro";
+                   
                     name.pop_back();
                 }
             }
-            else if (Event.text.unicode < 128 and name.length() < maxLength) // Asegurarse de que sea un caracter imprimible y ver el limite
+            else if (Event.text.unicode < 128 and name.length() <= maxLength) // Asegurarse de que sea un caracter imprimible y ver el limite
             {
                 name += static_cast<char>(Event.text.unicode);
+                
             }
             texto.setString(name);
+           
+           
+
         }
 
         window.draw(img);
         window.draw(escape);
         window.draw(atras);
         window.draw(EnterName);
+        if (name.length() > maxLength) {
+            
+            window.draw(NameLimit);
+          
+        }
         window.draw(texto);
         window.display();
 
