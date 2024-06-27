@@ -24,19 +24,20 @@ MainMenu::MainMenu()
     help.setFont(font);
     exit.setFont(font);
 
-    play.setString("play");
+    play.setString("Play");
     ranking.setString("RANKING");
     options.setString("options");
-    help.setString("help");
-    exit.setString("exit");
+    help.setString("Help");
+    exit.setString("Exit");
 
-    NameLimit.setCharacterSize(20);
+    NameLimit.setCharacterSize(14);
     NameLimit.setFont(font);
-    NameLimit.setString("Su nombre ha alcanzado el limite de caracteres");
+    NameLimit.setString("Ha alcanzado el limite de caracteres");
     NameLimit.setStyle(sf::Text::Italic);
-    //NameLimit.setOutlineThickness(1);
-    NameLimit.setOutlineColor(sf::Color::Red);
-    NameLimit.setPosition(600.f, 400.f);
+    NameLimit.setOutlineThickness(2);
+    NameLimit.setOutlineColor(sf::Color::Black);
+    NameLimit.setFillColor(sf::Color::Red);
+    NameLimit.setPosition(550.f, 300.f);
 
     EnterName.setCharacterSize(20);
     EnterName.setFont(font);
@@ -50,6 +51,8 @@ MainMenu::MainMenu()
     texto.setFont(font);
     texto.setStyle(sf::Text::Italic);
     texto.setFillColor(sf::Color::White);
+    texto.setOutlineThickness(2);
+    texto.setOutlineColor(sf::Color::Black);
     //text.setPosition()
 
     esc.loadFromFile("img/esc.png");
@@ -285,13 +288,25 @@ void MainMenu::showMenu() {
 bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
 {
     int cont = 0;
-    bool state = false;
     const int maxLength = 10;
+
+    sf::FloatRect textBounds;
+   
+
     Sleep(200);
 
 
 
     while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
+
+        textBounds = texto.getLocalBounds();
+        sf::RectangleShape background(sf::Vector2f(textBounds.width+20, textBounds.height+20));
+        background.setFillColor(sf::Color(0, 0, 0, 350));
+        background.setPosition((800 - textBounds.width) / 2, (600 - textBounds.height) / 2);
+        texto.setPosition(background.getPosition());
+
+        background.setPosition(650, 250);  
+        texto.setPosition(650, 250);  
 
         if (Event.type == sf::Event::Closed)
             window.close();
@@ -330,6 +345,7 @@ bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
             window.draw(NameLimit);
           
         }
+        window.draw(background);
         window.draw(texto);
         window.display();
 
