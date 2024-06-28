@@ -3,7 +3,7 @@
 #include <ctime>
 #include "Gameplay.h"
 #include <iostream>
-
+#include "PauseMenu.h"
 
 
 //inicializamos la variable de clase en 0 para cuando programemos el 
@@ -139,6 +139,7 @@ sf::Text Gameplay::showScore(int _score)
 
 void Gameplay::run(sf::RenderWindow& window) {
     _score = 0;
+    PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
   
@@ -150,6 +151,7 @@ void Gameplay::run(sf::RenderWindow& window) {
     
     music.play();
     while (window.isOpen()) {
+       
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -220,6 +222,19 @@ void Gameplay::run(sf::RenderWindow& window) {
             it->draw(window);
         }
         window.display();
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            //menu.Pause(window);
+            std::cout << "menu pausa";
+            if (menu.Pause(window)==false) {
+                std::cout << "se salio";
+                Sleep(100);
+                return;
+            }
+        }
+           
+
     }
 }
 

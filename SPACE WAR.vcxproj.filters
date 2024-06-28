@@ -60,6 +60,9 @@
     <ClCompile Include="Enemy4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collisionable.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Enemy4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

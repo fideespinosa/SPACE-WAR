@@ -143,6 +143,7 @@
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="Life.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RankingMenu.cpp" />
     <ClCompile Include="PowerUp.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RankingMenu.h" />
     <ClInclude Include="PowerUp.h" />
