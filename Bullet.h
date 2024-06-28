@@ -8,6 +8,7 @@ private:
     sf::Texture _texture;
     float _speed;
     int _direction;
+
 public:
     Bullet(sf::Vector2f position, int type);
     Bullet(sf::Vector2f position);

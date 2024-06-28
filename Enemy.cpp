@@ -48,7 +48,7 @@ void Enemy::handleInputEnemy(std::list<Bullet>& bullets)
 {
 
     int randomLuck = (std::rand() % 10) + 1;
-    
+    static sf::Clock shootClock;
     if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
     {
         std::cout << " balin enemigo " << std::endl;
