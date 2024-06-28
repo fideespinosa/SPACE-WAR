@@ -365,6 +365,7 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
         if (InserName(window, Event)) {
             music.stop();
             gameplay.run(window);
+            music.play();
         };
 
         break;

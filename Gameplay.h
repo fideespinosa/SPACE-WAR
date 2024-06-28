@@ -27,10 +27,15 @@ private:
 
 //Resources
     sf::Music music;
-    sf::SoundBuffer buffer;
+    sf::SoundBuffer buffer, buffer2;
+    sf::Sound sound;
 //Text
     sf::Font _font;
     sf::Text showScore(int _score);
+    sf::Text pause, life;
+    sf::Sprite img, img2;
+    sf::Texture texture, heart;
+
 
 public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);

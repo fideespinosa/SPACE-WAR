@@ -31,21 +31,24 @@ Gameplay& Gameplay::getInstance()
 
 Gameplay::Gameplay() {
     // Inicializar jugador y listas de enemigos y balas
+    _font.loadFromFile("SPACE.ttf");
+    life.setFont(_font);
+    life.setCharacterSize(35);
+    life.setPosition(40, 0);
 }
 
 void Gameplay::checkPlayerCollisions()
 {
+  
     bool collisionDetected = false;
     for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();)
     {
         if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
         {
             _player.setLife(_player.getLife() - 5);
-            if (_player.getLife() == 0)
-            {
-                std::cout << "GAME OVER PAPA te quedan : "<< std::endl;
-            }
+           
             std::cout << "Choco la navee" << std::endl;
+            sound.play();
             enemyIt = _enemies.erase(enemyIt);
         }
         else
@@ -125,7 +128,7 @@ sf::Text Gameplay::showScore(int _score)
     sf::Text textScore;
     textScore.setFont(_font);
     textScore.setString(score);
-    textScore.setCharacterSize(40);
+    textScore.setCharacterSize(35);
     textScore.setStyle(sf::Text::Italic);
     textScore.setFillColor(sf::Color::White);
     textScore.setOutlineThickness(1);
@@ -142,7 +145,13 @@ void Gameplay::run(sf::RenderWindow& window) {
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
-  
+    buffer2.loadFromFile("choque.mp3");
+    sound.setBuffer(buffer2);
+    sound.setVolume(40);
+
+    heart.loadFromFile("img/Heart.png");
+    img2.setTexture(heart);
+
     music.openFromFile("GPsoundtrack.wav");
     music.setVolume(20.f);
 
@@ -183,11 +192,15 @@ void Gameplay::run(sf::RenderWindow& window) {
         for (auto& bullet : _playerBullets) {
             bullet.update();
         }
-
+        int playerLife = _player.getLife();
+        sf::String lifeString = std::to_string(playerLife);
+        life.setString(lifeString);
         spawnEnemies();
         handleCollisions();
         checkPlayerCollisions();
         window.draw(showScore(_score));
+        window.draw(img2);
+        window.draw(life);
         _player.draw(window);
         
 
@@ -225,16 +238,21 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
-            //menu.Pause(window);
+            music.pause();
             std::cout << "menu pausa";
             if (menu.Pause(window)==false) {
                 std::cout << "se salio";
                 Sleep(100);
                 return;
             }
+            music.play();
         }
            
-
+        if (_player.getLife() == 0)
+        {
+            //funcion gameover
+            std::cout << "GAME OVER PAPA te quedan : " << std::endl;
+        }
     }
 }
 
