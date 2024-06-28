@@ -12,6 +12,8 @@ PauseMenu::PauseMenu() {
 	pause.setString("PAUSE");
 	pause.setStyle(sf::Text::Underlined);
 	pause.setStyle(sf::Text::Italic);
+	pause.setOutlineThickness(2);
+	pause.setOutlineColor(sf::Color::Black);
 
 	resume.setStyle(sf::Text::Italic);
 	exit.setStyle(sf::Text::Italic);
@@ -38,8 +40,8 @@ bool PauseMenu::Pause(sf::RenderWindow& window)
 	resume.setFillColor(sf::Color::White);
 	exit.setFillColor(sf::Color::Transparent);
 	exit.setOutlineThickness(1);
-	resume.setOutlineThickness(0);
-	resume.setOutlineColor(sf::Color::White);
+	resume.setOutlineThickness(2);
+	resume.setOutlineColor(sf::Color::Black);
 	exit.setOutlineColor(sf::Color::White);
 	indicator.setPosition(420, 225);
 
@@ -54,8 +56,10 @@ bool PauseMenu::Pause(sf::RenderWindow& window)
 			indicator.setPosition(420, 275);
 			resume.setFillColor(sf::Color::Transparent);
 			exit.setFillColor(sf::Color::Red);
-			exit.setOutlineThickness(0);
+			exit.setOutlineThickness(2);
+			resume.setOutlineColor(sf::Color::White);
 			resume.setOutlineThickness(1);
+			exit.setOutlineColor(sf::Color::Black);
 			
 		}
 
@@ -64,8 +68,11 @@ bool PauseMenu::Pause(sf::RenderWindow& window)
 			indicator.setPosition(420, 225);
 			exit.setFillColor(sf::Color::Transparent);
 			resume.setFillColor(sf::Color::White);
-			resume.setOutlineThickness(0);
+			resume.setOutlineThickness(2);
+			exit.setOutlineColor(sf::Color::White);
 			exit.setOutlineThickness(1);
+			resume.setOutlineColor(sf::Color::Black);
+			
 			}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {

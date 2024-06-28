@@ -12,7 +12,7 @@ class MainMenu
     sf::Sprite img, indicator, escape;
     sf::Texture background, arrow, esc;
     sf::Font font;
-    sf::Text play, ranking, help, exit, options, EnterName, atras, texto, NameLimit;
+    sf::Text play, ranking, help, exit, options, EnterName, atras, texto, NameLimit, minimo;
     int pos;
     std::string name;
 

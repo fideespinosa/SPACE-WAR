@@ -34,7 +34,35 @@ Gameplay::Gameplay() {
     _font.loadFromFile("SPACE.ttf");
     life.setFont(_font);
     life.setCharacterSize(35);
+    life.setOutlineThickness(2);
+    life.setOutlineColor(sf::Color::Black);
     life.setPosition(40, 0);
+
+    buffer2.loadFromFile("choque.mp3");
+    sound.setBuffer(buffer2);
+    sound.setVolume(40);
+
+    buffer3.loadFromFile("gameOverSound.mp3");
+    gameOverSound.setBuffer(buffer3);
+
+    heart.loadFromFile("img/Heart.png");
+    img2.setTexture(heart);
+
+    music.openFromFile("GPsoundtrack.wav");
+    music.setVolume(20.f);
+
+    texture.loadFromFile("img/Esc2.png");
+    img.setTexture(texture);
+    img.setPosition(950, -15);
+
+    Menu.setFont(_font);
+    Menu.setPosition(900, 0);
+    Menu.setCharacterSize(15);
+    Menu.setStyle(sf::Text::Italic);
+    Menu.setFillColor(sf::Color::White);
+    Menu.setOutlineThickness(2);
+    Menu.setOutlineColor(sf::Color::Black);
+    Menu.setString("Menu");
 }
 
 void Gameplay::checkPlayerCollisions()
@@ -133,7 +161,7 @@ sf::Text Gameplay::showScore(int _score)
     textScore.setFillColor(sf::Color::White);
     textScore.setOutlineThickness(1);
     textScore.setOutlineColor(sf::Color::Red);
-    textScore.setPosition(750, 25);
+    textScore.setPosition(0, 520);
     return textScore;
 
 }
@@ -145,15 +173,7 @@ void Gameplay::run(sf::RenderWindow& window) {
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
-    buffer2.loadFromFile("choque.mp3");
-    sound.setBuffer(buffer2);
-    sound.setVolume(40);
-
-    heart.loadFromFile("img/Heart.png");
-    img2.setTexture(heart);
-
-    music.openFromFile("GPsoundtrack.wav");
-    music.setVolume(20.f);
+  
 
     backgroundGame.loadFromFile("img/backgroundGamePlay.png");
     background.setTexture(backgroundGame);
@@ -199,8 +219,10 @@ void Gameplay::run(sf::RenderWindow& window) {
         handleCollisions();
         checkPlayerCollisions();
         window.draw(showScore(_score));
+        window.draw(Menu);
         window.draw(img2);
         window.draw(life);
+        window.draw(img);
         _player.draw(window);
         
 
@@ -250,8 +272,15 @@ void Gameplay::run(sf::RenderWindow& window) {
            
         if (_player.getLife() == 0)
         {
-            //funcion gameover
-            std::cout << "GAME OVER PAPA te quedan : " << std::endl;
+            music.stop();
+            gameOverSound.play();
+            if (gameOver(window)) {
+                //empezar de vuelta
+
+            }
+            else {
+                //volver al menu principal
+            }
         }
     }
 }
@@ -259,6 +288,99 @@ void Gameplay::run(sf::RenderWindow& window) {
 void Gameplay::drawLife(sf::RenderWindow& window, int life)
 {
     
+}
+
+bool Gameplay::gameOver(sf::RenderWindow& window)
+{
+    int pos = 1;
+    bool state = true;
+    sf::Text yes, no, again;
+    sf::Sprite fondo, gameOver;
+    sf::Texture pic, pic2;
+    sf::Font _font;
+    _font.loadFromFile("SPACE.ttf");
+    pic.loadFromFile("img/Pause.jpg");
+    fondo.setTexture(pic);
+    pic2.loadFromFile("img/gameOver.png");
+    gameOver.setTexture(pic2);
+    fondo.setPosition(200, 100);
+    gameOver.setPosition(280, 30);
+
+    yes.setFont(_font);
+    yes.setStyle(sf::Text::Italic);
+    yes.setOutlineThickness(2);
+    yes.setOutlineColor(sf::Color::Black);
+    yes.setFillColor(sf::Color::White);
+    yes.setString("YES");
+    yes.setPosition(370, 380);
+    yes.setCharacterSize(20);
+
+
+    no.setFont(_font);
+    no.setStyle(sf::Text::Italic);
+    no.setOutlineThickness(1);
+    no.setOutlineColor(sf::Color::White);
+    no.setFillColor(sf::Color::Transparent);
+    no.setString("NO");
+    no.setPosition(600, 380);
+    no.setCharacterSize(20);
+
+    again.setFont(_font);
+    again.setStyle(sf::Text::Italic);
+    again.setCharacterSize(25);
+    again.setOutlineThickness(2);
+    again.setOutlineColor(sf::Color::Black);
+    again.setFillColor(sf::Color::White);
+    again.setString("Play again?");
+    again.setPosition(400, 280);
+    again.setStyle(sf::Text::Underlined);
+
+    while (state) {
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) and pos == 1) {
+            pos = 2;
+
+            no.setOutlineThickness(2);
+            no.setOutlineColor(sf::Color::Black);
+            no.setFillColor(sf::Color::White);
+            yes.setOutlineThickness(1);
+            yes.setOutlineColor(sf::Color::White);
+            yes.setFillColor(sf::Color::Transparent);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) and pos == 2) {
+            pos = 1;
+           
+            yes.setOutlineThickness(2);
+            yes.setOutlineColor(sf::Color::Black);
+            yes.setFillColor(sf::Color::White);
+            no.setOutlineThickness(1);
+            no.setOutlineColor(sf::Color::White);
+            no.setFillColor(sf::Color::Transparent);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+
+            switch (pos)
+            {
+            case 1:
+                return true; //continua el juego
+                break;
+            case 2:
+                return false;
+                break;
+            default:
+                break;
+            }
+        }
+        window.draw(fondo);
+        window.draw(gameOver);
+        window.draw(yes);
+        window.draw(no);
+        window.draw(again);
+        window.display();
+    }
 }
 
 

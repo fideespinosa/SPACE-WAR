@@ -23,12 +23,57 @@ MainMenu::MainMenu()
     options.setFont(font);
     help.setFont(font);
     exit.setFont(font);
+    minimo.setFont(font);
 
     play.setString("Play");
     ranking.setString("RANKING");
     options.setString("options");
     help.setString("Help");
     exit.setString("Exit");
+
+    play.setFillColor(sf::Color::White);
+
+    background.loadFromFile("img/background.png");
+    arrow.loadFromFile("img/arrow.png");
+    img.setTexture(background);
+    indicator.setTexture(arrow);
+
+    play.setStyle(sf::Text::Italic);
+    play.setOutlineThickness(1);
+    play.setOutlineColor(sf::Color::Black);
+    play.setPosition(700.f, 150.f);
+
+    ranking.setStyle(sf::Text::Italic);
+    ranking.setFillColor(sf::Color::Transparent);
+    ranking.setOutlineThickness(1);
+    ranking.setOutlineColor(sf::Color::White);
+    ranking.setPosition(678.f, 200.f);
+
+    /*minimo.setString("Debe tener un minimo de 1 caracter");
+    minimo.setStyle(sf::Text::Italic);
+    minimo.setOutlineColor(sf::Color::White);
+    minimo.setOutlineThickness(1);
+    minimo.setOutlineColor(sf::Color::White);
+    minimo.setPosition(600, 300);*/
+
+    options.setStyle(sf::Text::Italic);
+    options.setFillColor(sf::Color::Transparent);
+    options.setOutlineThickness(1);
+    options.setOutlineColor(sf::Color::White);
+    options.setPosition(661.f, 250.f);
+
+    help.setStyle(sf::Text::Italic);
+    help.setFillColor(sf::Color::Transparent);
+    help.setOutlineThickness(1);
+    help.setOutlineColor(sf::Color::White);
+    help.setPosition(699.f, 300.f);
+
+    exit.setString("exit");
+    exit.setStyle(sf::Text::Italic);
+    exit.setFillColor(sf::Color::Transparent);
+    exit.setOutlineThickness(1);
+    exit.setOutlineColor(sf::Color::Red);
+    exit.setPosition(710.f, 350.f);
 
     NameLimit.setCharacterSize(14);
     NameLimit.setFont(font);
@@ -89,53 +134,7 @@ void MainMenu::showMenu() {
     music.play();
 
     int x = 690, y = 155, pos = 1;
-
-    play.setFillColor(sf::Color::White);
-
-    background.loadFromFile("img/background.png");
-    arrow.loadFromFile("img/arrow.png");
-    img.setTexture(background);
-    indicator.setTexture(arrow);
-
-    play.setStyle(sf::Text::Italic);
-    //play.setFillColor(sf::Color::Transparent);
-    play.setOutlineThickness(1);
-    play.setOutlineColor(sf::Color::Black);
-    //play.setStyle(sf::Text::Underlined);
-    play.setPosition(700.f, 150.f);
-
-
     indicator.setPosition(x, y);
-
-
-    ranking.setStyle(sf::Text::Italic);
-    ranking.setFillColor(sf::Color::Transparent);
-    ranking.setOutlineThickness(1);
-    ranking.setOutlineColor(sf::Color::White);
-    ranking.setPosition(678.f, 200.f);
-
-
-    options.setStyle(sf::Text::Italic);
-    options.setFillColor(sf::Color::Transparent);
-    options.setOutlineThickness(1);
-    options.setOutlineColor(sf::Color::White);
-    options.setPosition(661.f, 250.f);
-
-
-    help.setStyle(sf::Text::Italic);
-    help.setFillColor(sf::Color::Transparent);
-    help.setOutlineThickness(1);
-    help.setOutlineColor(sf::Color::White);
-    help.setPosition(699.f, 300.f);
-
-    exit.setString("exit");
-    exit.setStyle(sf::Text::Italic);
-    exit.setFillColor(sf::Color::Transparent);
-    exit.setOutlineThickness(1);
-    exit.setOutlineColor(sf::Color::Red);
-    exit.setPosition(710.f, 350.f);
-
-
     // Game Loop
     while (window.isOpen()) {
 
@@ -289,7 +288,6 @@ bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
 {
     int cont = 0;
     const int maxLength = 10;
-
     sf::FloatRect textBounds;
    
 
@@ -345,11 +343,15 @@ bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
             window.draw(NameLimit);
           
         }
+    
         window.draw(background);
         window.draw(texto);
+        
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+            return true;
+        }
+        
         window.display();
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) return true;
     }
     return false;
     std::cout << "salio";

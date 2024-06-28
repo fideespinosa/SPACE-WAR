@@ -27,12 +27,12 @@ private:
 
 //Resources
     sf::Music music;
-    sf::SoundBuffer buffer, buffer2;
-    sf::Sound sound;
+    sf::SoundBuffer buffer, buffer2, buffer3;
+    sf::Sound sound, gameOverSound;
 //Text
     sf::Font _font;
     sf::Text showScore(int _score);
-    sf::Text pause, life;
+    sf::Text pause, life, Menu;
     sf::Sprite img, img2;
     sf::Texture texture, heart;
 
@@ -44,6 +44,7 @@ public:
 
     void run(sf::RenderWindow& window);
     void drawLife(sf::RenderWindow& window, int life);
+    bool gameOver(sf::RenderWindow& window);
 protected:
     void handleCollisions();
     void spawnEnemies();
