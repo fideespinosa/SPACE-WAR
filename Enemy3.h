@@ -14,8 +14,7 @@ public:
 			std::cout << "error en carga de textura" << std::endl;
 		}
 		_sprite.setTexture(_texture);
-		_sprite.setPosition(x, y);
-		_sprite.setRotation(180.f);
+		_sprite.setPosition(x, y + _sprite.getGlobalBounds().top);
 		_speed = 1;
 		_life = 5;
 		

@@ -15,7 +15,7 @@ void Enemy1::setLife(int life)
 void Enemy1::update()
 {
 	if (!controlSprite(_sprite)) {
-		int randomMove = (std::rand() % 2) + 1;
+		int randomMove = (std::rand() % 4) + 1;
 		switch (randomMove) {
 		case 1:
 			_sprite.move(_speed, 0); // der

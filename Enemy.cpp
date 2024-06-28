@@ -48,7 +48,6 @@ void Enemy::handleInputEnemy(std::list<Bullet>& bullets)
 {
 
     int randomLuck = (std::rand() % 10) + 1;
-    static sf::Clock shootClock;
     if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
     {
         std::cout << " balin enemigo " << std::endl;
@@ -61,6 +60,26 @@ void Enemy::handleInputEnemy(std::list<Bullet>& bullets)
 Enemy::~Enemy()
 {
 
+}
+
+bool Enemy::controlSprite(sf::Sprite& _sprite)
+{
+    sf::Vector2f position = _sprite.getPosition();
+    sf::FloatRect bounds = _sprite.getGlobalBounds();
+
+    if (bounds.left <= 0) {
+        _sprite.setPosition(0, position.y); 
+        _sprite.move(_speed, 0); 
+    }
+    else if (bounds.left + bounds.width >= 1024) {
+        _sprite.setPosition(1024 - bounds.width, position.y); 
+        _sprite.move(-_speed, 0); 
+    }
+    else {
+        return false;
+    }
+
+    return true;
 }
 
 
