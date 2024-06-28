@@ -14,13 +14,22 @@ void Enemy1::setLife(int life)
 
 void Enemy1::update()
 {
-	std::srand(std::time(0));
-	int randomMove = (std::rand() % 2) + 1;
-	if (randomMove / 2 == 0) {
-		_sprite.move(0, _speed);
-	}
-	else {
-		_sprite.move(_speed * 2, -_speed);
+	if (!controlSprite(_sprite)) {
+		int randomMove = (std::rand() % 2) + 1;
+		switch (randomMove) {
+		case 1:
+			_sprite.move(_speed, 0); // der
+			break;
+		case 2:
+			_sprite.move(-_speed, 0); //izq
+			break;
+		case 3:
+			_sprite.move(0, _speed * 2); //abajo x2
+			break;
+		case 4:
+			_sprite.move(0, _speed); // abajo
+			break;
+		}
 	}
 }
 

@@ -22,7 +22,9 @@ public:
     virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
     virtual Bullet shoot();
+    sf::Clock shootClock;
     virtual void handleInputEnemy(std::list<Bullet>& bullets);
     virtual ~Enemy();
+    virtual bool controlSprite(sf::Sprite& _sprite);
 };
 

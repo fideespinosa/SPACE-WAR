@@ -44,8 +44,8 @@ void Player::handleInput(std::list<Bullet>& bullets) {
     if (position.x > 1024 - _sprite.getGlobalBounds().width) {
         _sprite.setPosition(1024 - _sprite.getGlobalBounds().width, position.y);
     }
-    if (position.y < 300) { //  300 piso de Y
-        _sprite.setPosition(position.x, 300);
+    if (position.y < 50) { //  100 piso de Y
+        _sprite.setPosition(position.x, 50);
     }
     if (position.y > 573 - _sprite.getGlobalBounds().height) { // 573 tope
         _sprite.setPosition(position.x, 573 - _sprite.getGlobalBounds().height);

@@ -13,22 +13,23 @@ void Enemy3::setLife(int life)
 
 void Enemy3::update()
 {
-	std::srand(std::time(0));
-	int randomMove = (std::rand() % 2) + 1;
-	switch (randomMove) {
-	case 1:
-		_sprite.move(0, _speed);
-		break;
-	case 2:
-		_sprite.move(_speed * -1, 3);
-		break;
-	case 3:
-		_sprite.move(0, _speed * 2);
-		break;
-	case 4:
-		_sprite.move(0, _speed);
-		_sprite.move(_speed, 0);
-		break;
+	if (!controlSprite(_sprite))
+	{
+		int randomMove = (std::rand() % 4) + 1;
+		switch (randomMove) {
+		case 1:
+			_sprite.move(_speed, 0); // der
+			break;
+		case 2:
+			_sprite.move(-_speed * 2, 0); //izq
+			break;
+		case 3:
+			_sprite.move(0, _speed * 2); //abajo x2
+			break;
+		case 4:
+			_sprite.move(0, _speed * 2); // abajo
+			break;
+		}
 	}
 }
 

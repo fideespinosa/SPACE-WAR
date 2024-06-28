@@ -97,8 +97,8 @@ void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREG
     int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
     //
     
-    if (_enemySpawnClock.getElapsedTime().asSeconds() > 2) {
-        float spawnX = static_cast<float>(rand() % (800 - 50)); // verificar ancho en getBounds de enemigo
+    if (_enemySpawnClock.getElapsedTime().asSeconds() > 1.5) {
+        float spawnX = static_cast<float>(rand() % 980 +20); //  estaria ok
         switch (randomType) {
         case 1:
             _enemies.push_back(std::make_unique<Enemy1>(spawnX, 0));

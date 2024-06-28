@@ -5,7 +5,7 @@ Bullet::Bullet(sf::Vector2f position, int type)
     _texture.loadFromFile("img/balaEnemigo.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(position);
-    _speed = -5.0f; // Velocidad hacia arriba
+    _speed = -2.0f; // Velocidad hacia arriba
     _direction = 1;
 }
 
