@@ -84,6 +84,21 @@ void Gameplay::checkPlayerCollisions()
             ++enemyIt;
         }
     }
+    for (auto enemyBulletsIt = _enemyBullets.begin(); enemyBulletsIt != _enemyBullets.end();)
+    {
+        if (enemyBulletsIt->getBounds().intersects(_player.getBounds()))
+        {
+            _player.setLife(_player.getLife() - 1);
+
+            std::cout << "Te balearon.." << std::endl;
+            sound.play();
+            enemyBulletsIt = _enemyBullets.erase(enemyBulletsIt);
+        }
+        else
+        {
+            ++enemyBulletsIt;
+        }
+    }
 }
 
 void Gameplay::handleCollisions() {
