@@ -6,14 +6,17 @@
 
 class Player : public Collisionable{
 private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
+    sf::Sprite _sprite, _spriteMove, _spriteDead;
+    sf::Texture _texture, _textureMove, _textureDead;
     int _life = 15;
     sf::SoundBuffer buffer;
     sf::Sound sound;
     float _speed;
+    int _stateMove, _stateDead;
+    sf::Clock _clockMove, _clockDead, shootClock;
 
 public:
+
     int getLife();
     void setLife(int life);
     Player();

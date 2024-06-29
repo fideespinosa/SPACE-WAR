@@ -19,7 +19,7 @@ void Explosion::update()
     {
         _stateExplosion++;
         if (_stateExplosion < 8) {
-            _sprite.setTextureRect(sf::IntRect(_stateExplosion *16, 0, 16, 15));
+            _sprite.setTextureRect(sf::IntRect(_stateExplosion *16, 0, 16, 16));
         }
         _clock.restart();
     }

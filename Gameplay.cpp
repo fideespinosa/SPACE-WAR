@@ -99,6 +99,7 @@ void Gameplay::checkPlayerCollisions()
             ++enemyBulletsIt;
         }
     }
+
 }
 
 void Gameplay::handleCollisions() {
@@ -235,8 +236,9 @@ void Gameplay::run(sf::RenderWindow& window) {
             bullet.update();
         }
 
-        int playerLife = _player.getLife();
-        sf::String lifeString = std::to_string(playerLife);
+        sf::String lifeString = std::to_string(_player.getLife());
+
+
         life.setString(lifeString);
         spawnEnemies();
         handleCollisions();
@@ -247,24 +249,6 @@ void Gameplay::run(sf::RenderWindow& window) {
         window.draw(life);
         window.draw(img);
         _player.draw(window);
-        
-
-        /*
-        auto enemy_it = _enemies.begin();
-        while (enemy_it != _enemies.end())
-        {
-            auto& enemy = *enemy_it;
-            enemy.draw(window);
-            ++enemy_it;
-        }
-
-        auto bullet_it = _playerBullets.begin();
-        while (bullet_it != _playerBullets.end())
-        {
-            auto& bullet = *bullet_it;
-            bullet.draw(window);
-            ++bullet_it;
-        }*/
 
         // Dibujar enemigos
         for (auto it = _enemies.begin(); it != _enemies.end(); ++it) {
@@ -297,8 +281,14 @@ void Gameplay::run(sf::RenderWindow& window) {
             }
             music.play();
         }
-           
-        if (_player.getLife() == 0)
+      
+        if (_player.getLife() <= 0) 
+        {
+            _enemies.clear();
+            _playerBullets.clear();
+            _enemyBullets.clear();
+        }
+        /*if (_player.getLife() <= 0)
         {
             music.stop();
             gameOverSound.play();
@@ -309,7 +299,7 @@ void Gameplay::run(sf::RenderWindow& window) {
             else {
                 //volver al menu principal
             }
-        }
+        }*/
     }
 }
 
