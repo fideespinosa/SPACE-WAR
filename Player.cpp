@@ -96,7 +96,7 @@ void Player::handleInput(std::list<Bullet>& bullets) {
     // check dead
     if (getLife() <= 0)
     {
-        if (_clockDead.getElapsedTime().asSeconds() > 0.1f)
+        if (_clockDead.getElapsedTime().asSeconds() > 0.25f)
         {
             _stateDead++;
             _spriteDead.setPosition(position.x, position.y);

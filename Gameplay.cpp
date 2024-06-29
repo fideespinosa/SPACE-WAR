@@ -142,28 +142,32 @@ void Gameplay::handleCollisions() {
 
 
 void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
-    std::srand(std::time(0)); 
-    int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
-    //
-    
-    if (_enemySpawnClock.getElapsedTime().asSeconds() > 1.5) {
-        float spawnX = static_cast<float>(rand() % 980 +20); //  estaria ok
-        switch (randomType) {
-        case 1:
-            _enemies.push_back(std::make_unique<Enemy1>(spawnX, 0));
-            break;
-        case 2:
-            _enemies.push_back(std::make_unique<Enemy2>(spawnX, 0));
-            break;
-        case 3:
-            _enemies.push_back(std::make_unique<Enemy3>(spawnX, 0));
-            break;
-        case 4:
-            _enemies.push_back(std::make_unique<Enemy4>(spawnX, 0));
-            break;
-        }
+   
+    if (_spawnCheck)
+    {
+        std::srand(std::time(0));
+        int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
+        //
 
-        _enemySpawnClock.restart();
+        if (_enemySpawnClock.getElapsedTime().asSeconds() > 1.5) {
+            float spawnX = static_cast<float>(rand() % 980 + 20); //  estaria ok
+            switch (randomType) {
+            case 1:
+                _enemies.push_back(std::make_unique<Enemy1>(spawnX, 0));
+                break;
+            case 2:
+                _enemies.push_back(std::make_unique<Enemy2>(spawnX, 0));
+                break;
+            case 3:
+                _enemies.push_back(std::make_unique<Enemy3>(spawnX, 0));
+                break;
+            case 4:
+                _enemies.push_back(std::make_unique<Enemy4>(spawnX, 0));
+                break;
+            }
+
+            _enemySpawnClock.restart();
+        }
     }
 }
 
@@ -191,7 +195,7 @@ void Gameplay::run(sf::RenderWindow& window) {
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
-  
+    _spawnCheck = true;
 
     backgroundGame.loadFromFile("img/backgroundGamePlay.png");
     background.setTexture(backgroundGame);
@@ -283,7 +287,8 @@ void Gameplay::run(sf::RenderWindow& window) {
         }
       
         if (_player.getLife() <= 0) 
-        {
+        {   
+            _spawnCheck = false;
             _enemies.clear();
             _playerBullets.clear();
             _enemyBullets.clear();

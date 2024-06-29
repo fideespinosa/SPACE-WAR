@@ -16,6 +16,7 @@ private:
     //Variables
     static Gameplay* _currentInstance;
     int _score = 0;
+    bool _spawnCheck;
 
 //Game Clases
     Player _player;
