@@ -30,7 +30,7 @@ Gameplay& Gameplay::getInstance()
 }
 
 Gameplay::Gameplay() {
-    // Inicializar jugador y listas de enemigos y balas
+    
     _font.loadFromFile("SPACE.ttf");
     life.setFont(_font);
     life.setCharacterSize(35);
@@ -112,7 +112,9 @@ void Gameplay::handleCollisions() {
                 (*enemyIt)->setLife((*enemyIt)->getLife() - 1);
                 if ((*enemyIt)->getLife() == 0) 
                 {
+                    _enemyExplosion.push_back(Explosion((*enemyIt)->getPosition()));
                     enemyIt = _enemies.erase(enemyIt);
+
                     _score += 10;
                 }
                 std::cout << "Collision detected" << std::endl;
@@ -224,9 +226,15 @@ void Gameplay::run(sf::RenderWindow& window) {
             bullet1.update();
         }
 
+        for (auto& enemyExplosion : _enemyExplosion)
+        {
+            enemyExplosion.update();
+        }
+
         for (auto& bullet : _playerBullets) {
             bullet.update();
         }
+
         int playerLife = _player.getLife();
         sf::String lifeString = std::to_string(playerLife);
         life.setString(lifeString);
@@ -261,6 +269,11 @@ void Gameplay::run(sf::RenderWindow& window) {
         // Dibujar enemigos
         for (auto it = _enemies.begin(); it != _enemies.end(); ++it) {
             (*it)->draw(window);
+        }
+
+        //dibujo explosiones
+        for (auto it = _enemyExplosion.begin(); it != _enemyExplosion.end(); ++it) {
+            it->draw(window);
         }
 
         // Dibujar balas

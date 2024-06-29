@@ -11,8 +11,10 @@ protected:
     float _speed = 0;
     int _life = 0;
     int _type = 0;
+    
 
 public:
+    sf::Vector2f getPosition() const;
     int getType();
     virtual int getLife();
     void setLife(int life);

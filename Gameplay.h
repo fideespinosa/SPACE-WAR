@@ -9,17 +9,20 @@
 #include "Enemy2.h"
 #include "Enemy3.h"
 #include "Enemy4.h"
+#include "Explosion.h"
 
 class Gameplay{
 private:
     //Variables
     static Gameplay* _currentInstance;
     int _score = 0;
+
 //Game Clases
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;
     std::list<Bullet> _enemyBullets;
+    std::list<Explosion> _enemyExplosion;
     sf::Clock _enemySpawnClock;
 //Windows
 
@@ -41,7 +44,6 @@ public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);
     Gameplay& getInstance();
     Gameplay();
-
     void run(sf::RenderWindow& window);
     void drawLife(sf::RenderWindow& window, int life);
     bool gameOver(sf::RenderWindow& window);

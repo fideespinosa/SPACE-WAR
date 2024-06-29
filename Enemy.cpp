@@ -1,6 +1,11 @@
 #include "Enemy.h"
 #include <iostream>
 
+sf::Vector2f Enemy::getPosition() const
+{
+      return _sprite.getPosition();   
+}
+
 int Enemy::getType()
 {
     return _type;
@@ -81,6 +86,8 @@ bool Enemy::controlSprite(sf::Sprite& _sprite)
 
     return true;
 }
+
+
 
 
 
