@@ -51,15 +51,12 @@ BulletEnemy Enemy::shoot() {
 
 void Enemy::handleInputEnemy(std::list<BulletEnemy>& bullets)
 {
-
-    int randomLuck = (std::rand() % 10) + 1;
     if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
     {
         std::cout << " balin enemigo " << std::endl;
         bullets.push_back(shoot());
         shootClock.restart();
     }
-
 }
 
 Enemy::~Enemy()

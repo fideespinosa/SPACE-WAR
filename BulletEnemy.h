@@ -8,7 +8,11 @@ public:
         _sprite.setTexture(_texture);
         _sprite.setPosition(position);
         _speed = -4.0f; // Velocidad hacia abajo
+        _sprite.setTextureRect(sf::IntRect(0, 0, 9, 9));
+        _sprite.setScale(2.0f, 2.0f);
+        _stateMove = 0;
 	}
-    void update(sf::Vector2f position);
+    void update() override;
+    void draw(sf::RenderWindow& window) override;
 };
 

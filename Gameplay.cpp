@@ -141,7 +141,7 @@ void Gameplay::handleCollisions() {
 }
 
 
-void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
+void Gameplay::spawnEnemies(float _spawnTime) { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
    
     if (_spawnCheck)
     {
@@ -149,7 +149,7 @@ void Gameplay::spawnEnemies() { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREG
         int randomType = (std::rand() % 4) + 1; //genero numero aleatorio para utilizar un draw diferente segun typo
         //
 
-        if (_enemySpawnClock.getElapsedTime().asSeconds() > 1.5) {
+        if (_enemySpawnClock.getElapsedTime().asSeconds() > _spawnTime) {
             float spawnX = static_cast<float>(rand() % 980 + 20); //  estaria ok
             switch (randomType) {
             case 1:
@@ -228,7 +228,7 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         for (auto& bullet1 : _enemyBullets) 
         {
-            bullet1.update(_player.getPosition());
+            bullet1.update();
         }
 
         for (auto& enemyExplosion : _enemyExplosion)
@@ -243,8 +243,17 @@ void Gameplay::run(sf::RenderWindow& window) {
         sf::String lifeString = std::to_string(_player.getLife());
 
 
+        //Dificultad
+        _gameTime = _gameClock.getElapsedTime();
+        float _seconds = _gameTime.asSeconds();
+        if (_seconds >= (_minute + 1) * 60.0f)
+        {
+            _minute++;
+            _spawnTime = _spawnTime - 1.0f;
+        }
+
         life.setString(lifeString);
-        spawnEnemies();
+        spawnEnemies(_spawnTime);
         handleCollisions();
         checkPlayerCollisions();
         window.draw(showScore(_score));

@@ -7,11 +7,13 @@ protected:
     sf::Sprite _sprite;
     sf::Texture _texture;
     float _speed;
+    int _stateMove;
+    sf::Clock _clockMove;
 
-public:
+public: 
     Bullet(sf::Vector2f position);
     virtual void update();
-    void draw(sf::RenderWindow& window) override;
+    virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
 };
 
