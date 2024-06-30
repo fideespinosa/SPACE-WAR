@@ -43,13 +43,13 @@ sf::FloatRect Enemy::getBounds() const {
     // cambiar return
 }
 
-Bullet Enemy::shoot() {
+BulletEnemy Enemy::shoot() {
     sf::FloatRect enemyBounds = _sprite.getGlobalBounds();
     sf::Vector2f enemyCenter(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width/2, _sprite.getPosition().y);
-    return Bullet(enemyCenter, 3);
+    return BulletEnemy(enemyCenter);
 }
 
-void Enemy::handleInputEnemy(std::list<Bullet>& bullets)
+void Enemy::handleInputEnemy(std::list<BulletEnemy>& bullets)
 {
 
     int randomLuck = (std::rand() % 10) + 1;

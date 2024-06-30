@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletEnemy.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletEnemy.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Consumable.h" />
     <ClInclude Include="Enemy.h" />

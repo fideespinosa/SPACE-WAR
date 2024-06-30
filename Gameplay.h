@@ -10,6 +10,7 @@
 #include "Enemy3.h"
 #include "Enemy4.h"
 #include "Explosion.h"
+#include "BulletEnemy.h"
 
 class Gameplay{
 private:
@@ -22,7 +23,7 @@ private:
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;
-    std::list<Bullet> _enemyBullets;
+    std::list<BulletEnemy> _enemyBullets;
     std::list<Explosion> _enemyExplosion;
     sf::Clock _enemySpawnClock;
 //Windows

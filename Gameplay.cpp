@@ -228,7 +228,7 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         for (auto& bullet1 : _enemyBullets) 
         {
-            bullet1.update();
+            bullet1.update(_player.getPosition());
         }
 
         for (auto& enemyExplosion : _enemyExplosion)

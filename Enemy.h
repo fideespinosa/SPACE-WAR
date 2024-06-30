@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Collisionable.h"
-#include "Bullet.h"
+#include "BulletEnemy.h"
 #include <list>
 
 class Enemy : public Collisionable {
@@ -23,9 +23,9 @@ public:
     virtual void update();
     virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
-    virtual Bullet shoot();
+    virtual BulletEnemy shoot();
     sf::Clock shootClock;
-    virtual void handleInputEnemy(std::list<Bullet>& bullets);
+    virtual void handleInputEnemy(std::list<BulletEnemy>& bullets);
     virtual ~Enemy();
     virtual bool controlSprite(sf::Sprite& _sprite);
 };
