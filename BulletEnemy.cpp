@@ -7,12 +7,12 @@ void BulletEnemy::update()
     if (_clockMove.getElapsedTime().asSeconds() > 0.1f)
     {
         _stateMove++;
-        if (_stateMove < 4) {
-            _sprite.setTextureRect(sf::IntRect(_stateMove * 9, 0, 9, 9));
+        if (_stateMove < 16) {
+            _sprite.setTextureRect(sf::IntRect(_stateMove * 16, 0, 16, 16));
         }
         _clockMove.restart();
     }
-    if (_stateMove == 4)
+    if (_stateMove == 16)
     {
         _stateMove = 0;
     }

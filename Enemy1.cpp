@@ -14,6 +14,7 @@ void Enemy1::setLife(int life)
 
 void Enemy1::update()
 {
+	sf::Vector2f position = _sprite.getPosition();
 	if (!controlSprite(_sprite)) {
 		int randomMove = (std::rand() % 4) + 1;
 		switch (randomMove) {
@@ -31,12 +32,21 @@ void Enemy1::update()
 			break;
 		}
 	}
-}
+	// movimiento de energia de la nave
+	if (_clockMove.getElapsedTime().asSeconds() > 0.01f)
+	{
+		_stateMove++;
+		_spriteMove.setPosition(position.x, position.y);
+		if (_stateMove < 8) {
+			_spriteMove.setTextureRect(sf::IntRect(_stateMove * 64, 0, 64, 64));
+		}
+		_clockMove.restart();
+	}
+	if (_stateMove == 8)
+	{
+		_stateMove = 0;
+	}
 
-void Enemy1::draw(sf::RenderWindow& window)
-{
-	_sprite.setTexture(_texture);
-	window.draw(_sprite);
 }
 
 sf::FloatRect Enemy1::getBounds() const

@@ -137,6 +137,10 @@ void Gameplay::handleCollisions() {
         {
             ++it;
         }
+
+        bool hearCollision;
+
+
     }
 }
 
@@ -240,14 +244,18 @@ void Gameplay::run(sf::RenderWindow& window) {
             bullet.update();
         }
 
+        for (auto& life : _life) {
+            life.update();
+        }
         sf::String lifeString = std::to_string(_player.getLife());
 
 
         //Dificultad
-        _gameTime = _gameClock.getElapsedTime();
-        float _seconds = _gameTime.asSeconds();
-        if (_seconds >= (_minute + 1) * 60.0f)
+       
+        float _seconds = _gameClock.getElapsedTime().asSeconds();
+        if (_seconds >= (_minute + 1) * 10.0f)
         {
+            _life.push_back(Life());
             _minute++;
             _spawnTime = _spawnTime - 1.0f;
         }
@@ -270,6 +278,11 @@ void Gameplay::run(sf::RenderWindow& window) {
 
         //dibujo explosiones
         for (auto it = _enemyExplosion.begin(); it != _enemyExplosion.end(); ++it) {
+            it->draw(window);
+        }
+
+        //dibujo corazones
+        for (auto it = _life.begin(); it != _life.end(); ++it) {
             it->draw(window);
         }
 

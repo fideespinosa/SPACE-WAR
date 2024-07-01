@@ -1,15 +1,25 @@
 #pragma once
-#include "Collisionable.h"
-#include <SFML/graphics.hpp>
+
 #include "Consumable.h"
-class Life : public sf::Drawable, public Collisionable, public Consumable
+#include <iostream>
+
+class Life : public Consumable
 {
-	
 public:
-	Life();
-	void update();
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	sf::FloatRect getBounds() const override; //sobreescribimos el metodo de collisionable
-	
+	Life() : Consumable() {
+
+        //Movimiento
+        _stateMove = 0;
+        if (!_texture.loadFromFile("img/moveEnemy1.png"))
+        {
+            std::cout << "Error al cargar naveMove" << std::endl;
+        };
+        _sprite.setTexture(_texture);
+        _sprite.setPosition((std::rand() % 1024) + 1, 0 + _sprite.getGlobalBounds().top);
+        _sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+        _life = 5;
+        _speed = 5;
+        _sprite.setScale(2.0f, 2.0f);
+	}
 };
 

@@ -23,7 +23,7 @@ Player::Player() {
     };
     _spriteMove.setTexture(_textureMove);
     _spriteMove.setPosition(400, 500); //posicion inicial igual a nave
-    _spriteMove.setTextureRect(sf::IntRect(400, 500, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
+    _spriteMove.setTextureRect(sf::IntRect(0, 0, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
     buffer.loadFromFile("bulletSound.mp3");
     sound.setBuffer(buffer);
 
