@@ -31,8 +31,8 @@ private:
     sf::Clock _enemySpawnClock, _gameClock;
 //Resources
     sf::Music music;
-    sf::SoundBuffer buffer, buffer2, buffer3;
-    sf::Sound sound, gameOverSound;
+    sf::SoundBuffer buffer, buffer2, buffer3, buffer4;
+    sf::Sound sound, gameOverSound, heartEffect, BulletImpact;
 //Text
     sf::Font _font;
     sf::Text showScore(int _score);

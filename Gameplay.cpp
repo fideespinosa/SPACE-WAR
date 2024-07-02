@@ -45,6 +45,9 @@ Gameplay::Gameplay() {
     buffer3.loadFromFile("gameOverSound.mp3");
     gameOverSound.setBuffer(buffer3);
 
+    buffer4.loadFromFile("heartSound.mp3");
+    heartEffect.setBuffer(buffer4);
+
     heart.loadFromFile("img/Heart.png");
     img2.setTexture(heart);
 
@@ -134,6 +137,8 @@ void Gameplay::handleCollisions() {
                 lifeIT->setLife(lifeIT->getLife() - 1);
                 if (lifeIT->getLife() == 0)
                 {
+                    heartEffect.play();
+
                     _player.setLife(_player.getLife() + 10);
                     lifeIT = _life.erase(lifeIT);
                     _score += 10;
