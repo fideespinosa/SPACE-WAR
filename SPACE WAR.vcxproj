@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArchivoRanking.cpp" />
     <ClCompile Include="BulletEnemy.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Consumable.cpp" />
@@ -150,9 +151,11 @@
     <ClCompile Include="RankingMenu.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="SPACE WAR.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArchivoRanking.h" />
     <ClInclude Include="BulletEnemy.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Consumable.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RankingMenu.h" />
     <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="score.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

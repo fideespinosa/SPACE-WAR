@@ -284,7 +284,7 @@ void MainMenu::showMenu() {
 
 }
 
-bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
+std::string MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
 {
     int cont = 0;
     const int maxLength = 10;
@@ -348,31 +348,34 @@ bool MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
         window.draw(texto);
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-            return true;
+            return name;
         }
         
         window.display();
     }
-    return false;
+    std::string estado = "false";
+    return estado;
     std::cout << "salio";
 }
 
 int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, sf::Event Event) {
-
+    RankingMenu ranking;
+    std::string p;
     Gameplay gameplay;
     int exit = 0;
     switch (pos) {
 
     case 1: std::cout << "1";
-        if (InserName(window, Event)) {
+        p = InserName(window, Event);
+        if (p == "false") { std::cout << "falseeee"; }
+        if (p!="false") {
             music.stop();
-            gameplay.run(window);
+            gameplay.run(window, p);
             music.play();
         };
 
         break;
     case 2: std::cout << "2";
-        RankingMenu ranking;
         ranking.show(window);
         //sound.play();
         break;

@@ -20,7 +20,7 @@ class MainMenu
 public:
     MainMenu();
     void showMenu();
-    bool InserName(sf::RenderWindow& window, sf::Event Event);
+    std::string InserName(sf::RenderWindow& window, sf::Event Event);
     int chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, sf::Event Event);
 
 };

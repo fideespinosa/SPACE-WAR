@@ -12,6 +12,7 @@
 #include "Explosion.h"
 #include "BulletEnemy.h"
 #include "Life.h"
+#include "score.h"
 
 class Gameplay{
 private:
@@ -21,6 +22,7 @@ private:
     bool _spawnCheck;
     float _spawnTime = 4.0f;
     int _minute = 0;
+    score score;
 //Game Clases
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
@@ -45,7 +47,7 @@ public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);
     Gameplay& getInstance();
     Gameplay();
-    void run(sf::RenderWindow& window);
+    void run(sf::RenderWindow& window, std::string name);
     void drawLife(sf::RenderWindow& window, int life);
     bool gameOver(sf::RenderWindow& window);
 protected:

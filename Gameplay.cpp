@@ -4,6 +4,7 @@
 #include "Gameplay.h"
 #include <iostream>
 #include "PauseMenu.h"
+#include "ArchivoRanking.h"
 
 
 //inicializamos la variable de clase en 0 para cuando programemos el 
@@ -51,7 +52,7 @@ Gameplay::Gameplay() {
     buffer5.loadFromFile("bulletImpact.wav");
     BulletImpact.setBuffer(buffer5);
 
-    buffer6.loadFromFile("enemyDie.mp3"); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    buffer6.loadFromFile("enemyDie.mp3"); 
     enemyDie.setBuffer(buffer6);
 
     heart.loadFromFile("img/Heart.png");
@@ -221,7 +222,7 @@ sf::Text Gameplay::showScore(int _score)
 
 
 
-void Gameplay::run(sf::RenderWindow& window) {
+void Gameplay::run(sf::RenderWindow& window, std::string name) {
     _score = 0;
     PauseMenu menu;
     sf::Sprite background;
@@ -326,9 +327,9 @@ void Gameplay::run(sf::RenderWindow& window) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             music.pause();
-            std::cout << "menu pausa";
+           
             if (menu.Pause(window)==false) {
-                std::cout << "se salio";
+              
                 Sleep(100);
                 return;
             }
@@ -337,11 +338,19 @@ void Gameplay::run(sf::RenderWindow& window) {
       
         if (_player.getLife() <= 0) 
         {   
+            score.setPoint(_score);
+            score.setName(name);
+            archivoRanking file;
             _spawnCheck = false;
             _enemies.clear();
             _playerBullets.clear();
             _enemyBullets.clear();
+
+            file.CalculateFile(score);
         }
+
+        //incluir el if de abajo con el de arriba
+
         /*if (_player.getLife() <= 0)
         {
             music.stop();
