@@ -48,6 +48,12 @@ Gameplay::Gameplay() {
     buffer4.loadFromFile("heartSound.mp3");
     heartEffect.setBuffer(buffer4);
 
+    buffer5.loadFromFile("bulletImpact.wav");
+    BulletImpact.setBuffer(buffer5);
+
+    buffer6.loadFromFile("enemyDie.mp3"); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    enemyDie.setBuffer(buffer6);
+
     heart.loadFromFile("img/Heart.png");
     img2.setTexture(heart);
 
@@ -94,7 +100,7 @@ void Gameplay::checkPlayerCollisions()
             _player.setLife(_player.getLife() - 1);
 
             std::cout << "Te balearon.." << std::endl;
-            sound.play();
+            BulletImpact.play();
             enemyBulletsIt = _enemyBullets.erase(enemyBulletsIt);
         }
         else
@@ -118,7 +124,7 @@ void Gameplay::handleCollisions() {
                 {
                     _enemyExplosion.push_back(Explosion((*enemyIt)->getPosition()));
                     enemyIt = _enemies.erase(enemyIt);
-
+                    enemyDie.play();
                     _score += 10;
                 }
                 std::cout << "Collision detected" << std::endl;
