@@ -10,7 +10,7 @@ public:
 
         //Movimiento
         _stateMove = 0;
-        if (!_texture.loadFromFile("img/moveEnemy1.png"))
+        if (!_texture.loadFromFile("img/heart2.png"))
         {
             std::cout << "Error al cargar naveMove" << std::endl;
         };
@@ -18,8 +18,8 @@ public:
         _sprite.setPosition((std::rand() % 1024) + 1, 0 + _sprite.getGlobalBounds().top);
         _sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
         _life = 5;
-        _speed = 5;
-        _sprite.setScale(2.0f, 2.0f);
+        _speed = 2;
+        _sprite.setScale(3.0f, 3.0f);
 	}
 };
 

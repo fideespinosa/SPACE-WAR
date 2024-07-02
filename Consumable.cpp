@@ -3,6 +3,16 @@
 
 
 
+int Consumable::getLife()
+{
+    return _life;
+}
+
+void Consumable::setLife(int life)
+{
+    _life = life;
+}
+
 void Consumable::update()
 {
     sf::Vector2f position = _sprite.getPosition();
@@ -75,4 +85,9 @@ bool Consumable::controlSprite(sf::Sprite& _sprite)
     }
 
     return true;
+}
+
+sf::FloatRect Consumable::getBounds() const
+{
+    return _sprite.getGlobalBounds();
 }

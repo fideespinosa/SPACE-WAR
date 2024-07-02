@@ -13,9 +13,12 @@ protected: //dara acceso a las clases derivadas
 	sf::Clock _clockMove;
 	int _stateMove = 0, _life, _speed;
 	public:   
+	int getLife();
+    void setLife(int life);
 	void update();
 	void draw(sf::RenderWindow& window);
 	bool controlSprite(sf::Sprite& _sprite);
 	Consumable() {};
+	sf::FloatRect getBounds() const;
 };
 

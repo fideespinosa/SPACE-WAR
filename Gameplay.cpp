@@ -127,19 +127,35 @@ void Gameplay::handleCollisions() {
                 ++enemyIt;
             }
         }
+        for (auto lifeIT = _life.begin(); lifeIT != _life.end();)
+        {
+            if (it->getBounds().intersects(lifeIT->getBounds()))
+            {
+                lifeIT->setLife(lifeIT->getLife() - 1);
+                if (lifeIT->getLife() == 0)
+                {
+                    _player.setLife(_player.getLife() + 10);
+                    lifeIT = _life.erase(lifeIT);
+                    _score += 10;
+                }
+                std::cout << "Collision detected" << std::endl;
+                collisionDetected = true;
+                break;
+            }
+            else
+            {
+                ++lifeIT;
+            }
+        }
 
-
-        if (collisionDetected) 
+        if (collisionDetected)
         {
             it = _playerBullets.erase(it);
         }
-        else 
+        else
         {
             ++it;
         }
-
-        bool hearCollision;
-
 
     }
 }
