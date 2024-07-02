@@ -269,7 +269,7 @@ void Gameplay::run(sf::RenderWindow& window) {
         //Dificultad
        
         float _seconds = _gameClock.getElapsedTime().asSeconds();
-        if (_seconds >= (_minute + 1) * 10.0f)
+        if (_seconds >= (_minute + 1) * 60.0f)
         {
             _life.push_back(Life());
             _minute++;

@@ -19,16 +19,26 @@ public:
 		_life = 10;
 
 		//Movimiento
-		_stateMove = 0;
 		if (!_textureMove.loadFromFile("img/moveEnemy3.png"))
 		{
 			std::cout << "Error al cargar naveMove" << std::endl;
 		};
 		_spriteMove.setTexture(_textureMove);
 		_spriteMove.setPosition(x, y); //posicion inicial igual a nave
-		_spriteMove.setTextureRect(sf::IntRect(0, 0, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
-	};
+		_spriteMove.setTextureRect(sf::IntRect(0, 0, 128, 128)); // pos x , pos y, ancho (weitdh), largo (height)
 	
+		//Animacion Armas
+		if (!_textureWeapons.loadFromFile("img/weaponsEnemy3.png"))
+		{
+			std::cout << "Error al cargar weaponsEnemy3" << std::endl;
+		};
+		_spriteWeapons.setTexture(_textureWeapons);
+		_spriteWeapons.setPosition(x, y); //posicion inicial igual a nave
+		_spriteWeapons.setTextureRect(sf::IntRect(0, 0, 128, 128)); // pos x , pos y, ancho (weitdh), largo (height)
+
+	
+	};
+	void update() override;
 	sf::FloatRect getBounds() const;
 	virtual ~Enemy3() = default;
 	Enemy3() = default;

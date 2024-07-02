@@ -12,7 +12,7 @@ public:
         _stateMove = 0;
         if (!_texture.loadFromFile("img/heart2.png"))
         {
-            std::cout << "Error al cargar naveMove" << std::endl;
+            std::cout << "Error al cargar HEART" << std::endl;
         };
         _sprite.setTexture(_texture);
         _sprite.setPosition((std::rand() % 1024) + 1, 0 + _sprite.getGlobalBounds().top);

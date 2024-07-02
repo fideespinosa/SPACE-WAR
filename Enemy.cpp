@@ -80,8 +80,11 @@ void Enemy::draw(sf::RenderWindow& window)
 {
     _spriteMove.setTexture(_textureMove);
     _sprite.setTexture(_texture);
+    _spriteWeapons.setTexture(_textureWeapons);
     window.draw(_sprite);
     window.draw(_spriteMove);
+    window.draw(_spriteWeapons);
+
 };
 
 
@@ -101,7 +104,6 @@ void Enemy::handleInputEnemy(std::list<BulletEnemy>& bullets)
 {
     if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
     {
-        std::cout << " balin enemigo " << std::endl;
         bullets.push_back(shoot());
         shootClock.restart();
     }

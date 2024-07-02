@@ -6,12 +6,12 @@
 
 class Enemy : public Collisionable {
 protected:
-    sf::Sprite _sprite, _spriteMove;
-    sf::Texture _texture, _textureMove;
+    sf::Sprite _sprite, _spriteMove, _spriteWeapons;
+    sf::Texture _texture, _textureMove, _textureWeapons;
     float _speed = 0;
     int _life = 0;
     int _type = 0;
-    int _stateMove = 0;
+    int _stateMove = 0, _stateWeapons =0;
     
 
 public:
@@ -25,7 +25,7 @@ public:
     virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
     virtual BulletEnemy shoot();
-    sf::Clock shootClock, _clockMove;
+    sf::Clock shootClock, _clockMove, _clockWeapons;
     virtual void handleInputEnemy(std::list<BulletEnemy>& bullets);
     virtual ~Enemy();
     virtual bool controlSprite(sf::Sprite& _sprite);
