@@ -55,7 +55,7 @@ public:
     void drawLife(sf::RenderWindow& window, int life);
     bool gameOver(sf::RenderWindow& window);
     void cleanGame();
-
+    bool youWin(sf::RenderWindow& window, int _score);
 protected:
     void handleCollisions();
     void spawnEnemies(float _spawnTime);

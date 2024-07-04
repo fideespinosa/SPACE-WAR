@@ -127,7 +127,7 @@ void Gameplay::handleCollisions() {
                     enemyIt = _enemies.erase(enemyIt);
                     enemyDie.play();
                    
-                    _score += 10;
+                    _score += 30;
                 }
                 collisionDetected = true;
                 break;
@@ -340,8 +340,8 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         if (_player.getLife() <= 0) 
         {   
 
-            scoreCls.setPoint(_score);
-            scoreCls.setName(name);
+           // scoreCls.setPoint(_score);
+            //scoreCls.setName(name);
            
             _spawnCheck = false;
             _enemies.clear();
@@ -369,12 +369,19 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         }
 
        
-            if (_minute == 1) {
+            if (_minute == 2) {
                 std::cout << "se termino el tiempo";
                 scoreCls.setPoint(_score);
                 scoreCls.setName(name);
-                file.CalculateFile(scoreCls);
-                //menuGanaste();
+                //file.CalculateFile(scoreCls);
+                if (youWin(window, _score))
+                {
+                    run(window, name);
+                }
+                else 
+                {
+                    return;
+                };
             }
         
 
@@ -501,5 +508,120 @@ void Gameplay::cleanGame() {
     _enemyExplosion.remove_if([](const Explosion& explosion) {
         return explosion.getState() < 0;
         });
+}
+
+bool Gameplay::youWin(sf::RenderWindow& window, int _score)
+{
+    int pos = 1;
+    bool state = true;
+    sf::Text yes, no, again, _finalscore, saludo;
+    sf::Sprite fondo, gameOver;
+    sf::Texture pic, pic2;
+    sf::Font _font;
+    _font.loadFromFile("SPACE.ttf");
+    pic.loadFromFile("img/gameOver2.png");
+    fondo.setTexture(pic);
+    //pic2.loadFromFile("img/gameOver.png");
+    gameOver.setTexture(pic2);
+    gameOver.setPosition(280, 30);
+
+    yes.setFont(_font);
+    yes.setStyle(sf::Text::Italic);
+    yes.setOutlineThickness(2);
+    yes.setOutlineColor(sf::Color::Black);
+    yes.setFillColor(sf::Color::White);
+    yes.setString("YES");
+    yes.setPosition(370, 380);
+    yes.setCharacterSize(20);
+
+
+    no.setFont(_font);
+    no.setStyle(sf::Text::Italic);
+    no.setOutlineThickness(1);
+    no.setOutlineColor(sf::Color::White);
+    no.setFillColor(sf::Color::Transparent);
+    no.setString("NO");
+    no.setPosition(600, 380);
+    no.setCharacterSize(20);
+
+    std::string puntaje = std::to_string(_score);
+    _finalscore.setFont(_font);
+    _finalscore.setStyle(sf::Text::Italic);
+    _finalscore.setCharacterSize(25);
+    _finalscore.setOutlineThickness(2);
+    _finalscore.setOutlineColor(sf::Color::Black);
+    _finalscore.setFillColor(sf::Color::White);
+    _finalscore.setString(puntaje);
+    _finalscore.setPosition(700, 100);
+    _finalscore.setStyle(sf::Text::Underlined);
+
+    saludo.setFont(_font);
+    saludo.setStyle(sf::Text::Italic);
+    saludo.setCharacterSize(25);
+    saludo.setOutlineThickness(2);
+    saludo.setOutlineColor(sf::Color::Black);
+    saludo.setFillColor(sf::Color::White);
+    saludo.setString("FINAL SCORE : ");
+    saludo.setPosition(250, 100);
+    saludo.setStyle(sf::Text::Underlined);
+
+    again.setFont(_font);
+    again.setStyle(sf::Text::Italic);
+    again.setCharacterSize(25);
+    again.setOutlineThickness(2);
+    again.setOutlineColor(sf::Color::Black);
+    again.setFillColor(sf::Color::White);
+    again.setString("CONGRATS, PLAY AGAIN?");
+    again.setPosition(300, 200);
+    again.setStyle(sf::Text::Underlined);
+
+    while (state) {
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) and pos == 1) {
+            pos = 2;
+
+            no.setOutlineThickness(2);
+            no.setOutlineColor(sf::Color::Black);
+            no.setFillColor(sf::Color::White);
+            yes.setOutlineThickness(1);
+            yes.setOutlineColor(sf::Color::White);
+            yes.setFillColor(sf::Color::Transparent);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) and pos == 2) {
+            pos = 1;
+
+            yes.setOutlineThickness(2);
+            yes.setOutlineColor(sf::Color::Black);
+            yes.setFillColor(sf::Color::White);
+            no.setOutlineThickness(1);
+            no.setOutlineColor(sf::Color::White);
+            no.setFillColor(sf::Color::Transparent);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+
+            switch (pos)
+            {
+            case 1:
+                return true; //continua el juego
+                break;
+            case 2:
+                return false;
+                break;
+            default:
+                break;
+            }
+        }
+        window.draw(fondo);
+        window.draw(gameOver);
+        window.draw(yes);
+        window.draw(no);
+        window.draw(again);
+        window.draw(_finalscore);
+        window.draw(saludo);
+        window.display();
+    }
 }
 

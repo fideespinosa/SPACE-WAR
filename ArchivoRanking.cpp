@@ -1,13 +1,7 @@
-#include "archivoRanking.h"
+#include "ArchivoRanking.h"
 #include <iostream>
 #include <cstring>
-#include "score.h"
-#include <vector>
-#include <algorithm>
 
-ArchivoRanking::ArchivoRanking()
-{
-}
 
 
 bool ArchivoRanking::CalculateFile(Score _Score)
