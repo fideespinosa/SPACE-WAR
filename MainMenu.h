@@ -9,10 +9,11 @@ class MainMenu
     sf::Music music;
     sf::SoundBuffer buffer;
     sf::Sound sound;
-    sf::Sprite img, indicator, escape;
-    sf::Texture background, arrow, esc;
+    sf::Sprite img, indicator, escape, imgHelp;
+    sf::Texture background, arrow, esc, backgroundHelp;
     sf::Font font;
     sf::Text play, ranking, help, exit, options, EnterName, atras, texto, NameLimit, minimo;
+    sf::Text movimiento, choque, disparar, puntos;
     int pos;
     std::string name;
 
@@ -22,6 +23,7 @@ public:
     void showMenu();
     std::string InserName(sf::RenderWindow& window, sf::Event Event);
     int chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, sf::Event Event);
+    void HelpMenu(sf::RenderWindow& window);
 
 };
 

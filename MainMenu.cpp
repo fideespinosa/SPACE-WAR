@@ -382,10 +382,24 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
     case 3: std::cout << "3";
         break;
     case 4: std::cout << "4";
+        HelpMenu(window);
         break;
     case 5: std::cout << "5";
         exit = 1;
         return exit;
 
+    }
+}
+
+void MainMenu::HelpMenu(sf::RenderWindow& window)
+{
+    while(window.isOpen()){
+    backgroundHelp.loadFromFile("img/backgroundHelp.jpg");
+    imgHelp.setTexture(backgroundHelp);
+
+
+    window.clear();
+    window.draw(imgHelp);
+    window.display();
     }
 }
