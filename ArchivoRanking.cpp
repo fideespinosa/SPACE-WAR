@@ -2,7 +2,8 @@
 #include <iostream>
 #include <cstring>
 #include "score.h"
-
+#include <vector>
+#include <algorithm>
 
 ArchivoRanking::ArchivoRanking()
 {
@@ -11,6 +12,8 @@ ArchivoRanking::ArchivoRanking()
 
 bool ArchivoRanking::CalculateFile(Score _Score)
 {
+
+	
 	FILE* p;
 	Score score[5];
 
@@ -24,19 +27,17 @@ bool ArchivoRanking::CalculateFile(Score _Score)
 	for (int i = 0; i < 5; i++)
 	{
 		fread(&score[i], sizeof(score), 1, p);
-		
 
-		if (_Score.getPoints() > score[i].getPoints()) {
+		if (_Score.getPoints() >= score[i].getPoints()) {
 			fclose(p);
 			moveRanking(i, _Score);
-			
+
 			return true;
 		}
-
 	}
-
 	fclose(p);
 	return false;
+	
 }
 
 void ArchivoRanking::moveRanking(int pos, Score _Score)
@@ -63,7 +64,7 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 
 	case 0:
 		std::cout << "entro 0";
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i < 5;i++) {
 
 			obj[aux1--] = obj[aux2--];
 
@@ -71,7 +72,7 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 		obj[pos]=_Score;
 		fopen_s(&p, "score.dat", "wb");
 
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i < 5;i++) {
 
 			fwrite(&obj[i], sizeof(Score), 1, p);
 
@@ -87,7 +88,7 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 		obj[pos] = _Score;
 		fopen_s(&p, "score.dat", "wb");
 
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i < 5;i++) {
 
 			fwrite(&obj[i], sizeof(Score), 1, p);
 
@@ -104,7 +105,7 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 		obj[pos] = _Score;
 		fopen_s(&p, "score.dat", "wb");
 
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i <5 ;i++) {
 
 			fwrite(&obj[i], sizeof(Score), 1, p);
 
@@ -124,7 +125,7 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 		obj[pos] = _Score;
 		fopen_s(&p, "score.dat", "wb");
 
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i < 5;i++) {
 
 			fwrite(&obj[i], sizeof(Score), 1, p);
 
@@ -136,18 +137,19 @@ void ArchivoRanking::moveRanking(int pos, Score _Score)
 		fopen_s(&p,"score.dat", "wb");
 		std::cout << "entro 4";
 		obj[pos] = _Score;
-		for (int i = 0; i <= 4;i++) {
+		for (int i = 0; i < 5;i++) {
 
 			fwrite(&obj[i], sizeof(Score), 1, p);
 
 		}
 		fclose(p);
 	default:
-		fclose(p);
 		break;
 	}
 
 }
+
+
 
 //eliminar despues
 

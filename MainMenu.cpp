@@ -406,6 +406,7 @@ std::string MainMenu::InserName(sf::RenderWindow& window, sf::Event Event)
         window.draw(texto);
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+            
             return name;
         }
         
@@ -428,7 +429,7 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
         if (p == "false") { std::cout << "falseeee"; }
         if (p!="false") {
             music.stop();
-            gameplay.run(window, p);
+            gameplay.run(window, p.c_str());
             music.play();
         };
 

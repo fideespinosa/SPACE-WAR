@@ -17,6 +17,6 @@ private:
 public: 
 	RankingMenu();
 	void show(sf::RenderWindow& window);
-	void showScore(sf::RenderWindow& window);
+	void showScore();
 };
 

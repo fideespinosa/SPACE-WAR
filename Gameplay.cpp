@@ -221,7 +221,7 @@ sf::Text Gameplay::showScore(int _score)
 
 
 
-void Gameplay::run(sf::RenderWindow& window, std::string name) {
+void Gameplay::run(sf::RenderWindow& window, const char* name) {
     _score = 0;
     ArchivoRanking ar;
   
@@ -339,9 +339,10 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
       
         if (_player.getLife() <= 0) 
         {   
-           // score.setPoint(_score);
-          //  score.setName(name);
-            //archivoRanking file;
+
+            scoreCls.setPoint(_score);
+            scoreCls.setName(name);
+           
             _spawnCheck = false;
             _enemies.clear();
             _playerBullets.clear();
@@ -355,6 +356,7 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
 
         if (_player.getLife() <= 0 && _clockAnimationPlayer.getElapsedTime().asSeconds() > 10)
         {
+
             if (gameOver(window)) {
                 //empezar de vuelta
                 _player.setLife(50);
@@ -367,8 +369,11 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         }
 
        
-            if (_minute >= 1) {
+            if (_minute == 1) {
                 std::cout << "se termino el tiempo";
+                scoreCls.setPoint(_score);
+                scoreCls.setName(name);
+                file.CalculateFile(scoreCls);
                 //menuGanaste();
             }
         
