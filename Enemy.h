@@ -16,7 +16,7 @@ protected:
 
 public:
     sf::Vector2f getPosition() const;
-    int getType();
+    virtual int getType();
     virtual int getLife();
     void setLife(int life);
     Enemy() {};

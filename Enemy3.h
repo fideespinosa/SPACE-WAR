@@ -13,7 +13,7 @@ public:
 		if (!_texture.loadFromFile("img/enemy3.png")) {
 			std::cout << "error en carga de textura" << std::endl;
 		}
-		_sprite.setTexture(_texture);
+		//_sprite.setTexture(_texture);
 		_sprite.setPosition(x, y + _sprite.getGlobalBounds().top);
 		_speed = 1;
 		_life = 10;
@@ -35,6 +35,7 @@ public:
 		_spriteWeapons.setTexture(_textureWeapons);
 		_spriteWeapons.setPosition(x, y); //posicion inicial igual a nave
 		_spriteWeapons.setTextureRect(sf::IntRect(0, 0, 128, 128)); // pos x , pos y, ancho (weitdh), largo (height)
+		_type = 3;
 
 	
 	};

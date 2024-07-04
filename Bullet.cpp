@@ -17,7 +17,7 @@ Bullet::Bullet(sf::Vector2f position) {
 
 void Bullet::update()
 {
-    std::cout << "sale la bala personaje " << std::endl;
+    
     _sprite.move(0, _speed);
     //Animacion de la bala
     if (_clockMove.getElapsedTime().asSeconds() > 0.5f)

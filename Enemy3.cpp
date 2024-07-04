@@ -63,7 +63,7 @@ void Enemy3::update()
     }
 
     // movimiento de armas de la nave
-    if (_clockWeapons.getElapsedTime().asSeconds() > 0.01f)
+    if (_clockWeapons.getElapsedTime().asSeconds() > 0.02f)
     {
         _stateWeapons++;
         _spriteWeapons.setPosition(position.x, position.y);

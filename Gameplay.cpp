@@ -84,8 +84,6 @@ void Gameplay::checkPlayerCollisions()
         if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
         {
             _player.setLife(_player.getLife() - 5);
-           
-            std::cout << "Choco la navee" << std::endl;
             sound.play();
             enemyIt = _enemies.erase(enemyIt);
         }
@@ -99,8 +97,6 @@ void Gameplay::checkPlayerCollisions()
         if (enemyBulletsIt->getBounds().intersects(_player.getBounds()))
         {
             _player.setLife(_player.getLife() - 1);
-
-            std::cout << "Te balearon.." << std::endl;
             BulletImpact.play();
             enemyBulletsIt = _enemyBullets.erase(enemyBulletsIt);
         }
@@ -123,12 +119,11 @@ void Gameplay::handleCollisions() {
                 (*enemyIt)->setLife((*enemyIt)->getLife() - 1);
                 if ((*enemyIt)->getLife() == 0) 
                 {
-                    _enemyExplosion.push_back(Explosion((*enemyIt)->getPosition()));
+                    _enemyExplosion.push_back(Explosion((*enemyIt)->getPosition(), (*enemyIt)->getType()));
                     enemyIt = _enemies.erase(enemyIt);
                     enemyDie.play();
                     _score += 10;
                 }
-                std::cout << "Collision detected" << std::endl;
                 collisionDetected = true;
                 break;
             }
@@ -150,7 +145,6 @@ void Gameplay::handleCollisions() {
                     lifeIT = _life.erase(lifeIT);
                     _score += 10;
                 }
-                std::cout << "Collision detected" << std::endl;
                 collisionDetected = true;
                 break;
             }
@@ -265,7 +259,7 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
 
         for (auto& enemyExplosion : _enemyExplosion)
         {
-            enemyExplosion.update();
+            enemyExplosion.update(enemyExplosion.getType());
         }
 
         for (auto& bullet : _playerBullets) {

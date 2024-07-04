@@ -29,6 +29,7 @@ public:
         _spriteMove.setTexture(_textureMove);
         _spriteMove.setPosition(x, y); //posicion inicial igual a nave
         _spriteMove.setTextureRect(sf::IntRect(0, 0, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
+        _type = 1;
     };
 	void update();
 	sf::FloatRect getBounds() const ;
