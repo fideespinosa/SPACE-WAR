@@ -5,6 +5,7 @@
 #include "RankingMenu.h"
 #include "Gameplay.h"
 #include <string>
+#include "Explosion.h"
 
 MainMenu::MainMenu()
 {
@@ -22,6 +23,17 @@ MainMenu::MainMenu()
     sig.setTexture(arrow2);
     sig.setPosition(920, 565.f);
     sig.setScale(0.5, 0.5);
+
+    sc.loadFromFile("img/space.png");
+    space.setTexture(sc);
+    space.setScale(0.5,0.5);
+    space.setPosition(100, 300);
+
+    teclas.setPosition(350, 200);
+    teclas.setScale(0.2f, 0.2f);
+    fl.loadFromFile("img/teclas.png");
+    teclas.setTexture(fl);
+    teclas.setPosition(100, 100);
 
 
     play.setFont(font);
@@ -62,8 +74,8 @@ MainMenu::MainMenu()
     minimo.setOutlineColor(sf::Color::White);
     minimo.setPosition(600, 300);*/
 
-    movimiento.setString("pulsando las flechas vas a poder controlar los movimientos de tu nave");
-    choque.setString("CUIDADO! al chocar con naves enemigas recibiras mas danio de lo normal y se te restaran puntos");
+    movimiento.setString("Vas a poder controlar los movimientos de tu nave \n pulsando las flechas ");
+    choque.setString("CUIDADO! al chocar con naves enemigas \n recibiras mas daño de lo normal \n y se te restaran puntos!");
     disparar.setString("al precionar la tecla \"espacio\" dispararas ");
     puntos.setString("al derrotar un enemigo se te sumaran 10 puntos");
     controles.setString("CONTROLES");
@@ -72,12 +84,26 @@ MainMenu::MainMenu()
     controles.setOutlineColor(sf::Color::Black);
     controles.setFont(font);
     controles.setCharacterSize(30);
-    controles.setPosition(300, 0);
+    controles.setPosition(400, 0);
+    controles.setStyle(sf::Text::Underlined);
 
     movimiento.setOutlineThickness(2);
     movimiento.setOutlineColor(sf::Color::Black);
     movimiento.setFont(font);
     movimiento.setCharacterSize(15);
+    movimiento.setPosition(310, 130);
+
+    disparar.setPosition(310, 320);
+    disparar.setOutlineThickness(2);
+    disparar.setOutlineColor(sf::Color::Black);
+    disparar.setFont(font);
+    disparar.setCharacterSize(15);
+
+    choque.setPosition(310, 320);
+    choque.setOutlineThickness(2);
+    choque.setOutlineColor(sf::Color::Black);
+    choque.setFont(font);
+    choque.setCharacterSize(15);
 
     options.setStyle(sf::Text::Italic);
     options.setFillColor(sf::Color::Transparent);
@@ -425,16 +451,25 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
 
 void MainMenu::HelpMenu(sf::RenderWindow& window)
 {
+    window.clear();
+
+
     siguiente.setString("SIGUIENTE");
     sig.setRotation(270);
     sig.setPosition(920, 565);
     sig.setRotation(270);
+    sf::Clock _clock;
+    bool stateAnimation = 0;
+    window.draw(space);
+    Explosion exp(sf::Vector2f(100, 300), 5 );
+
+   
+    
+
     while(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false){
 
     backgroundHelp.loadFromFile("img/backgroundHelp.jpg");
     imgHelp.setTexture(backgroundHelp);
-    window.clear();
-    window.draw(imgHelp);
 
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
     {
@@ -442,7 +477,9 @@ void MainMenu::HelpMenu(sf::RenderWindow& window)
         sig.setRotation(90);
         sig.setPosition(985, 500.f);
         controles.setString("CONSEJOS");
-
+        movimiento.setString(choque.getString());
+        disparar.setString(puntos.getString());
+        stateAnimation = 1;
     }
 
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left))) {
@@ -451,13 +488,27 @@ void MainMenu::HelpMenu(sf::RenderWindow& window)
         sig.setRotation(270);
         sig.setPosition(920, 565);
         controles.setString("CONTROLES");
+        movimiento.setString("Vas a poder controlar los movimientos de tu nave \n pulsando las flechas ");
+        disparar.setString("al precionar la tecla \"espacio\" dispararas ");
+
+        stateAnimation = 0;
     }
 
+    window.draw(imgHelp);
+    if (stateAnimation == 1) {
+        exp.update(5);
+        exp.draw(window);
+    }
+    else {
+        window.draw(teclas);
+        window.draw(space);
+    }
+    window.draw(disparar);
 
+    window.draw(movimiento);
     window.draw(sig);
     window.draw(siguiente);
     window.draw(controles);
-    window.draw(movimiento);
     window.draw(escape);
     window.draw(atras);
    

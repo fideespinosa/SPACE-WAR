@@ -7,6 +7,8 @@ private:
 	int points;
 	std::string name;
 public:
+	score(std::string n, int point);
+	score();
 	int getPoints();
 	void Show();
 	void setPoint(int po) {
@@ -20,5 +22,6 @@ public:
 	void setName(std::string n) {
 		name = n;
 	}
+
 };
 

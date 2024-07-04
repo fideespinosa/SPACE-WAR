@@ -9,8 +9,8 @@ class MainMenu
     sf::Music music;
     sf::SoundBuffer buffer;
     sf::Sound sound;
-    sf::Sprite img, indicator, escape, imgHelp, sig;
-    sf::Texture background, arrow, esc, backgroundHelp, arrow2;
+    sf::Sprite img, indicator, escape, imgHelp, sig, teclas, space;
+    sf::Texture background, arrow, esc, backgroundHelp, arrow2, fl, sc;
     sf::Font font;
     sf::Text play, ranking, help, exit, options, EnterName, atras, texto, NameLimit, minimo;
     sf::Text movimiento, choque, disparar, puntos, controles, siguiente;

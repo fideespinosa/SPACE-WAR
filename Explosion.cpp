@@ -50,6 +50,17 @@ Explosion::Explosion(sf::Vector2f position, int _type)
         _stateExplosion = 8;
         _typeExplosion = 4;
         break;
+    case 5:
+        if (!_texture.loadFromFile("img/explosion/animationDesc.png")) {
+            std::cout << "error en carga de textura" << std::endl;
+        }
+        _sprite.setTexture(_texture);
+        _stateExplosion = 0;
+        _sprite.setPosition(position.x, position.y);
+        _sprite.setTextureRect(sf::IntRect(0, 0, 128, 128)); // pos x , pos y, ancho (weitdh), largo (height)
+        _typeExplosion = 5;
+
+        break;
     default:
         std::cout << "Error" << std::endl;
 
@@ -108,12 +119,33 @@ void Explosion::update(int _type)
 
         }
         break;
+
+    case 5:
+        if (_clock.getElapsedTime().asSeconds() > 0.1f)
+        {
+            _stateExplosion++;
+            if (_stateExplosion < 12) {
+               
+                _sprite.setTextureRect(sf::IntRect(_stateExplosion * 128, 0, 128, 128));
+            }
+
+            _clock.restart();
+        }
+        if (_stateExplosion == 12) {
+            _stateExplosion = 0;
+        }
+        break;
     }
 }
 
 void Explosion::draw(sf::RenderWindow& window)
 {
         if (_stateExplosion > 0) {
+            _sprite.setTexture(_texture);
+            window.draw(_sprite);
+        }
+        else if(getType()==5)
+        {
             _sprite.setTexture(_texture);
             window.draw(_sprite);
         }

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "PauseMenu.h"
 #include "ArchivoRanking.h"
+#include "score.h"
 
 
 //inicializamos la variable de clase en 0 para cuando programemos el 
@@ -222,6 +223,19 @@ sf::Text Gameplay::showScore(int _score)
 
 void Gameplay::run(sf::RenderWindow& window, std::string name) {
     _score = 0;
+    archivoRanking ar;
+    score obj1("vacio", 0);
+    score obj2("vacio", 0);
+    score obj3("vacio", 0);
+    score obj4("vacio", 0);
+    score obj5("vacio", 0);
+
+    ar.cargarAr(obj1);
+    ar.cargarAr(obj2);
+    ar.cargarAr(obj3);
+    ar.cargarAr(obj4);
+    ar.cargarAr(obj5);
+
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
@@ -280,7 +294,7 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         {
             _life.push_back(Life());
             _minute++;
-            _spawnTime = _spawnTime - 1.0f;
+            _spawnTime = _spawnTime - 0.7f;
         }
 
         life.setString(lifeString);
@@ -317,7 +331,6 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         for (auto it = _enemyBullets.begin(); it != _enemyBullets.end(); ++it) {
             it->draw(window);
         } 
-        std::cout << _enemyExplosion.size() << std::endl;//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
         cleanGame();
 
@@ -363,6 +376,14 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
                 _clockAnimationPlayer.restart();
             }
         }
+
+       
+            if (_minute >= 1) {
+                std::cout << "se termino el tiempo";
+                //menuGanaste();
+            }
+        
+
     }
 }
 

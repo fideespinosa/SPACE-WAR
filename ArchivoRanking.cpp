@@ -20,7 +20,7 @@ void archivoRanking::saveFile(int gamePoints, int i)
 {
 }
 
-bool archivoRanking::CalculateFile(score Score)
+bool archivoRanking::CalculateFile(int Score)
 {
 	FILE* p;
 	score score[5];
@@ -37,7 +37,7 @@ bool archivoRanking::CalculateFile(score Score)
 		fread(&score[i], sizeof(score), 1, p);
 		
 
-		if (Score.getPoints() > score[i].getPoints()) {
+		if (Score > score[i].getPoints()) {
 			fclose(p);
 			moveRanking(i, Score);
 			
@@ -50,7 +50,7 @@ bool archivoRanking::CalculateFile(score Score)
 	return false;
 }
 
-void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint para recibir la clase score
+void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para recibir la clase score
 {
 	int j = 0;
 	int aux1 = 5, aux2 = 4;
@@ -80,7 +80,7 @@ void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint par
 			obj[aux1--] = obj[aux2--];
 
 		}
-		obj[pos]=Score;//cambiar para hacer un = del score y no del gamepoint
+		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
 		file.mostrar();
 
 		fopen_s(&p, "score.dat", "wb");
@@ -99,9 +99,8 @@ void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint par
 			obj[aux1--] = obj[aux2--];
 
 		}
-		obj[pos] = Score;//cambiar para hacer un = del score y no del gamepoint
+		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
 		file.mostrar();
-		std::cout << "aaaaaaaaaaaaaaaaaa";
 		fopen_s(&p, "score.dat", "wb");
 
 		for (int i = 0; i <= 4;i++) {
@@ -121,7 +120,7 @@ void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint par
 			obj[aux1--] = obj[aux2--];
 
 		}
-		obj[pos] = Score;//cambiar para hacer un = del score y no del gamepoint
+		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
 		file.mostrar();
 		std::cout << "aaaaaaaaaaaaaaaaaa";
 		fopen_s(&p, "score.dat", "wb");
@@ -143,7 +142,7 @@ void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint par
 			obj[aux1--] = obj[aux2--];
 
 		}
-		obj[pos] = Score;//cambiar para hacer un = del score y no del gamepoint
+		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
 		file.mostrar();
 		std::cout << "aaaaaaaaaaaaaaaaaa";
 		fopen_s(&p, "score.dat", "wb");
@@ -160,7 +159,7 @@ void archivoRanking::moveRanking(int pos, score Score)//cambiar el gamepoint par
 	case 4:
 		fopen_s(&p,"score.dat", "wb");
 		std::cout << "entro 4";
-		obj[pos] = Score;//cambiar para hacer un = del score y no del gamepoint
+		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
 		for (int i = 0; i <= 4;i++) {
 
 			fwrite(&obj[i], sizeof(score), 1, p);
@@ -213,6 +212,16 @@ void archivoRanking::mostrar() {
 		i++;
 
 	}
+	fclose(p);
+	return;
+}
+
+void archivoRanking::cargarAr(score reg)
+{
+	FILE* p;
+	 fopen_s(&p, "score.dat", "ab");
+	if (p == NULL) return;
+	bool escribio = fwrite(&reg, sizeof reg, 1, p);
 	fclose(p);
 	return;
 }

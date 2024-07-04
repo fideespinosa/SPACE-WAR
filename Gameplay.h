@@ -23,7 +23,7 @@ private:
     bool _spawnCheck;
     float _spawnTime = 4.0f;
     int _minute = 0;
-    score score;
+   // score score;
 //Game Clases
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
