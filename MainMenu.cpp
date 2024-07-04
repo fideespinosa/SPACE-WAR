@@ -450,6 +450,7 @@ void MainMenu::HelpMenu(sf::RenderWindow& window)
         siguiente.setString("SIGUIENTE");
         sig.setRotation(270);
         sig.setPosition(920, 565);
+        controles.setString("CONTROLES");
     }
 
 
