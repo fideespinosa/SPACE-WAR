@@ -350,7 +350,8 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         {
             if (gameOver(window)) {
                 //empezar de vuelta
-
+                _player.setLife(50);
+                run(window,name);
             }
             else {
                 //volver al menu principal

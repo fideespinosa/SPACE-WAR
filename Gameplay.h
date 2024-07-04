@@ -13,6 +13,7 @@
 #include "BulletEnemy.h"
 #include "Life.h"
 #include "score.h"
+#include "MainMenu.h"
 
 class Gameplay{
 private:
@@ -31,6 +32,7 @@ private:
     std::list<BulletEnemy> _enemyBullets;
     std::list<Explosion> _enemyExplosion;
     sf::Clock _enemySpawnClock, _gameClock, _clockAnimationPlayer;
+    MainMenu _menu;
 //Resources
     sf::Music music;
     sf::SoundBuffer buffer, buffer2, buffer3, buffer4, buffer5, buffer6;
@@ -41,7 +43,7 @@ private:
     sf::Text pause, life, Menu;
     sf::Sprite img, img2;
     sf::Texture texture, heart;
-
+    
 
 public:
    // bool checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies);
