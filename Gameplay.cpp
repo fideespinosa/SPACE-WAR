@@ -223,7 +223,7 @@ sf::Text Gameplay::showScore(int _score)
 
 void Gameplay::run(sf::RenderWindow& window, std::string name) {
     _score = 0;
-    archivoRanking ar;
+    ArchivoRanking ar;
   
     PauseMenu menu;
     sf::Sprite background;

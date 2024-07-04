@@ -57,20 +57,39 @@ RankingMenu::RankingMenu()
 void RankingMenu::show(sf::RenderWindow& window) {
 
     int exit = 0;
-    score _score1;
+    Score _score1, _score2, _score3, _score4, _score5;
     char name1[10];
+   
+   /*
     std::cin >> name1;
     _score1.setName(name1);
-    _score1.setPoint(29);
-    archivoRanking ar;
+    _score1.setPoint(0);
+    _score2.setName(name1);
+    _score2.setPoint(0);
+    _score3.setName(name1);
+    _score3.setPoint(0);
+    _score4.setName(name1);
+    _score4.setPoint(0);
+    _score5.setName(name1);
+    _score5.setPoint(0);
     ar.cargar(_score1);
+    ar.cargar(_score2);
+    ar.cargar(_score3);
+    ar.cargar(_score4);
+    ar.cargar(_score5);
+    */
+    ArchivoRanking ar;
+    for (int i = 0; i < 5; i++) {
+        std::cout << " mostrando registro  " << ar.mostrar(i).getPoints() << std::endl;
+        std::cout << " mostrando registro  " << ar.mostrar(i).getName() << std::endl;
+    }
+
     while (exit != 1) {
 
         window.clear();
         window.draw(img);
         window.draw(escape);
-        std::cout << " mostrando registro 2 " << ar.mostrar(1).getPoints() << std::endl;
-        std::cout << " mostrando registro 2 " << ar.mostrar(1).getName() << std::endl;
+      
         window.draw(Ranking);
         window.draw(atras);
 
@@ -99,27 +118,29 @@ void RankingMenu::show(sf::RenderWindow& window) {
 void RankingMenu::showScore(sf::RenderWindow& window)
 {
     FILE* p;
-    score obj[5], aux;
+    Score obj[5], aux;
     int j = 0;
     fopen_s(&p, "score.dat", "rb");
 
-    while (fread(&aux, sizeof(score), 1, p) == 1) {
+    while (fread(&aux, sizeof(Score), 1, p) == 1) {
         obj[j] = aux;
         j++;
     }
     fclose(p);
-    /*
+    
     n1.setString(obj[0].getName());
     n2.setString(obj[1].getName());
     n3.setString(obj[2].getName());
     n4.setString(obj[3].getName());
     n5.setString(obj[4].getName());
-    */
+    
     s1.setString(std::to_string(obj[0].getPoints()));
     s2.setString(std::to_string(obj[1].getPoints()));
     s3.setString(std::to_string(obj[2].getPoints()));
     s4.setString(std::to_string(obj[3].getPoints()));
     s5.setString(std::to_string(obj[4].getPoints()));
+
+
 
 }
 

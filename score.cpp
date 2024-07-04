@@ -2,17 +2,17 @@
 #include <cstring>
 #include <iostream>
 
-score::score( int point)
+Score::Score( int point)
 {
 	points = point;
 }
 
-int score::getPoints()
+int Score::getPoints()
 {
 	return points;
 }
 
-void score::Show()
+void Score::Show()
 {
 
 	std::cout << points << std::endl;
@@ -20,12 +20,12 @@ void score::Show()
 	return;
 }
 
-void score::setName(const char* _name)
+void Score::setName(const char* _name)
 {
 	strcpy_s(name, _name);
 }
 
-const char* score::getName()
+const char* Score::getName()
 {
 	return name;
 }

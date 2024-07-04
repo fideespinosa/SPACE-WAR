@@ -1,14 +1,14 @@
 #pragma once
 #include <string>
 
-class score
+class Score
 {
 private:
 	int points;
 	char name[10];
 public:
-	score(int point);
-	score() {};
+	Score(int point);
+	Score() {};
 	int getPoints();
 	void Show();
 	void setPoint(int po) {
