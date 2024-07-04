@@ -14,5 +14,6 @@ public:
 	void update(int _type);
 	void draw(sf::RenderWindow& window);
 	int getType();
+	int getState() const;
 };
 

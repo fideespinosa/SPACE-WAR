@@ -13,7 +13,10 @@ Bullet::Bullet(sf::Vector2f position) {
     _sprite.setScale(2.0f, 2.0f);
 }
 
-
+sf::Vector2f Bullet::getPosition() const
+{
+    return _sprite.getPosition();
+}
 
 void Bullet::update()
 {

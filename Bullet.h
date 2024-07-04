@@ -15,6 +15,7 @@ public:
     virtual void update();
     virtual void draw(sf::RenderWindow& window) override;
     sf::FloatRect getBounds() const override;
+    sf::Vector2f getPosition() const;
 };
 
 

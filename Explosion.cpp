@@ -124,3 +124,8 @@ int Explosion::getType()
     return _typeExplosion;
 }
 
+int Explosion::getState() const
+{
+    return _stateExplosion;
+}
+

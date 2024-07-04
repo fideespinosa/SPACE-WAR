@@ -18,6 +18,12 @@ MainMenu::MainMenu()
     background.loadFromFile("img/background.png");
     arrow.loadFromFile("img/arrow.png");
 
+    arrow2.loadFromFile("img/KeyArrow.png");
+    sig.setTexture(arrow2);
+    sig.setPosition(920, 565.f);
+    sig.setScale(0.5, 0.5);
+
+
     play.setFont(font);
     ranking.setFont(font);
     options.setFont(font);
@@ -55,6 +61,23 @@ MainMenu::MainMenu()
     minimo.setOutlineThickness(1);
     minimo.setOutlineColor(sf::Color::White);
     minimo.setPosition(600, 300);*/
+
+    movimiento.setString("pulsando las flechas vas a poder controlar los movimientos de tu nave");
+    choque.setString("CUIDADO! al chocar con naves enemigas recibiras mas danio de lo normal y se te restaran puntos");
+    disparar.setString("al precionar la tecla \"espacio\" dispararas ");
+    puntos.setString("al derrotar un enemigo se te sumaran 10 puntos");
+    controles.setString("CONTROLES");
+
+    controles.setOutlineThickness(2);
+    controles.setOutlineColor(sf::Color::Black);
+    controles.setFont(font);
+    controles.setCharacterSize(30);
+    controles.setPosition(300, 0);
+
+    movimiento.setOutlineThickness(2);
+    movimiento.setOutlineColor(sf::Color::Black);
+    movimiento.setFont(font);
+    movimiento.setCharacterSize(15);
 
     options.setStyle(sf::Text::Italic);
     options.setFillColor(sf::Color::Transparent);
@@ -111,6 +134,15 @@ MainMenu::MainMenu()
     atras.setOutlineThickness(1);
     atras.setOutlineColor(sf::Color::Black);
     atras.setPosition(115.f, 515.f);
+
+    siguiente.setFont(font);
+    siguiente.setString("SIGUIENTE");
+    siguiente.setStyle(sf::Text::Italic);
+    siguiente.setFillColor(sf::Color::White);
+    siguiente.setOutlineThickness(1);
+    siguiente.setOutlineColor(sf::Color::Black);
+    siguiente.setPosition(650, 515.f);
+    siguiente.setCharacterSize(30);
 
     int x = 690, y = 155;
 
@@ -393,13 +425,42 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
 
 void MainMenu::HelpMenu(sf::RenderWindow& window)
 {
-    while(window.isOpen()){
+    siguiente.setString("SIGUIENTE");
+    sig.setRotation(270);
+    sig.setPosition(920, 565);
+    sig.setRotation(270);
+    while(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false){
+
     backgroundHelp.loadFromFile("img/backgroundHelp.jpg");
     imgHelp.setTexture(backgroundHelp);
-
-
     window.clear();
     window.draw(imgHelp);
+
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
+    {
+        siguiente.setString("ANTERIOR");
+        sig.setRotation(90);
+        sig.setPosition(985, 500.f);
+        controles.setString("CONSEJOS");
+
+    }
+
+    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left))) {
+
+        siguiente.setString("SIGUIENTE");
+        sig.setRotation(270);
+        sig.setPosition(920, 565);
+    }
+
+
+    window.draw(sig);
+    window.draw(siguiente);
+    window.draw(controles);
+    window.draw(movimiento);
+    window.draw(escape);
+    window.draw(atras);
+   
     window.display();
+
     }
 }

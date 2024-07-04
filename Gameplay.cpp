@@ -84,6 +84,9 @@ void Gameplay::checkPlayerCollisions()
         if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
         {
             _player.setLife(_player.getLife() - 5);
+            if (_score > 0) {
+                _score -= 5;
+            }
             sound.play();
             enemyIt = _enemies.erase(enemyIt);
         }
@@ -122,6 +125,7 @@ void Gameplay::handleCollisions() {
                     _enemyExplosion.push_back(Explosion((*enemyIt)->getPosition(), (*enemyIt)->getType()));
                     enemyIt = _enemies.erase(enemyIt);
                     enemyDie.play();
+                   
                     _score += 10;
                 }
                 collisionDetected = true;
@@ -261,17 +265,14 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         {
             enemyExplosion.update(enemyExplosion.getType());
         }
-
+      
         for (auto& bullet : _playerBullets) {
-            bullet.update();
-        }
-
-        for (auto& life : _life) {
+            bullet.update();         
+        }    
+             for (auto& life : _life) {
             life.update();
         }
         sf::String lifeString = std::to_string(_player.getLife());
-
-
         //Dificultad
        
         float _seconds = _gameClock.getElapsedTime().asSeconds();
@@ -315,7 +316,11 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
         // Dibujar balas enemigas
         for (auto it = _enemyBullets.begin(); it != _enemyBullets.end(); ++it) {
             it->draw(window);
-        }
+        } 
+        std::cout << _enemyExplosion.size() << std::endl;//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+        cleanGame();
+
         window.display();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -456,7 +461,30 @@ bool Gameplay::gameOver(sf::RenderWindow& window)
         window.draw(again);
         window.display();
     }
+
+
 }
 
+void Gameplay::cleanGame() {
 
+    _enemies.remove_if([](const std::unique_ptr<Enemy>& enemy) {
+        return enemy->getPosition().y > 574;
+        });
+
+    _playerBullets.remove_if([](const Bullet& bullet) {       
+        return bullet.getPosition().y < 0;
+        });
+
+    _enemyBullets.remove_if([](const BulletEnemy& bullet) {
+        return bullet.getPosition().y > 574;
+        });
+
+    _life.remove_if([](const Life& life) {
+        return life.getPosition().y > 574;
+        });
+
+    _enemyExplosion.remove_if([](const Explosion& explosion) {
+        return explosion.getState() < 0;
+        });
+}
 

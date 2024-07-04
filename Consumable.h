@@ -20,5 +20,6 @@ protected: //dara acceso a las clases derivadas
 	bool controlSprite(sf::Sprite& _sprite);
 	Consumable() {};
 	sf::FloatRect getBounds() const;
+	sf::Vector2f getPosition() const;
 };
 

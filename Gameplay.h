@@ -52,8 +52,11 @@ public:
     void run(sf::RenderWindow& window, std::string name);
     void drawLife(sf::RenderWindow& window, int life);
     bool gameOver(sf::RenderWindow& window);
+    void cleanGame();
+
 protected:
     void handleCollisions();
     void spawnEnemies(float _spawnTime);
     void checkPlayerCollisions();
+
 };

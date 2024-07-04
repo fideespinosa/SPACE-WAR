@@ -91,3 +91,8 @@ sf::FloatRect Consumable::getBounds() const
 {
     return _sprite.getGlobalBounds();
 }
+
+sf::Vector2f Consumable::getPosition() const
+{
+    return sf::Vector2f();
+}
