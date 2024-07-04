@@ -30,7 +30,7 @@ private:
     std::list<Life> _life;
     std::list<BulletEnemy> _enemyBullets;
     std::list<Explosion> _enemyExplosion;
-    sf::Clock _enemySpawnClock, _gameClock;
+    sf::Clock _enemySpawnClock, _gameClock, _clockAnimationPlayer;
 //Resources
     sf::Music music;
     sf::SoundBuffer buffer, buffer2, buffer3, buffer4, buffer5, buffer6;

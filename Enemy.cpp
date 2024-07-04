@@ -96,13 +96,13 @@ sf::FloatRect Enemy::getBounds() const {
 
 BulletEnemy Enemy::shoot() {
     sf::FloatRect enemyBounds = _sprite.getGlobalBounds();
-    sf::Vector2f enemyCenter(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width/2, _sprite.getPosition().y);
+    sf::Vector2f enemyCenter(_sprite.getPosition().x + ( enemyBounds.width /2 - 7 ), _sprite.getPosition().y + (enemyBounds.height - 20));
     return BulletEnemy(enemyCenter);
 }
 
 void Enemy::handleInputEnemy(std::list<BulletEnemy>& bullets)
 {
-    if ( shootClock.getElapsedTime().asSeconds() > 0.4f) 
+    if ( shootClock.getElapsedTime().asSeconds() > 0.6f) 
     {
         bullets.push_back(shoot());
         shootClock.restart();

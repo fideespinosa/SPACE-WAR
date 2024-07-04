@@ -7,7 +7,7 @@ public:
         _texture.loadFromFile("img/balaEnemigo.png");
         _sprite.setTexture(_texture);
         _sprite.setPosition(position);
-        _speed = -4.0f; // Velocidad hacia abajo
+        _speed = -2.0f; // Velocidad hacia abajo
         _sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
         _sprite.setScale(2.0f, 2.0f);
         _stateMove = 0;

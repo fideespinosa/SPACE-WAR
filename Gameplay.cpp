@@ -338,31 +338,31 @@ void Gameplay::run(sf::RenderWindow& window, std::string name) {
       
         if (_player.getLife() <= 0) 
         {   
-            score.setPoint(_score);
-            score.setName(name);
-            archivoRanking file;
+           // score.setPoint(_score);
+          //  score.setName(name);
+            //archivoRanking file;
             _spawnCheck = false;
             _enemies.clear();
             _playerBullets.clear();
             _enemyBullets.clear();
-
-            file.CalculateFile(score);
+            music.stop();
+            gameOverSound.play();
+            //file.CalculateFile(score);
         }
 
         //incluir el if de abajo con el de arriba
 
-        /*if (_player.getLife() <= 0)
+        if (_player.getLife() <= 0 && _clockAnimationPlayer.getElapsedTime().asSeconds() > 10)
         {
-            music.stop();
-            gameOverSound.play();
             if (gameOver(window)) {
                 //empezar de vuelta
 
             }
             else {
                 //volver al menu principal
+                _clockAnimationPlayer.restart();
             }
-        }*/
+        }
     }
 }
 
@@ -380,11 +380,10 @@ bool Gameplay::gameOver(sf::RenderWindow& window)
     sf::Texture pic, pic2;
     sf::Font _font;
     _font.loadFromFile("SPACE.ttf");
-    pic.loadFromFile("img/Pause.jpg");
+    pic.loadFromFile("img/gameOver2.png");
     fondo.setTexture(pic);
     pic2.loadFromFile("img/gameOver.png");
     gameOver.setTexture(pic2);
-    fondo.setPosition(200, 100);
     gameOver.setPosition(280, 30);
 
     yes.setFont(_font);
