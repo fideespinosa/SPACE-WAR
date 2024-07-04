@@ -55,23 +55,22 @@ RankingMenu::RankingMenu()
 }
 
 void RankingMenu::show(sf::RenderWindow& window) {
+
     int exit = 0;
-    FILE* p;
+    score _score1;
+    char name1[10];
+    std::cin >> name1;
+    _score1.setName(name1);
+    _score1.setPoint(29);
+    archivoRanking ar;
+    ar.cargar(_score1);
     while (exit != 1) {
 
-      
-       
-
-        
-
         window.clear();
-
         window.draw(img);
-
-        window.draw(tres);
-
         window.draw(escape);
-
+        std::cout << " mostrando registro 2 " << ar.mostrar(1).getPoints() << std::endl;
+        std::cout << " mostrando registro 2 " << ar.mostrar(1).getName() << std::endl;
         window.draw(Ranking);
         window.draw(atras);
 
@@ -109,13 +108,13 @@ void RankingMenu::showScore(sf::RenderWindow& window)
         j++;
     }
     fclose(p);
-
+    /*
     n1.setString(obj[0].getName());
     n2.setString(obj[1].getName());
     n3.setString(obj[2].getName());
     n4.setString(obj[3].getName());
     n5.setString(obj[4].getName());
-
+    */
     s1.setString(std::to_string(obj[0].getPoints()));
     s2.setString(std::to_string(obj[1].getPoints()));
     s3.setString(std::to_string(obj[2].getPoints()));

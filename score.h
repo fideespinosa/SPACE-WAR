@@ -5,10 +5,10 @@ class score
 {
 private:
 	int points;
-	std::string name;
+	char name[10];
 public:
-	score(std::string n, int point);
-	score();
+	score(int point);
+	score() {};
 	int getPoints();
 	void Show();
 	void setPoint(int po) {
@@ -16,12 +16,7 @@ public:
 		points = po;
 		return;
 	}
-	std::string getName() {
-		return name;
-	}
-	void setName(std::string n) {
-		name = n;
-	}
-
+	void setName(const char* name);
+	const char* getName();
 };
 

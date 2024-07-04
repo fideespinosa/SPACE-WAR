@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include <iostream>
+#include "ArchivoRanking.h"
+
 class RankingMenu
 {
 

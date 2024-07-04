@@ -4,6 +4,9 @@
 #include <SFML\Audio.hpp>
 #include <string>
 #include <iostream>
+#include "ArchivoRanking.h"
+
+
 class MainMenu
 {
     sf::Music music;

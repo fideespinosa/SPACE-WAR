@@ -81,7 +81,7 @@ void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para 
 
 		}
 		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
-		file.mostrar();
+		//file.mostrar();
 
 		fopen_s(&p, "score.dat", "wb");
 
@@ -100,7 +100,7 @@ void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para 
 
 		}
 		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
-		file.mostrar();
+		//file.mostrar();
 		fopen_s(&p, "score.dat", "wb");
 
 		for (int i = 0; i <= 4;i++) {
@@ -121,7 +121,7 @@ void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para 
 
 		}
 		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
-		file.mostrar();
+		//file.mostrar();
 		std::cout << "aaaaaaaaaaaaaaaaaa";
 		fopen_s(&p, "score.dat", "wb");
 
@@ -143,7 +143,7 @@ void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para 
 
 		}
 		obj[pos].setPoint(Score);//cambiar para hacer un = del score y no del gamepoint
-		file.mostrar();
+		//file.mostrar();
 		std::cout << "aaaaaaaaaaaaaaaaaa";
 		fopen_s(&p, "score.dat", "wb");
 
@@ -175,54 +175,41 @@ void archivoRanking::moveRanking(int pos, int Score)//cambiar el gamepoint para 
 
 //eliminar despues
 
-void archivoRanking::cargar() {
+bool archivoRanking::cargar(score _score) {
 
-	int n;
 	FILE* p;
-	score obj[5];
-
-	fopen_s(&p, "score.dat", "wb");
-	for (int i = 0; i < 5; i++)
-	{
-		std::cout << "valor: ";
-		std::cin >> n;
-		std::cout << std::endl;
-		obj[i].setPoint(n);
-
-		fwrite(&obj[i], sizeof(score), 1, p);
+	fopen_s(&p, "score.dat", "ab");
+	if (p == NULL) {
+		return false;
 	}
-
-
-
+	bool ok = (fwrite(&_score, sizeof(score), 1, p) == 1);
+	if (!ok) {
+		std::cout << "Error al escribir en el archivo" << std::endl;
+	}
 	fclose(p);
+	return ok;
 
-	return;
 }
 
-void archivoRanking::mostrar() {
+score archivoRanking::mostrar(int nroScore) {
+	score obj;
 	FILE* p;
-	score obj[5];
-	int i = 0;
-
 	fopen_s(&p, "score.dat", "rb");
 
-	while (fread(&obj[i], sizeof(score), 1, p) == 1) {
-		// std::cout<<"valor i: "<<i;
-		obj[i].Show();
-		i++;
-
+	if (p == NULL) {
+		std::cout << "Error al abrir el archivo score.dat" << std::endl;
+		return obj;
+	}
+	if (fseek(p, nroScore * sizeof(score), SEEK_SET) != 0) {
+		std::cout << "Error al posicionar el puntero de archivo" << std::endl;
+		fclose(p);
+		return obj;
+	}
+	if (fread(&obj, sizeof(score), 1, p) != 1) {
+		std::cout << "Error al leer del archivo" << std::endl;
 	}
 	fclose(p);
-	return;
+	return obj;
 }
 
-void archivoRanking::cargarAr(score reg)
-{
-	FILE* p;
-	 fopen_s(&p, "score.dat", "ab");
-	if (p == NULL) return;
-	bool escribio = fwrite(&reg, sizeof reg, 1, p);
-	fclose(p);
-	return;
-}
 

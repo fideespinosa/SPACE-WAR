@@ -1,11 +1,12 @@
 #include "score.h"
 #include <cstring>
 #include <iostream>
-score::score(std::string n, int point)
+
+score::score( int point)
 {
-	name = n;
 	points = point;
 }
+
 int score::getPoints()
 {
 	return points;
@@ -18,3 +19,15 @@ void score::Show()
 
 	return;
 }
+
+void score::setName(const char* _name)
+{
+	strcpy_s(name, _name);
+}
+
+const char* score::getName()
+{
+	return name;
+}
+
+

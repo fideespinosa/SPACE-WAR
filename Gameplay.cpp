@@ -224,18 +224,7 @@ sf::Text Gameplay::showScore(int _score)
 void Gameplay::run(sf::RenderWindow& window, std::string name) {
     _score = 0;
     archivoRanking ar;
-    score obj1("vacio", 0);
-    score obj2("vacio", 0);
-    score obj3("vacio", 0);
-    score obj4("vacio", 0);
-    score obj5("vacio", 0);
-
-    ar.cargarAr(obj1);
-    ar.cargarAr(obj2);
-    ar.cargarAr(obj3);
-    ar.cargarAr(obj4);
-    ar.cargarAr(obj5);
-
+  
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;

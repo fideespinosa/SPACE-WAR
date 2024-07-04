@@ -434,10 +434,12 @@ int MainMenu::chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, s
 
         break;
     case 2: std::cout << "2";
+
         ranking.show(window);
         //sound.play();
         break;
     case 3: std::cout << "3";
+
         break;
     case 4: std::cout << "4";
         HelpMenu(window);
