@@ -342,16 +342,15 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
             std::cout << "La vida del jugador es 0 o menos" << std::endl;
             if (animationDead) {
                 animationDead = false;
+                _spawnCheck = false;
                 _clockAnimationPlayer.restart();
             }
             if (_clockAnimationPlayer.getElapsedTime().asSeconds() >= 5.0f) {
-                std::cout << "gggggggggggggggggggg" << std::endl;
+                
                 // scoreCls.setPoint(_score);
                  //scoreCls.setName(name);
                 if (gameOver(window)) 
                 {
-                _spawnCheck = false;
-                spawnEnemies(_spawnTime);
                 _enemies.clear();
                 _playerBullets.clear();
                 _enemyBullets.clear();
@@ -369,7 +368,6 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
                    
                 }
             }
-            else { std::cout << "aun no pasaron 5 seg" << std::endl; }
         }
 
        
