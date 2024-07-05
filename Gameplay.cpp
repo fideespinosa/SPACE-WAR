@@ -8,20 +8,8 @@
 #include "score.h"
 
 
-//inicializamos la variable de clase en 0 para cuando programemos el 
-// getinstance validemos si esta en 0 o se creo una instancia
 Gameplay* Gameplay::_currentInstance = nullptr;
 
-/*
-bool Gameplay::checkSuperpotition(Enemy& enemy, std::list<Enemy>& _enemies)
-{
-    for (auto& enemy : _enemies) {
-        if (enemy->getBounds().intersects(_enemies->getBounds()) {
-
-        }
-    }
-}
-*/
 
 Gameplay& Gameplay::getInstance()
 {
@@ -364,6 +352,7 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
                 }
                 else 
                 {
+                    _menu.showMenu(window);
                     //volver al menu principal
                    
                 }
@@ -372,8 +361,7 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
 
        
        
-            if (_minute == 2) {
-                std::cout << "se termino el tiempo";
+            if (_minute == 4) {
                 _spawnCheck = false;
                 scoreCls.setPoint(_score);
                 scoreCls.setName(name);
@@ -384,7 +372,8 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
                 }
                 else 
                 {
-                    return;
+                    _menu.showMenu(window);
+                    //volver al menu principal
                 };
             }
         

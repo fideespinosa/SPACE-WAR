@@ -177,10 +177,7 @@ MainMenu::MainMenu()
 
 
 
-void MainMenu::showMenu() {
-
-    sf::RenderWindow window(sf::VideoMode(1024, 573), "Space War");
-    window.setFramerateLimit(60);
+void MainMenu::showMenu(sf::RenderWindow& window) {
 
 
     sound.setBuffer(buffer);

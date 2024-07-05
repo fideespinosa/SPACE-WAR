@@ -23,7 +23,7 @@ class MainMenu
 
 public:
     MainMenu();
-    void showMenu();
+    void showMenu(sf::RenderWindow& window);
     std::string InserName(sf::RenderWindow& window, sf::Event Event);
     int chooseOption(int pos, sf::Sound sound, sf::RenderWindow& window, sf::Event Event);
     void HelpMenu(sf::RenderWindow& window);
