@@ -8,7 +8,7 @@ class Player : public Collisionable{
 private:
     sf::Sprite _sprite, _spriteMove, _spriteDead;
     sf::Texture _texture, _textureMove, _textureDead;
-    int _life = 20;
+    int _life = 10;
     sf::SoundBuffer buffer;
     sf::Sound sound;
     float _speed;

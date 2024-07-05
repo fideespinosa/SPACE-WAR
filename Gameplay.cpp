@@ -224,7 +224,7 @@ sf::Text Gameplay::showScore(int _score)
 void Gameplay::run(sf::RenderWindow& window, const char* name) {
     _score = 0;
     ArchivoRanking ar;
-  
+    bool animationDead = true;
     PauseMenu menu;
     sf::Sprite background;
     sf::Texture backgroundGame;
@@ -272,7 +272,7 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         for (auto& bullet : _playerBullets) {
             bullet.update();         
         }    
-             for (auto& life : _life) {
+        for (auto& life : _life) {
             life.update();
         }
         sf::String lifeString = std::to_string(_player.getLife());
@@ -336,41 +336,47 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
             }
             music.play();
         }
-      
-        if (_player.getLife() <= 0) 
-        {   
-
-           // scoreCls.setPoint(_score);
-            //scoreCls.setName(name);
-           
-            _spawnCheck = false;
-            _enemies.clear();
-            _playerBullets.clear();
-            _enemyBullets.clear();
-            music.stop();
-            gameOverSound.play();
-            //file.CalculateFile(score);
-        }
-
-        //incluir el if de abajo con el de arriba
-
-        if (_player.getLife() <= 0 && _clockAnimationPlayer.getElapsedTime().asSeconds() > 10)
+        
+        if (_player.getLife() <= 0)
         {
-
-            if (gameOver(window)) {
-                //empezar de vuelta
-                _player.setLife(50);
-                run(window,name);
-            }
-            else {
-                //volver al menu principal
+            std::cout << "La vida del jugador es 0 o menos" << std::endl;
+            if (animationDead) {
+                animationDead = false;
                 _clockAnimationPlayer.restart();
             }
+            if (_clockAnimationPlayer.getElapsedTime().asSeconds() >= 5.0f) {
+                std::cout << "gggggggggggggggggggg" << std::endl;
+                // scoreCls.setPoint(_score);
+                 //scoreCls.setName(name);
+                if (gameOver(window)) 
+                {
+                _spawnCheck = false;
+                spawnEnemies(_spawnTime);
+                _enemies.clear();
+                _playerBullets.clear();
+                _enemyBullets.clear();
+                music.stop();
+                gameOverSound.play();
+                //file.CalculateFile(score);
+               
+                    //empezar de vuelta
+                    _player.setLife(50);
+                    run(window, name);
+                }
+                else 
+                {
+                    //volver al menu principal
+                   
+                }
+            }
+            else { std::cout << "aun no pasaron 5 seg" << std::endl; }
         }
 
        
+       
             if (_minute == 2) {
                 std::cout << "se termino el tiempo";
+                _spawnCheck = false;
                 scoreCls.setPoint(_score);
                 scoreCls.setName(name);
                 //file.CalculateFile(scoreCls);
