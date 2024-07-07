@@ -66,38 +66,44 @@ Gameplay::Gameplay() {
 
 void Gameplay::checkPlayerCollisions()
 {
-  
-    bool collisionDetected = false;
-    for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();)
-    {
-        if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
-        {
-            _player.setLife(_player.getLife() - 5);
-            if (_score > 0) {
-                _score -= 5;
-            }
-            sound.play();
-            enemyIt = _enemies.erase(enemyIt);
-        }
-        else
-        {
-            ++enemyIt;
-        }
-    }
-    for (auto enemyBulletsIt = _enemyBullets.begin(); enemyBulletsIt != _enemyBullets.end();)
-    {
-        if (enemyBulletsIt->getBounds().intersects(_player.getBounds()))
-        {
-            _player.setLife(_player.getLife() - 1);
-            BulletImpact.play();
-            enemyBulletsIt = _enemyBullets.erase(enemyBulletsIt);
-        }
-        else
-        {
-            ++enemyBulletsIt;
-        }
-    }
 
+        bool collisionDetected = false;
+        for (auto enemyIt = _enemies.begin(); enemyIt != _enemies.end();)
+        {
+            if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
+            {
+                if (_player.getShield() == false)
+                {
+                    _player.setLife(_player.getLife() - 5);
+                }
+                if (_score > 0) {
+                    _score -= 5;
+                }
+                sound.play();
+                enemyIt = _enemies.erase(enemyIt);
+            }
+            else
+            {
+                ++enemyIt;
+            }
+        }
+        for (auto enemyBulletsIt = _enemyBullets.begin(); enemyBulletsIt != _enemyBullets.end();)
+        {
+            if (enemyBulletsIt->getBounds().intersects(_player.getBounds()))
+            {
+                if (_player.getShield() == false)
+                {
+                    _player.setLife(_player.getLife() - 1);
+                }
+                BulletImpact.play();
+                enemyBulletsIt = _enemyBullets.erase(enemyBulletsIt);
+            }
+            else
+            {
+                ++enemyBulletsIt;
+            }
+        }
+  
 }
 
 void Gameplay::handleCollisions() {
@@ -125,18 +131,26 @@ void Gameplay::handleCollisions() {
                 ++enemyIt;
             }
         }
-        for (auto lifeIT = _life.begin(); lifeIT != _life.end();)
+        for (auto lifeIT = _consumable.begin(); lifeIT != _consumable.end();)
         {
             if (it->getBounds().intersects(lifeIT->getBounds()))
             {
                 lifeIT->setLife(lifeIT->getLife() - 1);
                 if (lifeIT->getLife() == 0)
                 {
-                    heartEffect.play();
-
-                    _player.setLife(_player.getLife() + 10);
-                    lifeIT = _life.erase(lifeIT);
-                    _score += 10;
+                    if (lifeIT->getType() == 0) 
+                    {
+                        heartEffect.play();
+                        _player.setLife(_player.getLife() + 10);
+                        lifeIT = _consumable.erase(lifeIT);
+                        _score += 10;
+                    }
+                    else if (lifeIT->getType() == 1)
+                    {
+                        _player.setShield(true);
+                        lifeIT = _consumable.erase(lifeIT);
+                        _score += 10;
+                    }
                 }
                 collisionDetected = true;
                 break;
@@ -235,7 +249,7 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         window.draw(background);
         
         _player.handleInput(_playerBullets);
-        _player.update();
+   
 
         for (auto& enemy1 : _enemies)
         {
@@ -260,20 +274,29 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         for (auto& bullet : _playerBullets) {
             bullet.update();         
         }    
-        for (auto& life : _life) {
+        for (auto& life : _consumable) {
             life.update();
         }
         sf::String lifeString = std::to_string(_player.getLife());
         //Dificultad
        
         float _seconds = _gameClock.getElapsedTime().asSeconds();
-        if (_seconds >= (_minute + 1) * 60.0f)
+        if (_seconds >= (_minute + 1) * 10.0f)
         {
-            _life.push_back(Life());
+            _consumable.push_back(Shield());
+            _consumable.push_back(Life());
             _minute++;
             _spawnTime = _spawnTime - 0.7f;
         }
 
+        if (_player.getShield() == true) {
+
+            if (_shieldClock.getElapsedTime().asSeconds() > 15.0f) {
+                _shieldClock.restart();
+                _player.setShield(false);
+            }
+        }
+   
         life.setString(lifeString);
         spawnEnemies(_spawnTime);
         handleCollisions();
@@ -296,7 +319,7 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         }
 
         //dibujo corazones
-        for (auto it = _life.begin(); it != _life.end(); ++it) {
+        for (auto it = _consumable.begin(); it != _consumable.end(); ++it) {
             it->draw(window);
         }
 
@@ -494,8 +517,8 @@ void Gameplay::cleanGame() {
         return bullet.getPosition().y > 574;
         });
 
-    _life.remove_if([](const Life& life) {
-        return life.getPosition().y > 574;
+    _consumable.remove_if([](const Consumable& consumable) {
+        return consumable.getPosition().y > 574;
         });
 
     _enemyExplosion.remove_if([](const Explosion& explosion) {

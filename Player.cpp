@@ -3,20 +3,34 @@
 
 
 void Player::setLife(int life)
-{
-    _life = life;
-}
+        {
+        _life = life;
+        }
 
-int Player::getLife()
-{
+void Player::setShield(bool state)
+    {
+    _shield = state;
+    }
+
+bool Player::getShield()
+    {
+    return _shield;
+    }
+
+
+    int Player::getLife()
+    {
     return _life;
-}
+    }
+
 Player::Player() {
     _texture.loadFromFile("img/naveTest.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(400, 500); // Posición inicial en la parte inferior de la pantalla
     _speed = 4;
     _stateMove = 0;
+    _shield = false;
+
     if (!_textureMove.loadFromFile("img/naveMove.png"))
     {
         std::cout << "Error al cargar naveMove" << std::endl;
@@ -35,13 +49,22 @@ Player::Player() {
     _spriteDead.setTexture(_textureDead);
     _spriteDead.setTextureRect(sf::IntRect(0, 0, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
 
+
+    _stateShield = 0;
+    if (!_textureShield.loadFromFile("img/shield.png"))
+    {
+        std::cout << "Error al cargar shield" << std::endl;
+    };
+    _spriteShield.setTexture(_textureShield);
+    _spriteShield.setTextureRect(sf::IntRect(0, 0, 64, 64)); // pos x , pos y, ancho (weitdh), largo (height)
 }
 
 void Player::handleInput(std::list<Bullet>& bullets) {
 
     sf::Vector2f position = _sprite.getPosition();
 
-    if (getLife() > 0) {
+    if (getLife() > 0) 
+    {
         // agrego x2 en la velocidad de mov izq y der
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             _sprite.move(-_speed * 2, 0);
@@ -92,6 +115,25 @@ void Player::handleInput(std::list<Bullet>& bullets) {
         {
             _stateMove = 0;
         }
+
+
+        //Check shield
+        if (_shield == true)
+        {
+            if (_clockShield.getElapsedTime().asSeconds() > 0.01f)
+            {
+                _stateShield++;
+                _spriteShield.setPosition(position.x, position.y);
+                if (_stateShield < 8) {
+                    _spriteShield.setTextureRect(sf::IntRect(_stateShield * 64, 0, 64, 64));
+                }
+                _clockShield.restart();
+            }
+            if (_stateShield == 8)
+            {
+                _stateShield = 0;
+            }
+        }
     }
     // check dead
     if (getLife() <= 0)
@@ -107,7 +149,6 @@ void Player::handleInput(std::list<Bullet>& bullets) {
             _clockDead.restart();
         }
     }
-
 }
 
 
@@ -123,6 +164,11 @@ void Player::draw(sf::RenderWindow& window) {
         _sprite.setTexture(_texture);
         window.draw(_sprite);
         window.draw(_spriteMove);
+        if( _shield == true)
+        {
+            _spriteShield.setTexture(_textureShield);
+            window.draw(_spriteShield);
+        }
     }
     else
     {

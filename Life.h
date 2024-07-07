@@ -20,6 +20,7 @@ public:
         _life = 5;
         _speed = 2;
         _sprite.setScale(3.0f, 3.0f);
+        _type = 0;
 	}
 };
 

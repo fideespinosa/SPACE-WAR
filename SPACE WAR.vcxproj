@@ -149,7 +149,7 @@
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RankingMenu.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="SPACE WAR.cpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RankingMenu.h" />
-    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="score.h" />
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,8 @@
 #include "Explosion.h"
 #include "BulletEnemy.h"
 #include "Life.h"
+#include "Consumable.h"
+#include "Shield.h"
 #include "Score.h"
 #include "MainMenu.h"
 
@@ -30,10 +32,10 @@ private:
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;
-    std::list<Life> _life;
+    std::list<Consumable> _consumable;
     std::list<BulletEnemy> _enemyBullets;
     std::list<Explosion> _enemyExplosion;
-    sf::Clock _enemySpawnClock, _gameClock, _clockAnimationPlayer;
+    sf::Clock _enemySpawnClock, _gameClock, _clockAnimationPlayer, _shieldClock;
     MainMenu _menu;
 //Resources
     sf::Music music;

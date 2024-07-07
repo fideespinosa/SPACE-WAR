@@ -3,6 +3,11 @@
 
 
 
+int Consumable::getType()
+{
+    return _type;
+}
+
 int Consumable::getLife()
 {
     return _life;
@@ -48,18 +53,39 @@ void Consumable::update()
             break;
         }
     }
-    if (_clockMove.getElapsedTime().asSeconds() > 0.03f)
+
+    if (getType() == 0) 
     {
-        _stateMove++;
-        _sprite.setPosition(position.x, position.y);
-        if (_stateMove < 5) {
-            _sprite.setTextureRect(sf::IntRect(_stateMove * 16, 0, 16, 16));
+        if (_clockMove.getElapsedTime().asSeconds() > 0.03f)
+        {
+            _stateMove++;
+            _sprite.setPosition(position.x, position.y);
+            if (_stateMove < 5) {
+                _sprite.setTextureRect(sf::IntRect(_stateMove * 16, 0, 16, 16));
+            }
+            _clockMove.restart();
         }
-        _clockMove.restart();
+        if (_stateMove == 5)
+        {
+            _stateMove = 0;
+        }
     }
-    if (_stateMove == 5)
+    else 
     {
-        _stateMove = 0;
+        if (_clockMove.getElapsedTime().asSeconds() > 0.03f)
+        {
+            _stateMove++;
+            _sprite.setPosition(position.x, position.y);
+            if (_stateMove < 8) {
+                _sprite.setTextureRect(sf::IntRect(_stateMove * 64, 0, 64, 64));
+            }
+            _clockMove.restart();
+        }
+        if (_stateMove == 8)
+        {
+            _stateMove = 0;
+        }
+
     }
 }
 
@@ -95,4 +121,9 @@ sf::FloatRect Consumable::getBounds() const
 sf::Vector2f Consumable::getPosition() const
 {
     return sf::Vector2f();
+}
+
+sf::Vector2f Consumable::getPosition()
+{
+    return _sprite.getPosition();
 }
