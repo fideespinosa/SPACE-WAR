@@ -24,7 +24,7 @@ private:
     static Gameplay* _currentInstance;
     int _score = 0;
     bool _spawnCheck;
-    float _spawnTime = 4.0f;
+    float _spawnTime = 5.0f;
     int _minute = 0;
     Score scoreCls;
     ArchivoRanking file;

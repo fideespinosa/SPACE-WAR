@@ -72,13 +72,9 @@ void Gameplay::checkPlayerCollisions()
         {
             if ((*enemyIt)->getBounds().intersects(_player.getBounds()))
             {
-                if (_player.getShield() == false)
-                {
-                    _player.setLife(_player.getLife() - 5);
-                }
-                if (_score > 0) {
-                    _score -= 5;
-                }
+                if (_player.getShield() == false){ _player.setLife(_player.getLife() - 5); }
+                if (_score > 0) { _score -= 5; }
+                if (_player.getShield() == true) { _score += 5; }
                 sound.play();
                 enemyIt = _enemies.erase(enemyIt);
             }
@@ -174,8 +170,9 @@ void Gameplay::handleCollisions() {
 }
 
 
-void Gameplay::spawnEnemies(float _spawnTime) { // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
-   
+void Gameplay::spawnEnemies(float _spawnTime) 
+{ // VERIFICAR POSICION DE RESPAWN, HAY QUE CORREGIR CONTEMPLANDO GLOBALBOUDS
+    if (_spawnTime < 0.5f) { _spawnTime = 0.5f; };
     if (_spawnCheck)
     {
         std::srand(std::time(0));
@@ -284,12 +281,12 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         //Dificultad
        
         float _seconds = _gameClock.getElapsedTime().asSeconds();
-        if (_seconds >= (_minute + 1) * 10.0f)
+        if (_seconds >= (_minute + 1) * 60.0f)
         {
             _consumable.push_back(Shield());
             _consumable.push_back(Life());
             _minute++;
-            _spawnTime = _spawnTime - 0.7f;
+            _spawnTime = _spawnTime - 0.5f;
         }
 
         if (_player.getShield() == true) {
@@ -343,17 +340,16 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         {
             music.pause();
            
-            if (menu.Pause(window)==false) {
-              
-                Sleep(100);
-                return;
+            if (menu.Pause(window)==false) 
+            {             
+              Sleep(100);
+              return;
             }
             music.play();
         }
         
         if (_player.getLife() <= 0)
         {
-            std::cout << "La vida del jugador es 0 o menos" << std::endl;
             if (animationDead) {
                 animationDead = false;
                 _spawnCheck = false;

@@ -160,15 +160,15 @@ void Player::update()
 void Player::draw(sf::RenderWindow& window) {
     if (getLife() > 0)
     {
-        _spriteMove.setTexture(_textureMove);
-        _sprite.setTexture(_texture);
-        window.draw(_sprite);
-        window.draw(_spriteMove);
-        if( _shield == true)
+        if (_shield == true)
         {
             _spriteShield.setTexture(_textureShield);
             window.draw(_spriteShield);
         }
+        _spriteMove.setTexture(_textureMove);
+        _sprite.setTexture(_texture);
+        window.draw(_sprite);
+        window.draw(_spriteMove);
     }
     else
     {

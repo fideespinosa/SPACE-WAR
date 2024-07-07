@@ -18,7 +18,7 @@ public:
         _sprite.setTexture(_texture);
         _sprite.setPosition((std::rand() % 1024) + 1, 0 + _sprite.getGlobalBounds().top);
         _sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-        _life = 1;
+        _life = 5;
         _speed = 3;
         _type = 1;
     }
