@@ -16,6 +16,7 @@
 #include "Shield.h"
 #include "Score.h"
 #include "MainMenu.h"
+#include "BackgroundAnimation.h"
 
 class Gameplay{
 private:
@@ -29,6 +30,7 @@ private:
     ArchivoRanking file;
    // score score;
 //Game Clases
+    BackgroundAnimation _background;
     Player _player;
     std::list < std::unique_ptr< Enemy >> _enemies;
     std::list<Bullet> _playerBullets;

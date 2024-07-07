@@ -232,11 +232,12 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
     sf::Texture backgroundGame;
     _spawnCheck = true;
 
-    backgroundGame.loadFromFile("img/backgroundGamePlay.png");
-    background.setTexture(backgroundGame);
+    //backgroundGame.loadFromFile("img/backgroundGamePlay.png");
+    //background.setTexture(backgroundGame);
     
     music.play();
-    while (window.isOpen()) {
+    while (window.isOpen()) 
+    {
        
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -246,7 +247,9 @@ void Gameplay::run(sf::RenderWindow& window, const char* name) {
         }
         window.clear();
        
-        window.draw(background);
+        _background.update();
+        _background.draw(window);
+        //window.draw(background);
         
         _player.handleInput(_playerBullets);
    

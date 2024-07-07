@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArchivoRanking.cpp" />
+    <ClCompile Include="BackgroundAnimation.cpp" />
     <ClCompile Include="BulletEnemy.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Consumable.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArchivoRanking.h" />
+    <ClInclude Include="BackgroundAnimation.h" />
     <ClInclude Include="BulletEnemy.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Consumable.h" />
